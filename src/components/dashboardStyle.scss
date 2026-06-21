@@ -1,0 +1,110 @@
+@use "../styles/color";
+.customer-table {
+    margin-top: 50px;
+    margin-left: 30px;
+    background: #FFFFFF !important;
+    padding: 20px 20px;
+    border-radius: 20px;
+    .ant-table {
+        border-radius: 20px;
+    }
+    .ant-table-container {
+        margin-top: 20px;
+        border-radius: 20px;
+    }
+}
+
+.customer-table .ant-table-thead > tr > th {
+    background: color.$side-bar-color;
+    color: #ffffff;
+    font-family: color.$text-font;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+// ==============================
+// Responsive Table
+// ==============================
+@media (max-width: 1199px) {
+    .customer-table {
+        margin-left: 16px;
+        margin-top: 30px;
+        padding: 12px;
+        overflow-x: auto;
+
+        .ant-table {
+            min-width: 700px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .customer-table {
+        margin-left: 8px;
+        margin-top: 20px;
+        padding: 8px;
+
+        .ant-table {
+            min-width: 600px;
+        }
+
+        .ant-table-thead > tr > th,
+        .ant-table-tbody > tr > td {
+            font-size: 13px;
+            padding: 8px 12px !important;
+        }
+    }
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: space-between;
+    .header-title {
+        display: flex;
+        gap: 12px;
+        margin-left: 30px;
+        margin-bottom: 10px;
+        font-family: color.$text-font;
+        font-size: 24px;
+        font-weight: 600;
+        color: color.$side-bar-color;
+    }
+
+    .profile-avtar {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        font-size: 14px;
+        line-height: 30px;
+        list-style: none;
+        font-family: Inter;
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: center;
+        vertical-align: middle;
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid transparent;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 30px;
+        align-items: center;
+        justify-content: center;
+
+        .user-icon {
+            font-size: 24px;
+            padding-top: 5px;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    
+}
+
