@@ -1,10 +1,11 @@
 import  {Table, Segmented} from 'antd'
 import { mockCustomers } from '../lib/data'
 import {InfoCircleOutlined,UserOutlined} from '@ant-design/icons'
-//import CustomerEntity from '../entities/customer/entity'
+import {useNavigate} from 'react-router-dom'
 import './dashboardStyle.scss'
 
 export default function DashboardContent() {
+  const navigate = useNavigate()
   const columns = [
     {
         title: "STT",
@@ -55,7 +56,7 @@ export default function DashboardContent() {
                 <span>Khách hàng</span>
             </div>
            
-            <div className="profile-avtar">
+            <div className="profile-avtar" onClick={() => navigate('/profile')}>
                 <UserOutlined className="user-icon"/>
             </div>
         </div>
