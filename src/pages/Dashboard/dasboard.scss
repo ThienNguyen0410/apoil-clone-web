@@ -70,6 +70,7 @@
     padding-inline: 24px 30px !important;
     margin-right: -16px !important;
     width: 247px !important;
+    align-items: center;
 }
 
 // --- Menu icons ---
@@ -157,6 +158,7 @@
             padding-inline: 0 !important;
             margin-right: 0 !important;
             border-radius: 12px !important;
+            width: auto !important;
         }
 
         .ant-menu-submenu > .ant-menu-submenu-title {
