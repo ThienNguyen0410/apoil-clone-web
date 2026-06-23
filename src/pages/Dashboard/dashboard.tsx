@@ -26,7 +26,7 @@ export default function Dashboard() {
 
   return (
     <Layout className="dashboard-layout" style={{ minHeight: '100vh' }}>
-      <Sider width={240} collapsedWidth={110} collapsible collapsed={collapsed} onCollapse={setCollapsed} trigger={null} className="side-bar">
+      <Sider width={247} collapsedWidth={110} collapsible collapsed={collapsed} onCollapse={setCollapsed} trigger={null} className="side-bar">
         <img className="logo" src={logo} alt="logo" />
         <Menu
           onClick={(e) => { setSelectedKey(e.key); setCollapsed(false) }}
