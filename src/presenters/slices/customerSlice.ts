@@ -18,8 +18,8 @@ const initialState: customerState = {
 
 export const fetchCustomers = createAsyncThunk(
     'customer/getCustomers',
-    async(page:number) => {
-        return await customerRepository.getAllCustomers(page);
+    async(current:number = 1) => {
+        return await customerRepository.getAllCustomers(current);
     }
 )
 
