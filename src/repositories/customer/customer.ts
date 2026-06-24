@@ -1,6 +1,6 @@
-import api from './api';
-import type CustomerEntity from '../entities/customer/entity';
-import type Pagination from '../entities/pagination';
+import api from '../api';
+import type CustomerEntity from '../../entities/customer/entity';
+import type Pagination from '../../entities/pagination';
 
 
 export const customerRepository = {

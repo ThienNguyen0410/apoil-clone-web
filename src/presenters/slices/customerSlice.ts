@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type CustomerEntity from '../../entities/customer/entity';
-import { customerRepository } from '../../repositories/customer';
+import { customerRepository } from '../../repositories/customer/customer';
 
 
 interface customerState {

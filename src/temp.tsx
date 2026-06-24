@@ -1,36 +1,3 @@
-// import { BrowserRouter, Routes, Route } from 'react-router-dom'
-// import Dashboard from './pages/Dashboard/dashboard'
-// import Profile from './pages/Dashboard/profile'
-// import Login from './pages/auth/login'
-// import {store} from './presenters/store'
-// import { Provider } from 'react-redux'
-// import PrivateLayout from './pages/Layout/privateLayout'
-// import PublicLayout from './pages/Layout/publicLayout'
-// import { publicRoutes } from './routes/publicRoutes'
-// import { privateRoutes } from './routes/privateRoutes'
-
-// import './App.css'
-
-// function App() {
-//   return (
-//     <>
-//     <Provider store={store}>
-//       <BrowserRouter>
-//         <Routes>
-//             <Route path="/dashboard" element={<Dashboard/>}></Route>
-//             <Route path="/profile" element={<Profile/>}></Route>
-//             <Route path="/login" element={<Login/>}></Route>
-//         </Routes>
-//       </BrowserRouter>
-//     </Provider>
-//     </>
-//   )
-// }
-
-// export default App
-
-
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './pages/Dashboard/dashboard'
 import Profile from './pages/Dashboard/profile'
@@ -51,7 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
            {publicRoutes.map((route) => (
-            <Route
+            <Route>
               key = {route.path}
               path = {route.path}
               element = {
@@ -59,13 +26,12 @@ function App() {
                   {route.element}
                 </PublicLayout>
               }
-              >
             </Route>
            ))}
 
 
            {privateRoutes.map((route) => (
-            <Route
+            <Route>
               key={route.path}
               path={route.path}
               element= {
@@ -73,7 +39,6 @@ function App() {
                   {route.element}
                 </PrivateLayout>
               }
-              >
             </Route>
            ))}
         </Routes>
@@ -84,4 +49,3 @@ function App() {
 }
 
 export default App
-

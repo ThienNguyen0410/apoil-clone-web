@@ -1,20 +1,19 @@
 @use "../../styles/color";
 
 
-.profile-content{
+.profile-content {
+    min-height: 100vh;
+    background: color.$background-color;
     display: flex;
+    justify-content: center;
     padding: 48px 120px;
 }
 .profile-body {
-    min-height: 100vh;
     width: 100%;
-    margin: 0;
-    padding: 0;
+    max-width: 922px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: color.$background-color;
-    overflow-y: auto;
 }
 
 h1 {
