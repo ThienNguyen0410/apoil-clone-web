@@ -1,7 +1,8 @@
 import axios from 'axios';
+
 export const STORAGE_KEY = {
-    ACCESS: 'accessToken',
-    REFRESH: 'refreshToken',
+    ACCESS: 'access_token',
+    REFRESH: 'refresh_token',
 };
 
 const BASE_URL = 'https://apsp-oilchange-api.dev.altasoftware.vn';
@@ -29,6 +30,14 @@ function isTokenExpired(token: string): boolean {
         return true;
     }
 }
+
+// Seed hardcoded token for development (will be replaced after login)
+const HARDCODED_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWNhdGlvbiI6IjVlYTJlMmY5LWRjODAtNDAzYi05ZDM0LWVmZjYyZWYzNWY1MyIsIm1vZGVsVHlwZSI6IkluZnJhc3RydWN0dXJlLk1vZHVsZXMuVXNlcnMuRW50aXRpZXMuVXNlciIsImV4cCI6MTc4Mjc4ODAzN30.sGtaweVvX_scU0_2UUtGav7hN4LrCL_QIufOmf-3YwE';
+if (!getAccessToken()) {
+    setTokens(HARDCODED_TOKEN, '');
+}
+
+// --- Axios instance ---
 
 const api = axios.create({
     baseURL: BASE_URL,
