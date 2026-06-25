@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type UserEntities from '../../entities/user/entity';
 import type { UserPayLoad } from '../../entities/user/entity';
 import { authRepository } from '../../repositories/auth/auth';
+import { REHYDRATE } from 'redux-persist';
 
 interface AuthState {
     user: UserEntities | null;
@@ -31,6 +32,8 @@ const autSlice = createSlice({
             state.user = null;
             state.loading = false;
             state.error = null;
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
         }
     },
 
@@ -49,6 +52,14 @@ const autSlice = createSlice({
         builder.addCase(login.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message || 'An error occurred';
+        })
+
+        builder.addCase(REHYDRATE, (state) => {
+            const token = localStorage.getItem('accessToken');
+            if (!token) {
+                state.user = null;
+                state.isAuthenticated = false;
+            }
         })
     }
 })

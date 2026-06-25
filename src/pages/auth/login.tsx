@@ -16,7 +16,8 @@ export default function Login() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (isAuthenticated) {
+        const token = localStorage.getItem('accessToken');
+        if (isAuthenticated && token) {
             navigate('/dashboard', { replace: true })
         }
     }, [isAuthenticated, navigate])
