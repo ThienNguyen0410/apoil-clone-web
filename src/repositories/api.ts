@@ -1,5 +1,7 @@
 import axios from 'axios';
 import dayjs from 'dayjs'
+import { store } from '../presenters/store';
+import { logout } from '../presenters/slices/authSlice';
 export const STORAGE_KEY = {
     ACCESS: 'accessToken',
     REFRESH: 'refreshToken',
@@ -104,6 +106,7 @@ api.interceptors.response.use(
                 refreshSubscribers = [];
                 localStorage.removeItem(STORAGE_KEY.ACCESS);
                 localStorage.removeItem(STORAGE_KEY.REFRESH);
+                store.dispatch(logout());
                 window.location.href = '/login';
                 return Promise.reject(refreshError);
             }

@@ -16,6 +16,9 @@ A web-based Content Management System for managing oil change services. Built wi
 | UI Library     | [Ant Design](https://ant.design) 6                           |
 | Routing        | [React Router](https://reactrouter.com) 7                    |
 | Styling        | [Sass](https://sass-lang.com) (sass-embedded) + Ant Design   |
+| State Mgmt    | [Redux Toolkit](https://redux-toolkit.js.org) + [redux-persist](https://github.com/rt2zz/redux-persist) |
+| i18n           | [react-i18next](https://react.i18next.com) + [i18next](https://www.i18next.com) |
+| HTTP Client   | [Axios](https://axios-http.com)                              |
 | Linting        | [ESLint](https://eslint.org) 10 + typescript-eslint          |
 
 ---
@@ -25,29 +28,54 @@ A web-based Content Management System for managing oil change services. Built wi
 ```
 src/
 ├── assets/              # Static assets (logo, icons)
-│   └── logo.png
+│   ├── logo.png
+│   └── avatar.png
 ├── components/          # Reusable UI components
-│   ├── dashboardTable.tsx      # Customer list table
-│   └── dashboardStyle.scss     # Table and header styles
+│   ├── header.tsx              # Top bar with breadcrumb, language switcher, avatar
+│   ├── header.scss
+│   ├── dashboardTable.tsx      # Customer list table with Segmented navigation
+│   ├── dashboardStyle.scss
+│   ├── dropdownbar.tsx         # Language dropdown (deprecated)
+│   └── dropdown.scss
 ├── entities/            # TypeScript interfaces
-│   ├── customer/entity.ts      # Customer interface
-│   └── error/entity.ts         # Error interface (placeholder)
-├── lib/
-│   └── data.ts          # Mock customer data
+│   ├── customer/entity.ts
+│   ├── user/entity.ts          # User + login payload interfaces
+│   ├── pagination.ts           # Pagination interface
+│   └── error/entity.ts
+├── icons/               # Custom SVG icon components
+│   ├── vi.tsx                  # Vietnam flag icon
+│   └── us.tsx                  # US flag icon
+├── locale/              # i18n configuration
+│   ├── i18n.ts                 # i18next setup
+│   ├── vi/translation.json     # Vietnamese translations
+│   └── en/translation.json     # English translations
 ├── pages/
+│   ├── auth/
+│   │   ├── login.tsx           # Login page
+│   │   └── login.scss
 │   └── Dashboard/
 │       ├── dashboard.tsx       # Main dashboard layout with sidebar
-│       ├── dasboard.scss       # Dashboard layout styles
-│       ├── profile.tsx         # Profile page (placeholder)
-│       └── profile.scss        # Profile styles (placeholder)
-├── repositories/
-│   └── customer.ts      # Customer repository (placeholder)
+│       ├── dasboard.scss
+│       ├── profile.tsx         # Profile page
+│       └── profile.scss
+├── presenters/          # Redux state management
+│   ├── store.ts                # Redux store with persist config
+│   ├── hooks.ts                # Typed hooks (useAppDispatch, useAppSelector)
+│   └── slices/
+│       ├── authSlice.ts        # Auth state (login, logout, rehydrate validation)
+│       └── customerSlice.ts    # Customer state (fetch list)
+├── repositories/        # API service layer
+│   ├── api.ts                  # Axios instance with JWT interceptors + refresh
+│   ├── auth/auth.ts            # Auth API (login)
+│   └── customer/customer.ts    # Customer API (CRUD)
+├── routes/
+│   ├── publicRoutes.tsx        # Public route definitions (/login)
+│   └── privateRoutes.tsx       # Private route definitions (/dashboard, /profile)
 ├── styles/
 │   └── color.scss       # SCSS variables (colors, fonts)
-├── App.tsx              # Root component with routing
-├── App.css              # App-level styles
-├── index.css            # Global styles (empty)
-└── main.tsx             # Application entry point
+├── App.tsx              # Root component with PersistGate + routing
+├── App.css
+└── main.tsx             # Application entry point (Provider wrapper)
 ```
 
 ---
@@ -106,23 +134,22 @@ npm run lint
 ### Implemented
 
 - **Responsive sidebar** — Collapses automatically on screens narrower than 1200px; toggle manually by clicking the content area
-- **Customer management** — Table view displaying customer data (name, phone, oil change history, status)
+- **Customer management** — Table view displaying customer data (name, phone, oil change history, status) via REST API
 - **Segmented navigation** — Switch between Dashboard and Customers views
 - **Responsive layout** — Adapts to tablet and mobile screen sizes
+- **Internationalization (i18n)** — Multi-language support with Vietnamese and English via `react-i18next` + `i18next`
+- **JWT Authentication** — Login with access/refresh token flow; automatic token refresh via Axios interceptors
+- **Persistent auth state** — Redux state persisted to localStorage via `redux-persist`; survives page reload
+- **Route guards** — Public/private layout separation; redirect to login when unauthenticated
 
-### Planned (via API)
-
-Full REST API integration for the following modules (see [`api.md`](api.md) for complete endpoint documentation):
+### Planned
 
 | Module              | Description                           |
 | ------------------- | ------------------------------------- |
-| Authentication      | Login, logout, token refresh          |
-| Users               | User CRUD, profile management         |
 | Roles & Permissions | Role-based access control             |
 | Devices             | Oil change device management          |
 | Device Groups       | Device grouping                       |
 | Products            | Product and oil-change settings       |
-| Customers           | Customer CRUD                         |
 | Revenues            | Revenue tracking and export           |
 | Errors / Logs       | Error monitoring and processing       |
 | Coupons & Vouchers  | Promotional code management           |
@@ -135,27 +162,28 @@ Full REST API integration for the following modules (see [`api.md`](api.md) for 
 
 ## Architecture
 
-### Current Data Flow
+### Data Flow
 
 ```
-main.tsx → App.tsx → Dashboard
-                        ├── Sider (logo + navigation)
-                        └── Content
-                              ├── Segmented (Dashboard / Customers)
-                              └── Table ← mockCustomers (mock data)
+main.tsx
+  └── <Provider store={store}>                    ← Redux Provider
+       └── App.tsx
+            └── <PersistGate>                      ← Wait for rehydration
+                 └── <BrowserRouter>
+                      ├── PublicLayout              ← Redirect to /dashboard if token exists
+                      │    └── /login → Login
+                      └── PrivateLayout             ← Redirect to /login if no token
+                           └── Dashboard
+                                ├── Sider (logo + navigation)
+                                └── Content
+                                      ├── Header (breadcrumb + language switcher + avatar)
+                                      ├── Segmented (Dashboard / Customers)
+                                      └── Table ← API Service → Repository → REST API
 ```
 
-### Planned Data Flow
+Authentication tokens are stored in `localStorage` and managed by `redux-persist`. Axios interceptors handle automatic token refresh on 401 responses.
 
-```
-main.tsx → App.tsx → Dashboard
-                        ├── Sider (logo + navigation)
-                        └── Content
-                              ├── Segmented (Dashboard / Customers)
-                              └── Table ← API Service → Repository → REST API
-```
-
-The `repositories/` directory is prepared for the API integration layer. The API contract is fully defined in [`api.md`](api.md) with a base URL of `https://apsp-oilchange-api.dev.altasoftware.vn`.
+The API base URL is `https://apsp-oilchange-api.dev.altasoftware.vn` (see [`api.md`](api.md) for full contract).
 
 ---
 
@@ -184,4 +212,4 @@ Shared style variables are defined in `src/styles/color.scss` and imported via S
 
 ## License
 
-Private — All rights reserved.
+Public — Unlicensed.
