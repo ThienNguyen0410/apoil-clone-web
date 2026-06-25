@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Layout, Menu, Segmented } from 'antd'
+import {useTranslation} from 'react-i18next'
+import { Layout, Menu } from 'antd'
 import {
   DashboardOutlined,
   UserOutlined, ApartmentOutlined, DollarOutlined, SettingOutlined,
@@ -11,8 +12,10 @@ import './dasboard.scss'
 const { Sider, Header, Content } = Layout
 
 export default function Dashboard() {
+  const {t} = useTranslation()
   const [selectedKey, setSelectedKey] = useState('users')
   const [collapsed, setCollapsed] = useState(false)
+  const [dropdownClick, setDropdownClick] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 1199px)')
@@ -23,6 +26,8 @@ export default function Dashboard() {
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
   }, [])
+
+
 
   return (
     <Layout className="dashboard-layout" style={{ minHeight: '100vh' }}>
@@ -36,24 +41,24 @@ export default function Dashboard() {
           selectedKeys={[selectedKey]}
           triggerSubMenuAction="hover"
           items={[
-            { key: 'dashboard', icon: <DashboardOutlined />, label: 'Dashboard' },
-            { key: 'equipments', icon: <ApartmentOutlined />, label: 'Thiết bị' },
-            { key: 'revenue', icon: <DollarOutlined />, label: 'Doanh thu' },
-            { key: 'errors', icon: <UserOutlined />, label: 'Báo lỗi' },
-            { key: 'customers', icon: <DollarOutlined />, label: 'Khách hàng' },
+            { key: 'dashboard', icon: <DashboardOutlined />, label: t('Dashboard') },
+            { key: 'equipments', icon: <ApartmentOutlined />, label: t('Device') },
+            { key: 'revenue', icon: <DollarOutlined />, label: t('Revenue') },
+            { key: 'errors', icon: <UserOutlined />, label: t('Errors') },
+            { key: 'customers', icon: <DollarOutlined />, label: t('Customers') },
             {
               key: 'system-settings',
               icon: <SettingOutlined />,
-              label: 'Cài đặt hệ thống',
+              label: t('System settings'),
               children: [
                 {
                   key: "roles",
-                  label: "Vai trò",
+                  label: t('Roles'),
                 },
 
                 {
                   key: "users",
-                  label: "Người dùng",
+                  label: t('Users'),
                 }
               ]
             },
@@ -62,7 +67,11 @@ export default function Dashboard() {
       </Sider>
 
       <Layout onClick={() => setCollapsed(true)} className="content-layout">
-        <Header className="header-content" />
+        <Header className="header-content" >
+          {/* <div className="switch-bar">
+            <Dropdownbar onSwitchLanguage={handleSwitchLanguage} currentLanguage={i18n.language} />
+          </div> */}
+        </Header>
         <Content>
           {selectedKey === 'dashboard' && <div>Dashboard</div>}
           {selectedKey === 'customers' && <DashboardContent />}

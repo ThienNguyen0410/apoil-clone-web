@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {useState} from 'react'
 import {login} from '../../presenters/slices/authSlice'
-import type UserPayLoad from '../../entities/user/entity'
+import type { UserPayLoad } from '../../entities/user/entity'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
 import logo from '../../assets/logo.png'

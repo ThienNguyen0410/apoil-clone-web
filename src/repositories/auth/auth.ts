@@ -1,4 +1,4 @@
-import type UserPayLoad from '../../entities/user/entity';
+import type { UserPayLoad } from '../../entities/user/entity';
 import type UserEntities from "../../entities/user/entity";
 import api from '../api';
 

@@ -64,7 +64,7 @@
     .header-title {
         display: flex;
         gap: 12px;
-        margin-left: 30px;
+        margin-left: 20px;
         margin-bottom: 10px;
         font-family: color.$text-font;
         font-size: 24px;
@@ -107,8 +107,46 @@
 
     
 }
+.dashboard-segmented {
+    width: 429px;
+    margin-left: 20px;
+    border-radius: 60px;
 
-//status column
-.status-done {
-    
+    .ant-segmented {
+        width: 100%;
+        height: 48px;
+        background-color: #ffffff;
+        border-radius: 60px;
+        padding: 2px;
+    }
+
+    .ant-segmented-item {
+        flex: 1;
+        height: 44px;
+        border-radius: 60px;
+    }
+
+    // Item chưa được chọn
+    .ant-segmented-item-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 24px;
+        color: #0d733b;
+        font-weight: 600;
+        line-height: 28px;
+        text-align: center;
+        font-family: Inter, sans-serif;
+    }
+
+    // Item được chọn
+    .ant-segmented-item-selected {
+        background-color: #0d733b;
+        border-radius: 60px;
+        margin: 2px;
+
+        .ant-segmented-item-label {
+            color: #ffffff;
+        }
+    }
 }

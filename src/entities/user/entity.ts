@@ -8,7 +8,7 @@ export default interface UserEntities {
 }
 
 
-export default interface UserPayLoad {
+export interface UserPayLoad {
     username: string;
     password: string;
 }
