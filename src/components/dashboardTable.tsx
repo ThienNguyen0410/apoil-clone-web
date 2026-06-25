@@ -5,12 +5,17 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
 import { fetchCustomers } from '../presenters/slices/customerSlice'
 import { Spin } from 'antd'
+import { useTranslation } from 'react-i18next'
+import Header from './header'
+
 import './dashboardStyle.scss'
 
 export default function DashboardContent() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { customers, loading, error } = useAppSelector((state) => state.customer)
+  const {t, i18n} = useTranslation()
+  const key = 'Customers'
 
   useEffect(() => {
     dispatch(fetchCustomers(1))
@@ -18,27 +23,27 @@ export default function DashboardContent() {
 
   const columns = [
     {
-      title: 'STT',
+      title: t("No."),
       dataIndex: 'id',
     },
     {
-      title: 'Tên khách hàng',
+      title: t("Customer Name"),
       dataIndex: 'name',
     },
     {
-      title: 'Số điện thoại',
+      title: t("Phone Number"),
       dataIndex: 'phone_number',
     },
     {
-      title: 'Số lần thay nhớt',
+      title: t("Number of Oil Changes"),
       dataIndex: 'times_change_oil',
     },
     {
-      title: 'Chu kỳ thay nhớt tiếp theo',
+      title: t("Next Oil Change Cycle"),
       dataIndex: 'duration_next_change',
     },
     {
-      title: 'Trạng thái',
+      title: t("Status"),
       dataIndex: 'status',
 
       render: (text: string) => (
@@ -55,7 +60,7 @@ export default function DashboardContent() {
     },
 
     {
-      title: 'Hành động',
+      title: t("Action"),
       dataIndex: 'action',
     },
   ]
@@ -83,23 +88,20 @@ export default function DashboardContent() {
     return <div style={{ textAlign: 'center', padding: 100, color: 'red' }}>{error}</div>
   }
 
+  const handleSwitchLanguage = (language: string) => {
+    i
+  }
+
   return (
     <>
-      <div className="header-content">
-        <div className="header-title">
-          <UserOutlined />
-          <span>Khách hàng</span>
-        </div>
-
-        <div className="profile-avtar" onClick={() => navigate('/profile')}>
-          <UserOutlined className="user-icon" />
-        </div>
-      </div>
+      <Header name={key} />
 
       <Segmented
+        onClick={(e) => e.stopPropagation()}
+        className="dashboard-segmented"
         options={[
-          { label: 'Dashboard', value: 'dashboard' },
-          { label: 'Khách hàng', value: 'customers' },
+          { label: t('Customer List'), value: 'customer_list' },
+          { label: t('Oil Change Schedule Setup'), value: 'oil_schedule' },
         ]}
       />
       <Table className="customer-table" columns={columns} dataSource={data} />

@@ -1,0 +1,32 @@
+.language-switcher {
+  background-color: #fff;
+  border-color: #0d733b;
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: #0dd5821f 0px 0px 0px 2px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 0px 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  position: relative;
+  right: 10px;
+}
+
+.dropdown-item {
+  font-size: 14px;
+  line-height: 22px;
+  color: #333;
+}
+
+.language-switcher {
+  width: 100px;
+  height: 44px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}

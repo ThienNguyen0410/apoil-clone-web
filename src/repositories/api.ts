@@ -1,4 +1,5 @@
 import axios from 'axios';
+import dayjs from 'dayjs'
 export const STORAGE_KEY = {
     ACCESS: 'accessToken',
     REFRESH: 'refreshToken',
@@ -23,8 +24,9 @@ function setTokens(access: string, refresh: string) {
 
 function isTokenExpired(token: string): boolean {
     try {
+        const now = dayjs()
         const payload = JSON.parse(atob(token.split('.')[1]));
-        return payload.exp * 1000 < Date.now();
+        return payload.exp * 1000 < now.valueOf();
     } catch {
         return true;
     }

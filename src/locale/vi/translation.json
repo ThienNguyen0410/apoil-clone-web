@@ -1,0 +1,20 @@
+{
+    "Dashboard": "Dashboard",
+    "Device": "Thiết bị",
+    "Revenue": "Doanh thu",
+    "Customers": "Khách hàng",
+    "System settings": "Cài đặt hệ thống",
+    "Errors": "Báo lỗi",
+    "Roles": "Vai trò",
+    "Users": "Người dùng",
+    "No." : "STT",
+    "Customer Name": "Tên khách hàng",
+    "Phone Number": "Số điện thoại",
+    "Date of Birth": "Ngày sinh",
+    "Number of Oil Changes": "Số lần thay dầu",
+    "Next Oil Change Cycle": "Chu kỳ thay nhớt tiếp theo",
+    "Status": "Trạng thái",
+    "Action": "Hành động",
+    "Customer List": "Danh sách khách hàng",
+    "Oil Change Schedule Setup": "Cài đặt lịch thay nhớt"
+}

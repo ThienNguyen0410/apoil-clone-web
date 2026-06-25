@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type UserEntities from '../../entities/user/entity';
-import type  UserPayLoad from '../../entities/user/entity';
+import type { UserPayLoad } from '../../entities/user/entity';
 import { authRepository } from '../../repositories/auth/auth';
 
 interface AuthState {
