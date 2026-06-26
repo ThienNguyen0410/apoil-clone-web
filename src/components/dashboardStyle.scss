@@ -1,6 +1,6 @@
 @use "../styles/color";
 .customer-table {
-    margin-top: 50px;
+    margin-top: 5px;
     margin-left: 30px;
     background: #FFFFFF !important;
     padding: 20px 20px;
@@ -16,7 +16,6 @@
         }
     }
     .ant-table-container {
-        margin-top: 20px;
         border-radius: 20px;
         width: auto;
     }
@@ -218,3 +217,95 @@
 }
 
 
+.table_layout {
+    background: #FFFFFF;
+    margin-top: 20px;
+    margin-left: 30px;
+    border-radius: 18px;
+
+    h1 {
+        color: #242b35;
+        font-weight: 600;
+        margin: 0 0 5px;
+    }
+}
+
+.intro-box {
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+    position:relative;
+
+    .search-section{
+        background-color: #fff;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 220px;
+        height: 67px;
+        position: relative;
+        top: 15px;
+        left: 15px;
+
+        h1 {
+            font-family: Inter, sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        input {
+        width: 220px;
+        height: 43px;
+        display: flex;
+
+        background-color: #fff;
+
+        border: 1px solid #0d733b;
+        border-radius: 8px;
+
+        color: #333;
+
+        font-size: 13px;
+        line-height: 20.4286px;
+
+        padding: 16px 10px;
+        
+        }
+    }
+
+    .filter-section {
+        width: 200px;
+        height: 67px;
+        position: relative;
+        right: 15px;
+        top: 15px;
+
+        h1 {
+            color: #242b35;
+            font-family: Inter, sans-serif;
+            font-weight: 600;
+            margin: 0 0 5px;
+            font-size: 16px;
+        }
+
+        .status-select {
+            display: flex;
+
+            background-color: #fff;
+
+            border: 1px solid #228049;
+            border-radius: 6px;
+
+            color: #333;
+
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 22px;
+
+            padding: 0 11px;
+            width: 200px;
+            height: 42px;
+        }
+    }
+}
