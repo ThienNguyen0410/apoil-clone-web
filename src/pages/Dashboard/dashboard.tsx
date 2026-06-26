@@ -31,7 +31,7 @@ export default function Dashboard() {
 
   return (
     <Layout className="dashboard-layout" style={{ minHeight: '100vh' }}>
-      <Sider width={247} collapsedWidth={110} collapsible collapsed={collapsed} onCollapse={setCollapsed} trigger={null} className="side-bar">
+      <Sider width={311} collapsedWidth={86} collapsible collapsed={collapsed} onCollapse={setCollapsed} trigger={null} className="side-bar">
         <img className="logo" src={logo} alt="logo" />
         <Menu
           onClick={(e) => { setSelectedKey(e.key); setCollapsed(false) }}
@@ -50,6 +50,7 @@ export default function Dashboard() {
               key: 'system-settings',
               icon: <SettingOutlined />,
               label: t('System settings'),
+              popupClassName: 'side-menu-popup',
               children: [
                 {
                   key: "roles",
@@ -73,7 +74,6 @@ export default function Dashboard() {
           </div> */}
         </Header>
         <Content>
-          {selectedKey === 'dashboard' && <div>Dashboard</div>}
           {selectedKey === 'customers' && <DashboardContent />}
         </Content>
       </Layout>

@@ -4,22 +4,61 @@
     margin-left: 30px;
     background: #FFFFFF !important;
     padding: 20px 20px;
-    border-radius: 20px;
+    width: auto;
+    align-items: center;
+    border-radius: 8px 8px 0px 0px;
+    
     .ant-table {
         border-radius: 20px;
+        table{
+            border-spacing: 0 12px;
+            border-radius: 8px 8px 0px 0px;
+        }
     }
     .ant-table-container {
         margin-top: 20px;
         border-radius: 20px;
+        width: auto;
+    }
+
+    .ant-pagination {   
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
     }
 }
 
 .customer-table .ant-table-thead > tr > th {
-    background: color.$side-bar-color;
-    color: #ffffff;
+    background: #e9fdf2;
+    color: #0d733b;
     font-family: color.$text-font;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 700;
+    display: table-cell;
+    line-height: 22px;
+    padding: 10px 8px;
+}
+
+.customer-table .ant-table-tbody > tr > td {
+    background: #f6f6f680 !important;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+}
+
+// Header row - border-radius top-left, top-right
+.customer-table .ant-table-thead > tr > th:first-child {
+    border-radius: 8px 0 0 0;
+}
+.customer-table .ant-table-thead > tr > th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+// Body rows - border-radius top-left, top-right mỗi hàng
+.customer-table .ant-table-tbody > tr > td:first-child {
+    border-radius: 8px 0 0 8px;
+}
+.customer-table .ant-table-tbody > tr > td:last-child {
+    border-radius: 0 8px 8px 0;
 }
 
 // ==============================
@@ -108,20 +147,21 @@
     
 }
 .dashboard-segmented {
-    width: 429px;
+    width: fit-content;
+    height: 53px;
     margin-left: 20px;
     border-radius: 60px;
+    background-color: #0d733b;
 
     .ant-segmented {
         width: 100%;
         height: 48px;
-        background-color: #ffffff;
+        background-color: #0d733b;
         border-radius: 60px;
         padding: 2px;
     }
 
     .ant-segmented-item {
-        flex: 1;
         height: 44px;
         border-radius: 60px;
     }
@@ -132,21 +172,49 @@
         align-items: center;
         justify-content: center;
         padding: 10px 24px;
-        color: #0d733b;
+        color: #fff;
         font-weight: 600;
         line-height: 28px;
         text-align: center;
         font-family: Inter, sans-serif;
+        margin-bottom: 5px;
     }
 
     // Item được chọn
     .ant-segmented-item-selected {
-        background-color: #0d733b;
+        background-color: #ffffff;
         border-radius: 60px;
         margin: 2px;
 
         .ant-segmented-item-label {
-            color: #ffffff;
+            color: #0d733b;
         }
     }
 }
+
+.status-done {
+    width: 89px;
+    height: 30px;
+    text-align: center;
+    background-color: #e3ffe1;
+    border-radius: 20px;
+    color: #34cd26;
+    padding: 5px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #34cd26;
+
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.status-overdue {
+    background-color: #ffe3e3;
+    border-radius: 20px;
+    color: #cd2626;
+    padding: 5px 10px;
+}
+
+

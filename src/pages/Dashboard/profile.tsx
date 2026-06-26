@@ -1,38 +1,40 @@
-import {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
-import avatar from '../../assets/avatar.png'
+import React from 'react'
 import './profile.scss'
-
-export default function Profile() {
-  const [userName, setUserName] = useState('Nguyễn Văn A')
-  const [fullName, setFullName] = useState('Nguyễn Văn A')
-  const [phoneNumber, setPhoneNumber] = useState('0123456789')
-  const [email, setEmail] = useState('abc123@gmail.com')
+import avatar from '../../assets/avatar.png'
+import {useNavigate} from 'react-router-dom'
+export default function profile() {
   const navigate = useNavigate()
   return (
+    <div className="profile-page">
+      <div className="profile-content">
+        <h2 className="title">Personal Information</h2>
 
-    <div className="profile-content">
-      <div className="profile-body">
-        <h1>Thông tin cá nhân</h1>
-        <div className="profile-container">
-          <div className="profile-avatar">
-              <img src={avatar} alt="Avatar"></img>
+        <div className="profile-user-box">
+          <div className="profile-user-form">
+            <div className="avt-role">
+              <img src={avatar} alt="Avatar" />
+              <h2>Admin</h2>
+            </div>
+
+            <div className="profile-form-box">
+              <label>Tên đăng nhập</label>
+              <input id="username-input" type="text" placeholder="Tên đăng nhập"/>
+
+              <label>Họ và tên</label>
+              <input id="name-input" type="text" placeholder="Họ và tên"/>
+
+              <label>Số điện thoại</label>
+              <input id="phone-input" type="text" placeholder="Số điện thoại"/>
+
+              <label>Email</label>
+              <input id="email-input" type="text" placeholder="Email"/>
+            </div>
           </div>
-          <div className="profile-info">
-            <p>Tên đăng nhập</p>
-            <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}></input>
-            <p>Họ và tên</p>
-            <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)}></input>
-            <p>Số điện thoại</p>
-            <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}></input>
-            <p>Email</p>
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-          </div>  
         </div>
-        <button
-        className="back-button"
-        onClick={() => navigate("/dashboard")}>Quay lại
-        </button>
+
+        <div className="wrap-btn">
+          <button className="back-btn" onClick={() => navigate("/dashboard")}>Quay lại</button>
+        </div>
       </div>
     </div>
   )
