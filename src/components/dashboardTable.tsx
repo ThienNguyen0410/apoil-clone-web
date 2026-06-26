@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { Table, Segmented } from 'antd'
+import { useEffect, useState } from 'react'
+import { Table, Segmented, Select } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
 import { fetchCustomers } from '../presenters/slices/customerSlice'
@@ -10,12 +10,22 @@ import dayjs from 'dayjs'
 
 import './dashboardStyle.scss'
 
+const options = [
+  { value: 'tat-ca', label: 'Tất cả' },
+  { value: 'da-thay', label: 'Đã thay' },
+  { value: 'sap-den-han', label: 'Sắp đến hạn' },
+  { value: 'den-han-thay-nhot', label: 'Đến hạn thay nhớt' },
+  { value: 'qua-han', label: 'Quá hạn' },
+  { value: 'chua-thay', label: 'Chưa thay' },
+  { value: 'chua-dang-ky-xe', label: 'Chưa đăng ký xe' },
+];
+
 export default function DashboardContent() {
   const dispatch = useAppDispatch()
   const { customers, loading, error } = useAppSelector((state) => state.customer)
   const {t} = useTranslation()
   const key = 'Customers'
-
+  const [selectedStatus, setSelectedStatus] = useState('tat-ca')
   useEffect(() => {
     dispatch(fetchCustomers(1))
   }, [dispatch])
@@ -106,6 +116,28 @@ export default function DashboardContent() {
         ]}
       />
       <div className="table_layout">
+        <div className="intro-box">
+          <div className="search-section">
+            <h1>Từ khóa</h1>
+            <input
+            type="search"
+            placeholder="Nhập từ khóa"
+            />
+          </div>
+
+          <div className="filter-section">
+            <h1>Trạng thái</h1>
+            <Select
+              className="status-select"
+              placeholder={selectedStatus}
+              options={options}
+              value={selectedStatus}
+              onChange={(value) => setSelectedStatus(value)}
+            />
+          </div>
+        </div>
+
+       
           <Table className="customer-table" columns={columns} dataSource={data} />
       </div>
     </>
