@@ -13,6 +13,23 @@ const resources = {
     }
 }
 
+let initLang = 'vi';
+try {
+    const persisted = localStorage.getItem('persist:root');
+    if (persisted) {
+        const parsed = JSON.parse(persisted);
+        if (parsed.locale) {
+            const localeState = JSON.parse(parsed.locale);
+            if (localeState.language === 'ENG') {
+                initLang = 'en';
+            }
+        }
+    }
+}
+catch(error) {console.error('Error initializing i18n:', error);}
+
+
+
 i18n.use(initReactI18next).init({
     resources,
     lng: 'vi',

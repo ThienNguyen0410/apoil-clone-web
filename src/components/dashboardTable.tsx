@@ -38,6 +38,7 @@ export default function DashboardContent() {
     {
       title: t("Customer Name"),
       dataIndex: 'name',
+      sorter: (a:any,b:any) => a.name.localeCompare(b.name),
     },
     {
       title: t("Phone Number"),
@@ -75,6 +76,11 @@ export default function DashboardContent() {
     {
       title: t("Action"),
       dataIndex: 'action',
+      render: () => (
+        <div className="action-icon">
+            <InfoCircleOutlined />
+        </div>
+      )
     },
   ]
 
@@ -117,7 +123,7 @@ export default function DashboardContent() {
       />
       <div className="table_layout">
         <div className="intro-box">
-          <div className="search-section">
+          <div className="search-section" onClick={(e) => e.stopPropagation()}>
             <h1>Từ khóa</h1>
             <input
             type="search"
@@ -125,7 +131,7 @@ export default function DashboardContent() {
             />
           </div>
 
-          <div className="filter-section">
+          <div className="filter-section" onClick={(e) => e.stopPropagation()}>
             <h1>Trạng thái</h1>
             <Select
               className="status-select"

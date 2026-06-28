@@ -73,8 +73,10 @@ export default function Dashboard() {
             <Dropdownbar onSwitchLanguage={handleSwitchLanguage} currentLanguage={i18n.language} />
           </div> */}
         </Header>
-        <Content>
-          {selectedKey === 'customers' && <DashboardContent />}
+        <Content  className="content-box">
+          <div className='module-content' onClick={(e) => e.stopPropagation()}>
+              {selectedKey === 'customers' && <DashboardContent  />}
+          </div>
         </Content>
       </Layout>
     </Layout>

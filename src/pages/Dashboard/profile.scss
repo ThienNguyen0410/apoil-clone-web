@@ -137,6 +137,10 @@
         &::placeholder {
             color: #bfbfbf;
         }
+
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 }
 

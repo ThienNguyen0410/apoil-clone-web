@@ -5,7 +5,7 @@
 // ==============================
 .dashboard-layout {
     background: color.$background-color !important;
-
+    
     .ant-layout,
     .ant-layout-content {
         background: color.$background-color !important;
@@ -70,6 +70,8 @@
     width: 310px !important;
     height: 50px !important;
     font-weight: 500;
+    display: flex;
+    align-items: center;
 }
 
 .side-menu .ant-menu-item-selected {
