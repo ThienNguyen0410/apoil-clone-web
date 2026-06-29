@@ -43,8 +43,16 @@
 
     padding: 48px 120px;
 
-    width:  calc(1152px - 240px);
+    width:  1152px;
     height: 512px;
+    display: flex;
+    flex-direction: row;
+
+    .profile-nav {
+        right: 0px;
+        top: 200px;
+        position: absolute;
+    }
 
     .profile-user-form {
         display: flex;
@@ -130,8 +138,8 @@
         line-height: 25.1429px;
         padding: 9px 16px;
 
-        width: 566px;
-        height: 28px;
+        width: 600px;
+        height: 48px;
         font-size: 18px;
 
         &::placeholder {
@@ -140,6 +148,10 @@
 
         &:disabled {
             cursor: not-allowed;
+        }
+
+        &:hover {
+            border-color: color.$side-bar-color;
         }
     }
 }

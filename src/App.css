@@ -182,3 +182,23 @@
     border-right-color: var(--border);
   }
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e2faf0;
+}
+
+#root {
+    min-height: 100vh;
+}

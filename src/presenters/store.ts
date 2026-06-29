@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import customerReducer from './slices/customerSlice';
 import authReducer from './slices/authSlice';
 import localeReducer from './slices/localeSlice';
+import profileReducer from './slices/profileSlice';
 import {persistStore, persistReducer} from 'redux-persist'
 
 
@@ -14,13 +15,14 @@ const storage = {
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth', 'locale']
+    whitelist: ['auth', 'locale', 'profile']
 }
 
 const rootReducer = combineReducers({
     customer: customerReducer,
     auth: authReducer,
-    locale: localeReducer
+    locale: localeReducer,
+    profile: profileReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
