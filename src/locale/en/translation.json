@@ -1,9 +1,11 @@
 {
     "Dashboard": "Dashboard",
-    "Device": "Device",
-    "Errors": "Errors",
+    "Device": "Devices",
+    "Errors": "Error Report",
     "Revenue": "Revenue",
     "Customers": "Customers",
+    "Oil type": "Oil type",
+    "Code Management": "Code Management",
     "System settings": "System settings",
     "Roles": "Roles",
     "Users": "Users",
@@ -16,6 +18,25 @@
     "Status": "Status",
     "Action": "Action",
     "Customer List": "Customer List",
-    "Oil Change Schedule Setup": "Oil Change Schedule Setup"
+    "Oil Change Schedule Setup": "Oil Change Schedule Setup",
+    "changed": "changed",
+    "not changed": "not changed",
 
+
+    "Key Word": "Key Word",
+
+    "All": "All",
+    "Changed": "Changed",
+    "Ultrasound due": "Ultrasound due",
+    "Oil change due": "Oil change due",
+    "Overdue": "Overdue",
+    "Not changed": "Not changed",
+    "Vehicle not yet registered": "Vehicle not yet registered",
+
+    "Personal Information": "Personal Information",
+    "Username": "Username",
+    "Full Name": "First and last name",
+    "Email": "Email",
+
+    "Back": "Back"
 }

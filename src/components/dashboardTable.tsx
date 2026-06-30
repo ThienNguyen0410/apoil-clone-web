@@ -3,6 +3,7 @@ import { Table, Segmented, Select } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
 import { fetchCustomers } from '../presenters/slices/customerSlice'
+import SavedBtn from './savedBtn'
 import { Spin } from 'antd'
 import { useTranslation } from 'react-i18next'
 import Header from './header'
@@ -20,7 +21,7 @@ const options = [
   { value: 'chua-dang-ky-xe', label: 'Chưa đăng ký xe' },
 ];
 
-export default function DashboardContent() {
+export default function DashboardContent({ collapsed }: { collapsed?: boolean }) {
   const dispatch = useAppDispatch()
   const { customers, loading, error } = useAppSelector((state) => state.customer)
   const {t} = useTranslation()
@@ -38,22 +39,27 @@ export default function DashboardContent() {
     {
       title: t("Customer Name"),
       dataIndex: 'name',
+      sorter: (a:any,b:any) => a.name.localeCompare(b.name),
     },
     {
       title: t("Phone Number"),
       dataIndex: 'phone_number',
+      sorter: (a:any,b:any) => a.phone_number.localeCompare(b.phone_number),
     },
     {
       title: t("Date of Birth"),
       dataIndex: 'date_of_birth',
+      sorter: (a:any, b:any) => a.date_of_birth.localeCompare(b.date_of_birth),
     },
     {
       title: t("Number of Oil Changes"),
       dataIndex: 'times_change_oil',
+      sorter: (a:any, b:any) => a.times_change_oil - b.times_change_oil,
     },
     {
       title: t("Next Oil Change Cycle"),
       dataIndex: 'duration_next_change',
+      sorter: (a:any, b:any) => a.duration_next_change.localeCompare(b.duration_next_change),
     },
     {
       title: t("Status"),
@@ -62,12 +68,12 @@ export default function DashboardContent() {
       render: (text: string) => (
         <span
           className={
-            text === 'Đã thay'
+            text === 'Đã thay' || text === 'Changed'
               ? 'status-done'
               : 'status-overdue'
           }
         >
-          {text}
+          {text === "Đã thay" || text === "Changed" ? ( t("changed")) : (t("not changed"))}
         </span>
       )
     },
@@ -75,6 +81,11 @@ export default function DashboardContent() {
     {
       title: t("Action"),
       dataIndex: 'action',
+      render: () => (
+        <div className="action-icon">
+            <InfoCircleOutlined />
+        </div>
+      )
     },
   ]
 
@@ -115,9 +126,9 @@ export default function DashboardContent() {
           { label: t('Oil Change Schedule Setup'), value: 'oil_schedule' },
         ]}
       />
-      <div className="table_layout">
+      <div className={`table_layout${collapsed ? ' collapsed' : ''}`}>
         <div className="intro-box">
-          <div className="search-section">
+          <div className="search-section" onClick={(e) => e.stopPropagation()}>
             <h1>Từ khóa</h1>
             <input
             type="search"
@@ -125,7 +136,7 @@ export default function DashboardContent() {
             />
           </div>
 
-          <div className="filter-section">
+          <div className="filter-section" onClick={(e) => e.stopPropagation()}>
             <h1>Trạng thái</h1>
             <Select
               className="status-select"
@@ -137,8 +148,12 @@ export default function DashboardContent() {
           </div>
         </div>
 
-       
-          <Table className="customer-table" columns={columns} dataSource={data} />
+          <div className="main-table">
+              <Table className="customer-table" columns={columns} dataSource={data} />
+              <div className="saved-btn">
+                  <SavedBtn/>
+              </div>
+          </div>
       </div>
     </>
   )

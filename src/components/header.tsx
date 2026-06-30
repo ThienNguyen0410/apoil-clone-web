@@ -1,11 +1,15 @@
 import React from 'react'
-import {useState} from 'react'
-import {UserOutlined, ApartmentOutlined, DollarOutlined, SettingOutlined} from '@ant-design/icons'
+import {useState, useEffect} from 'react'
+import {UserOutlined} from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
-import {Select, Dropdown} from 'antd'
-import FlagVietnamIcon from '../icons/vi'
-import FlagUsOutlyingIslandsIcon from '../icons/us'
+import {Dropdown} from 'antd'
 import { useNavigate } from 'react-router-dom'
+
+import vnFlag from '../assets/vnFlag.png'
+import enFlag from '../assets/enFlag.png'
+
+import { useAppDispatch, useAppSelector } from '../presenters/hooks'
+import { setLanguage } from '../presenters/slices/localeSlice'
 import './header.scss'
 
 
@@ -20,19 +24,31 @@ const moduleNameMap: { [key: string]: { name: string; icon: React.ReactNode } } 
     }
 }
 export default function Header({ name }: HeaderProps) {
-
-  const [language, setLanguage] = useState('VIE')
-  const [flag, setFlag] = useState(<FlagVietnamIcon size={20} />)
+  //const [language, setLanguage] = useState('VIE')
+  //const [flag, setFlag] = useState(vnFlag)
   //items for selected module
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const {language} = useAppSelector((state) => state.locale)
+
+  useEffect(() => {
+    if (language === 'VIE') {
+      i18n.changeLanguage('vi')
+    }
+
+    else {
+      i18n.changeLanguage('en')
+    }
+  },[language])
+
   const items = [
     {
       key: 'VIE',
-      label: <span className="dropdown-item"><FlagVietnamIcon size={20} /> VIE</span>
+      label: <span className="dropdown-item"><img src={vnFlag} alt="VN" className="flag-icon" /> VIE</span>
     },
     {
       key: 'EN',
-      label: <span className="dropdown-item"><FlagUsOutlyingIslandsIcon size={20} /> ENG</span>
+      label: <span className="dropdown-item"><img src={enFlag} alt="EN" className="flag-icon" /> ENG</span>
     }
   ]
 
@@ -43,14 +59,14 @@ export default function Header({ name }: HeaderProps) {
 
   function OnSwitchLanguage(language: string) {
     if (language === 'VIE') {
-      i18n.changeLanguage('vi')
+      dispatch(setLanguage('VIE'))
     }
-    else if (language === 'EN') {
-      i18n.changeLanguage('en')
-    }
-    setLanguage(language)
-    setFlag(language === 'VIE' ? <FlagVietnamIcon size={20} /> : <FlagUsOutlyingIslandsIcon size={20} />)
+
+    else dispatch(setLanguage('ENG'))
+
   }
+
+  const flag = language === 'VIE' ? vnFlag : enFlag
   return (
     <div className="breadcrumb-box">
       <div className="breadcrumbs-info">
@@ -65,7 +81,7 @@ export default function Header({ name }: HeaderProps) {
             items,
             onClick: (e) => OnSwitchLanguage && OnSwitchLanguage(e.key)
           }}>
-            <span className="language-switcher">{flag} {language}</span>
+            <span className="language-switcher"><img src={flag} alt={language} className="flag-icon" /> {language}</span>
           </Dropdown>
         </div>
 

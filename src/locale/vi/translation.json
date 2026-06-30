@@ -3,6 +3,8 @@
     "Device": "Thiết bị",
     "Revenue": "Doanh thu",
     "Customers": "Khách hàng",
+    "Oil type": "Loại nhớt",
+    "Code Management": "Quản lý mã",
     "System settings": "Cài đặt hệ thống",
     "Errors": "Báo lỗi",
     "Roles": "Vai trò",
@@ -16,5 +18,24 @@
     "Status": "Trạng thái",
     "Action": "Hành động",
     "Customer List": "Danh sách khách hàng",
-    "Oil Change Schedule Setup": "Cài đặt lịch thay nhớt"
+    "Oil Change Schedule Setup": "Cài đặt lịch thay nhớt",
+    "changed": "Đã thay",
+    "not changed": "Chưa thay",
+
+    "Key Word": "Từ khóa",
+
+    "All": "Tất cả",
+    "Changed": "Đã thay",
+    "Ultrasound due": "Sắp đến hạn",
+    "Oil change due": "Đến hạn thay nhớt",
+    "Overdue": "Quá hạn",
+    "Not changed": "Chưa thay",
+    "Vehicle not yet registered": "Chưa đăng ký xe",
+
+    "Personal Information": "Thông tin cá nhân",
+    "Username": "Tên đăng nhập",
+    "Full Name": "Họ và tên",
+    "Email": "Email",
+
+    "Back": "Quay lại"
 }

@@ -1,10 +1,13 @@
 export default interface UserEntities {
-    id: string;
-    userrname: string;
+    id?: string;
+    username?: string;
+    fullname?: string;
+    phone_number?: string;
     email: string;
-    isAuthenticated: boolean;
-    accessToken: string;
-    refreshToken: string;
+    //roleId?: string;
+    isAuthenticated?: boolean;
+    accessToken?: string;
+    refreshToken?: string;
 }
 
 

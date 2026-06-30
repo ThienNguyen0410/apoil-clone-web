@@ -1,0 +1,109 @@
+.ant-modal-container {
+    margin: 0 !important;
+    padding: 0 !important;
+
+}
+
+.logout-modal {
+    .ant-modal-content {
+        height: 380px;
+        padding: 0;
+        border-radius: 16px;
+        overflow: hidden !important;
+    }
+
+    .ant-modal-body {
+        padding: 0;
+    }
+}
+
+.logout-modal {
+    text-align: center;
+    height: 380px;
+    position: relative;
+}
+
+.logout-header {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0d733b;
+    color: #faad14;
+    font-size: 94px;
+    line-height: 1;
+    border-radius: 8px 8px 0 0;
+}
+
+.logout-header .icon {
+    width: 90px;
+    height: 90px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color: #0b7d3b;
+}
+
+.logout-body {
+    padding: 24px 0 0;
+
+    h2 {
+        color: #0d733b;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 36px;
+        margin: 0;
+        text-align: center;
+    }
+
+    p {
+        color: #000000e0;
+        font-size: 14px;
+        line-height: 22px;
+        margin: 8px 61.125px 0;
+        text-align: center;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        color: #000000e0;
+        font-size: 14px;
+        line-height: 22px;
+        margin: 28px 0 0;
+        text-align: end;
+        gap: 20px;
+
+
+        #cancel {
+            background-color: #fff;
+            border: 1px solid #0d733b;
+            border-radius: 8px;
+            color: #0d733b;
+            font-family: -apple-system;
+            font-weight: 900;
+            line-height: 25.1429px;
+            font-size: 20px;
+            text-align: center;
+            width: 150px;
+            height: 48px;
+        }
+
+        #accept {
+            background-color: #0d733b;
+            border: 1px solid #0d733b;
+            border-radius: 8px;
+            color: #fff;
+            font-family: -apple-system;
+            font-weight: 900;
+            line-height: 25.1429px;
+            font-size: 20px;
+            text-align: center;
+            width: 150px;
+            height: 48px;
+        }
+    }
+}

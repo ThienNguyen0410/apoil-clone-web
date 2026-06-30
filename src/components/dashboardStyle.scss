@@ -4,15 +4,18 @@
     margin-left: 30px;
     background: #FFFFFF !important;
     padding: 20px 20px;
-    width: auto;
+    width: 1437px;
     align-items: center;
     border-radius: 8px 8px 0px 0px;
+
+   
     
     .ant-table {
         border-radius: 20px;
         table{
             border-spacing: 0 12px;
             border-radius: 8px 8px 0px 0px;
+
         }
     }
     .ant-table-container {
@@ -27,6 +30,10 @@
     }
 }
 
+.table_layout.collapsed .customer-table {
+    width: 1660px;
+}
+
 .customer-table .ant-table-thead > tr > th {
     background: #e9fdf2;
     color: #0d733b;
@@ -36,7 +43,24 @@
     display: table-cell;
     line-height: 22px;
     padding: 10px 8px;
+}  
+.customer-table .ant-table-thead > tr > th.ant-table-column-has-sorters  {
+    background: #e9fdf2
 }
+
+.customer-table .ant-table-thead > tr > th.ant-table-column-has-sorters:hover {
+    background: #e9fdf2 !important;
+}
+
+.customer-table .ant-table-column-sorter-up.active {
+    color: color.$side-bar-color;
+}
+
+.customer-table .ant-table-column-sorter-down.active {
+    color: color.$side-bar-color;
+}
+
+
 
 .customer-table .ant-table-tbody > tr > td {
     background: #f6f6f680 !important;
@@ -147,10 +171,11 @@
 }
 .dashboard-segmented {
     width: fit-content;
-    height: 53px;
+    height: 52px;
     margin-left: 20px;
     border-radius: 60px;
     background-color: #0d733b;
+    
 
     .ant-segmented {
         width: 100%;
@@ -162,7 +187,9 @@
 
     .ant-segmented-item {
         height: 44px;
+        
         border-radius: 60px;
+    
     }
 
     // Item chưa được chọn
@@ -170,13 +197,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px 24px;
+        padding: 6px 24px 14px;
         color: #fff;
         font-weight: 600;
-        line-height: 28px;
+        font-size: 16px;
+        //line-height: 28px;
         text-align: center;
         font-family: Inter, sans-serif;
-        margin-bottom: 5px;
+        
     }
 
     // Item được chọn
@@ -184,7 +212,6 @@
         background-color: #ffffff;
         border-radius: 60px;
         margin: 2px;
-
         .ant-segmented-item-label {
             color: #0d733b;
         }
@@ -207,6 +234,8 @@
 
     font-size: 14px;
     line-height: 22px;
+
+    font-weight: 600;
 }
 
 .status-overdue {
@@ -220,13 +249,36 @@
 .table_layout {
     background: #FFFFFF;
     margin-top: 20px;
-    margin-left: 30px;
+    margin-left: 20px;
     border-radius: 18px;
+    height: 756px;
+    width: 1485px;
 
+    &.collapsed {
+        width: 1708px;
+    }
+
+    padding: 16px 24px 10px;
     h1 {
         color: #242b35;
         font-weight: 600;
         margin: 0 0 5px;
+    }
+
+    .main-table {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .saved-btn {
+            position: absolute;
+            top: 170px;
+            right: 0px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
 }
 
@@ -309,3 +361,10 @@
         }
     }
 }
+
+.action-icon {
+    color: #0d733b;
+    font-size: 20px;
+    display: flex;
+}
+
