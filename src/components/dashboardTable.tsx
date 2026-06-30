@@ -68,12 +68,12 @@ export default function DashboardContent() {
       render: (text: string) => (
         <span
           className={
-            text === 'Đã thay'
+            text === 'Đã thay' || text === 'Changed'
               ? 'status-done'
               : 'status-overdue'
           }
         >
-          {text}
+          {text === "Đã thay" || text === "Changed" ? ( t("changed")) : (t("not changed"))}
         </span>
       )
     },

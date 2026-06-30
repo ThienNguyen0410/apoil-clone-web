@@ -36,6 +36,9 @@ function isTokenExpired(token: string): boolean {
 
 const api = axios.create({
     baseURL: BASE_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    }
 });
 
 // --- Refresh logic (singleton to avoid concurrent calls) ---

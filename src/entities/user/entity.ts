@@ -4,7 +4,7 @@ export default interface UserEntities {
     fullname?: string;
     phone_number?: string;
     email: string;
-    //role?: string;
+    //roleId?: string;
     isAuthenticated?: boolean;
     accessToken?: string;
     refreshToken?: string;

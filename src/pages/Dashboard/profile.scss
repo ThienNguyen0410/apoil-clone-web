@@ -190,4 +190,55 @@
             cursor: pointer;
         }
     }
+
+    .save-cancel-btn {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+
+        .cancel-btn {
+            display: inline-block;
+            background-color: #fff;
+            border: 1px solid #1c7c45;
+            border-radius: 8px;
+            color: #0d733b;
+            font-family: Inter, sans-serif;
+            font-weight: 700;
+            line-height: 25.1429px;
+            margin: 0 20px 0 0;
+            text-align: center;
+            width: 150px;
+            height: 48px;
+            font-family: Inter, sans-serif;
+            font-size: 20px;
+            font-weight:700;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .save-btn {
+            display: inline-block;
+            background-color: #0d733b;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: #fff;
+            font-family: Inter, sans-serif;
+            font-weight: 700;
+            line-height: 25.1429px;
+            text-align: center;
+            width: 150px;
+            height: 48px;
+            font-family: Inter, sans-serif;
+            font-size: 20px;
+            font-weight:700;
+         
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
 }

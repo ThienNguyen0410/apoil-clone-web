@@ -32,7 +32,7 @@ catch(error) {console.error('Error initializing i18n:', error);}
 
 i18n.use(initReactI18next).init({
     resources,
-    lng: 'vi',
+    lng: initLang,
     fallbackLng: 'en',
     interpolation: {
         escapeValue: false
