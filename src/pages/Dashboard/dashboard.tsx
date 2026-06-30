@@ -48,13 +48,13 @@ export default function Dashboard() {
           selectedKeys={[selectedKey]}
           triggerSubMenuAction="hover"
           items={[
-            { key: 'dashboard', icon: <HomeOutlined />, label: t('Dashboard') },
-            { key: 'equipments', icon: <ApartmentOutlined />, label: t('Device') },
-            { key: 'revenue', icon: <DollarOutlined />, label: t('Revenue') },
-            { key: 'errors', icon: <ExclamationCircleOutlined />, label: t('Errors') },
-            { key: 'customers', icon: <UserOutlined />, label: t('Customers') },
+            { key: 'dashboard', icon: <HomeOutlined style={{fontSize:"24px"}}/>, label: t('Dashboard') },
+            { key: 'equipments', icon: <ApartmentOutlined style={{fontSize: "24px"}} />, label: t('Device') },
+            { key: 'revenue', icon: <DollarOutlined style={{fontSize: "24px"}} />, label: t('Revenue') },
+            { key: 'errors', icon: <ExclamationCircleOutlined style={{fontSize: "24px"}} />, label: t('Errors') },
+            { key: 'customers', icon: <UserOutlined style={{fontSize: "24px"}} />, label: t('Customers') },
            
-            {key: 'oil_type', icon: <CodeSandboxOutlined/>, label: t('Oil type') },
+            {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
 
 
             // {

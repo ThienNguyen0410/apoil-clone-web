@@ -137,15 +137,15 @@ export default function profile() {
         (
           <div className="save-cancel-btn">
 
-            
+             <button className="cancel-btn" onClick={cancelEdit}>
+              {t("Cancel")}
+             </button>
 
              <button className= "save-btn" onClick={saveProfile}>
-              Save
+              {t("Save")}
              </button>
 
-             <button className="cancel-btn" onClick={cancelEdit}>
-              Cancel
-             </button>
+            
           </div>
         ) 
           : (<button className="back-btn" onClick={() => navigate("/dashboard")}>{t("Back")}</button>)

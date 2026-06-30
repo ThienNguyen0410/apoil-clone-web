@@ -85,8 +85,8 @@ export default function Header({ name }: HeaderProps) {
           </Dropdown>
         </div>
 
-        <div className="avatar-navigate">
-          <UserOutlined onClick={() => navigate("/profile")}/>
+        <div className="avatar-navigate" onClick={() => navigate("/profile")}>
+          <UserOutlined/>
         </div>
       </div>
     </div> 

@@ -1,0 +1,10 @@
+30/6/2026
+Những việc đã làm được:
+- Dasboard Page:
+  + Chỉnh lại UI (chưa responsive)
+  + Quản lý state bằng redux (tránh reload lại state biến mất)
+  + Hoàn thành bộ đổi ngôn ngữ
+
+- Profile page:
+ + Hoàn thiện UI (chưa responsivce)
+ + Hoàn thiện 3 module của nav bar (edit, change password, logout)
