@@ -21,7 +21,7 @@ const options = [
   { value: 'chua-dang-ky-xe', label: 'Chưa đăng ký xe' },
 ];
 
-export default function DashboardContent() {
+export default function DashboardContent({ collapsed }: { collapsed?: boolean }) {
   const dispatch = useAppDispatch()
   const { customers, loading, error } = useAppSelector((state) => state.customer)
   const {t} = useTranslation()
@@ -126,7 +126,7 @@ export default function DashboardContent() {
           { label: t('Oil Change Schedule Setup'), value: 'oil_schedule' },
         ]}
       />
-      <div className="table_layout">
+      <div className={`table_layout${collapsed ? ' collapsed' : ''}`}>
         <div className="intro-box">
           <div className="search-section" onClick={(e) => e.stopPropagation()}>
             <h1>Từ khóa</h1>

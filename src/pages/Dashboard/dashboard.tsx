@@ -103,7 +103,7 @@ export default function Dashboard() {
         </Header>
         <Content  className="content-box">
           <div className='module-content' onClick={(e) => e.stopPropagation()}>
-              {selectedKey === 'customers' && <DashboardContent  />}
+              {selectedKey === 'customers' && <DashboardContent collapsed={collapsed} />}
           </div>
         </Content>
       </Layout>

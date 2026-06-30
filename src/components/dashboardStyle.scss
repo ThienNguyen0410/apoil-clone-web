@@ -7,12 +7,15 @@
     width: 1437px;
     align-items: center;
     border-radius: 8px 8px 0px 0px;
+
+   
     
     .ant-table {
         border-radius: 20px;
         table{
             border-spacing: 0 12px;
             border-radius: 8px 8px 0px 0px;
+
         }
     }
     .ant-table-container {
@@ -25,6 +28,10 @@
         justify-content: flex-end;
         margin-top: 20px;
     }
+}
+
+.table_layout.collapsed .customer-table {
+    width: 1660px;
 }
 
 .customer-table .ant-table-thead > tr > th {
@@ -246,6 +253,10 @@
     border-radius: 18px;
     height: 756px;
     width: 1485px;
+
+    &.collapsed {
+        width: 1708px;
+    }
 
     padding: 16px 24px 10px;
     h1 {
