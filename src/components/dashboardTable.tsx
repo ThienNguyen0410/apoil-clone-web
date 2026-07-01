@@ -122,6 +122,8 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
         showSizeChanger={false}
       />
     </div>
+
+    
   )
 
   if (loading) {
@@ -132,9 +134,9 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
     )
   }
 
-  if (error) {
-    return <div style={{ textAlign: 'center', padding: 100, color: 'red', background:"white" }}>{error}</div>
-  }
+  // if (error) {
+  //   return <div style={{ textAlign: 'center', padding: 100, color: 'red', background:"#e2faf0" }}>{error}</div>
+  // }
 
  
   return (
@@ -172,7 +174,9 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
         </div>
 
           <div className="main-table">
-              <Table className="customer-table" columns={columns} dataSource={data} pagination = {false} footer={() => tableFooter} />
+              <Table className="customer-table" columns={columns} dataSource={data} pagination = {false} 
+              
+              footer={!error? () => tableFooter : undefined} />
               <div className="saved-btn">
                   <SavedBtn/>
               </div>

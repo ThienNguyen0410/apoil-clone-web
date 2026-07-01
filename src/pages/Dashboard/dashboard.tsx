@@ -6,7 +6,7 @@ import {
   HomeOutlined, ExclamationCircleOutlined, CodeSandboxOutlined, QrcodeOutlined 
 } from '@ant-design/icons'
 import logo from '../../assets/logo.png'
-import DashboardContent from '../../components/dashboardTable'
+import DashboardContent from '../../components/DashboardTable'
 import './dasboard.scss'
 const { Sider, Header, Content } = Layout
 

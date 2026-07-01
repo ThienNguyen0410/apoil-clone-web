@@ -63,7 +63,6 @@ export default function Header({ name }: HeaderProps) {
     }
 
     else dispatch(setLanguage('ENG'))
-
   }
 
   const flag = language === 'VIE' ? vnFlag : enFlag
