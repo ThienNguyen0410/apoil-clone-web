@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Table, Segmented, Select } from 'antd'
+import { Table, Segmented, Select, Pagination } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
 import { fetchCustomers } from '../presenters/slices/customerSlice'
@@ -27,6 +27,7 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
   const {t} = useTranslation()
   const key = 'Customers'
   const [selectedStatus, setSelectedStatus] = useState('tat-ca')
+  const [entriesPerPage, setEntriesPerPage] = useState(10)
   useEffect(() => {
     dispatch(fetchCustomers(1))
   }, [dispatch])
@@ -101,6 +102,30 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
     action: <InfoCircleOutlined />,
   }))
 
+  const tableFooter = (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} className="footer-box">
+      <div className="entry-display">
+            <p>Display</p>
+            <input
+              type="text"
+              value={entriesPerPage}
+              onChange={(e) => setEntriesPerPage(parseInt(e.target.value) || 0)}
+            />
+            <p>entries per page</p>
+      </div>
+
+      <Pagination
+        current={10}
+        total={10}
+        pageSize={entriesPerPage}
+        //onChange={(page) => setCurrentPage(page)}
+        showSizeChanger={false}
+      />
+    </div>
+
+    
+  )
+
   if (loading) {
     return (
       <div style={{ textAlign: 'center', padding: 100 }}>
@@ -109,9 +134,9 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
     )
   }
 
-  if (error) {
-    return <div style={{ textAlign: 'center', padding: 100, color: 'red' }}>{error}</div>
-  }
+  // if (error) {
+  //   return <div style={{ textAlign: 'center', padding: 100, color: 'red', background:"#e2faf0" }}>{error}</div>
+  // }
 
  
   return (
@@ -149,11 +174,15 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
         </div>
 
           <div className="main-table">
-              <Table className="customer-table" columns={columns} dataSource={data} />
+              <Table className="customer-table" columns={columns} dataSource={data} pagination = {false} 
+              
+              footer={!error? () => tableFooter : undefined} />
               <div className="saved-btn">
                   <SavedBtn/>
               </div>
           </div>
+
+          
       </div>
     </>
   )

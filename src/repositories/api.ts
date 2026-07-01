@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dayjs from 'dayjs'
 import { store } from '../presenters/store';
-import { logout } from '../presenters/slices/authSlice';
+import { logout, updateTokens } from '../presenters/slices/authSlice';
 export const STORAGE_KEY = {
     ACCESS: 'accessToken',
     REFRESH: 'refreshToken',
@@ -41,7 +41,6 @@ const api = axios.create({
     }
 });
 
-// --- Refresh logic (singleton to avoid concurrent calls) ---
 
 let isRefreshing = false;
 let refreshSubscribers: Array<(token: string) => void> = [];
@@ -61,6 +60,7 @@ async function doRefreshToken(): Promise<string> {
 
     const { accessToken, refreshToken: newRefreshToken } = response.data.data;
     setTokens(accessToken, newRefreshToken);
+    store.dispatch(updateTokens({ accessToken, refreshToken: newRefreshToken }));
     return accessToken;
 }
 

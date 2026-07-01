@@ -4,7 +4,7 @@ import authReducer from './slices/authSlice';
 import localeReducer from './slices/localeSlice';
 import profileReducer from './slices/profileSlice';
 import {persistStore, persistReducer} from 'redux-persist'
-
+import {FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from 'redux-persist'
 
 const storage = {
   getItem: (key: string) => Promise.resolve(localStorage.getItem(key)),
@@ -15,7 +15,11 @@ const storage = {
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth', 'locale', 'profile']
+    whitelist: ['auth', 'locale', 'profile'],
+    version: 1,
+    migrate: (state: any) => {
+        return Promise.resolve(state)
+    }
 }
 
 const rootReducer = combineReducers({
@@ -31,7 +35,9 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
-            serializableCheck: false,
+            serializableCheck: {
+                ignoredActions: [FLUSH ,REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            }
         }),
 });
 

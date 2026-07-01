@@ -1,5 +1,6 @@
 import { Modal, Button } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 import './logout.scss'
 
 interface LogoutProps {
@@ -9,6 +10,7 @@ interface LogoutProps {
 }
 
 export default function LogoutPopup({ open, setOpen, handleLogout }: LogoutProps) {
+  const {t} = useTranslation()
   return (
     <Modal
       open={open}
@@ -26,13 +28,13 @@ export default function LogoutPopup({ open, setOpen, handleLogout }: LogoutProps
         </div>
 
         <div className="logout-body">
-          <h2>Xác nhận đăng xuất khỏi thiết bị</h2>
-          <p>Bạn có thực sự muốn đăng xuất không?</p>
+          <h2>{t("confirm logout")}</h2>
+          <p>{t("lougout confirm")}</p>
 
           <div className="buttons">
             <Button onClick={() => setOpen(false)}
                 id="cancel">
-              Hủy
+              {t("Cancel")}
             </Button>
 
             <Button
@@ -40,7 +42,7 @@ export default function LogoutPopup({ open, setOpen, handleLogout }: LogoutProps
               onClick={handleLogout}
               id="accept"
             >
-              Đồng ý
+              {t("ok")}
             </Button>
           </div>
         </div>
