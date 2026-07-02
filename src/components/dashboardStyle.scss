@@ -7,7 +7,7 @@
     width: 1437px;
     align-items: center;
     border-radius: 8px 8px 0px 0px;
-
+    margin-left: -22px;
    
     
     .ant-table {
@@ -15,7 +15,8 @@
         table{
             border-spacing: 0 12px;
             border-radius: 8px 8px 0px 0px;
-
+            width: 1437px !important;
+            height: 240px !important;
         }
     }
     .ant-table-container {
@@ -51,6 +52,7 @@
     display: table-cell;
     line-height: 22px;
     padding: 10px 8px;
+    border: none;
 }  
 .customer-table .ant-table-thead > tr > th.ant-table-column-has-sorters  {
     background: #e9fdf2
@@ -278,6 +280,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        
 
         .saved-btn {
             position: absolute;
@@ -308,6 +311,7 @@
         position: relative;
         top: 15px;
         left: 15px;
+        margin-left: -18px;
 
         h1 {
             font-family: Inter, sans-serif;
@@ -339,8 +343,9 @@
         width: 200px;
         height: 67px;
         position: relative;
-        right: 15px;
+        right: 4px;
         top: 15px;
+        
 
         h1 {
             color: #242b35;
@@ -397,3 +402,6 @@
     }
 }
 
+.action-icon .icon:hover {
+    cursor: pointer;
+}

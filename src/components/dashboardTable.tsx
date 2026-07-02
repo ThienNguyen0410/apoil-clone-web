@@ -3,10 +3,10 @@ import { Table, Segmented, Select, Pagination } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
 import { fetchCustomers } from '../presenters/slices/customerSlice'
-import SavedBtn from './savedBtn'
+import SavedBtn from './SavedBtn'
 import { Spin } from 'antd'
 import { useTranslation } from 'react-i18next'
-import Header from './header'
+import Header from './Header'
 import dayjs from 'dayjs'
 
 import './dashboardStyle.scss'
@@ -68,6 +68,7 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
 
       render: (text: string) => (
         <span
+        
           className={
             text === 'Đã thay' || text === 'Changed'
               ? 'status-done'
@@ -80,11 +81,15 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
     },
 
     {
-      title: t("Action"),
+      title: <div style={{textAlign: "center"}}>{t("Action")}</div>,
       dataIndex: 'action',
       render: () => (
-        <div className="action-icon">
+        <div className="action-icon"
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        >
+          <div className="icon"          >
             <InfoCircleOutlined />
+          </div>
         </div>
       )
     },
@@ -104,7 +109,9 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
 
   const tableFooter = (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} className="footer-box">
-      <div className="entry-display">
+      <div className="entry-display"
+      style={{marginTop: "6px"}}
+      >
             <p>Display</p>
             <input
               type="text"
@@ -115,6 +122,7 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
       </div>
 
       <Pagination
+      style={{marginRight: "-50px"}}
         current={10}
         total={10}
         pageSize={entriesPerPage}
@@ -133,11 +141,6 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
       </div>
     )
   }
-
-  // if (error) {
-  //   return <div style={{ textAlign: 'center', padding: 100, color: 'red', background:"#e2faf0" }}>{error}</div>
-  // }
-
  
   return (
     <>
@@ -175,7 +178,6 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
 
           <div className="main-table">
               <Table className="customer-table" columns={columns} dataSource={data} pagination = {false} 
-              
               footer={!error? () => tableFooter : undefined} />
               <div className="saved-btn">
                   <SavedBtn/>

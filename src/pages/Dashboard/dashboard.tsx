@@ -55,6 +55,8 @@ export default function Dashboard() {
             { key: 'customers', icon: <UserOutlined style={{fontSize: "24px"}} />, label: t('Customers') },
            
             {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
+            {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
+            {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
 
 
             // {

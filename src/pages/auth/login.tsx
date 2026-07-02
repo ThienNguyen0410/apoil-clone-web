@@ -5,15 +5,21 @@ import type { UserPayLoad } from '../../entities/user/entity'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
 import logo from '../../assets/logo.png'
+import { useTranslation } from 'react-i18next'
+import EyeVisible from '../../components/icons/Eyevisible'
+import EyeInvisible from '../../components/icons/Eyeinvisible'
+import {Checkbox} from 'antd'
 import './login.scss'
 
 export default function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
     const dispatch = useAppDispatch()
     const { isAuthenticated, loading, error } = useAppSelector((state) => state.auth)
     const navigate = useNavigate()
+    const {t} = useTranslation()
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -42,46 +48,59 @@ export default function Login() {
         <div className="auth-wrapper">
             <div className="content-form">
                 <img src={logo} alt="Logo" className="logo" />
-                <h1>Đăng nhập</h1>
+                <h1>{t('Log in')}</h1>
                 <form className="input-form" onSubmit={handleLogin}>
                     <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Tên đăng nhập"
+                    placeholder={t('Username')}
                     disabled={loading}
+                    className="username-input"
                     />
 
-                    <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Mật khẩu"
-                    disabled={loading}
+                    <div className= "password-wrapper">
+                        <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder={t('Password')}
+                        disabled={loading}
+                        className="password-input"
                     />
+                    <span className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
+                        {showPassword ? <EyeVisible /> : <EyeInvisible />}
+                    </span>
+                    </div>
+                    
 
                     <div className="item-control">
                        <label>
-                        <input
-                            type="checkbox"
-                            checked={rememberMe}
-                            onChange={(e) => setRememberMe(e.target.checked)}
-                            disabled={loading}
-                        />
-                        Ghi nhớ đăng nhập
+                            <Checkbox
+                                checked={rememberMe}
+                                onChange={(e) => setRememberMe(e.target.checked)}
+                                disabled={loading}
+                            />
+                        {t('Remember me')}
                       </label>
 
-                      <a href="#">Quên mật khẩu?</a>
+                      <a href="#">{t('Forgot password')}?</a>
                     </div>
 
                     {error && <p className="error-message">{error}</p>}
 
                     <button className="login-button" type="submit" disabled={loading}>
-                        {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+                        {loading ? t('Logging in') : t('Log in')}
                     </button>
                 </form>
             </div>
         </div>
+
+        <div className="login-footer">
+            <p className="copyright">Powered by <b>Alta Media</b></p>
+            <p className="hotline">Hotline: 1900 1567</p>
+        </div>
     </div>
   )
 }
+

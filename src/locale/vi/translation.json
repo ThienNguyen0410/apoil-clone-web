@@ -52,5 +52,12 @@
 
     "confirm logout": "Xác nhận đăng xuất khỏi thiết bị",
     "lougout confirm": "Bạn có thực sự muốn đăng xuất không?",
-    "ok": "Đồng ý"
+    "ok": "Đồng ý",
+
+    "Log in": "Đăng nhập",
+    "Usẻname": "Tên đăng nhập",
+    "Password": "Mật khẩu",
+    "Forgot password": "Quên mật khẩu",
+    "Remember me": "Ghi nhớ đăng nhập",
+    "Logging in": "Đang đăng nhập..."
 }

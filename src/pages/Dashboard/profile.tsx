@@ -76,7 +76,6 @@ export default function profile() {
     })
   }
 
-  console.log("Open Lock: ", openLock)
   return (
     <div className="profile-page">
       <div className="profile-content">

@@ -53,6 +53,12 @@
 
     "confirm logout": "Confirm Logout of the device",
     "lougout confirm": "Are you sure you want to logout?",
-    "ok": "OK"
-
+    "ok": "OK",
+    
+    "Log in": "Log in",
+    "Usẻname": "Username",
+    "Password": "Password",
+    "Forgot password": "Forgot password",
+    "Remember me": "Remember me",
+    "Logging in": "Logging in..."
 }

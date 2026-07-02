@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     height: 925px;
     margin-top: 10px;
     margin-left: 10px;
@@ -37,7 +37,7 @@
     .logo {
         width: 280px;
         height: 81px;
-        margin: 50px 15.7031px 20px 15.6875px;
+        margin: 68px 15.7031px 20px 15.6875px;
         
         display: block;
         margin-inline: auto;
@@ -55,11 +55,11 @@
     background: color.$side-bar-color;
     font-family: color.$text-font;
     color: color.$text-color;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 52px;
     border-inline-end: none !important;
     padding-inline: 0 !important;
 }
