@@ -3,6 +3,7 @@ import { useState } from 'react'
 import {Modal, Input, Button} from 'antd'
 import {LockOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
+import LockPopups from '../icons/LockPopups'
 import './lock.scss'
 
 type LockProps = {
@@ -37,19 +38,19 @@ export default function LockPopup({open, setOpen, handleChangePassword}: LockPro
               placeholder={t("enter old password")}
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
-              prefix={<LockOutlined style={{fontSize: 32}} />}
+              prefix={<LockPopups />}
               className="old-password"
             />
 
             <Input.Password placeholder={t("enter new password")}
-            prefix={<LockOutlined style={{fontSize: 32}} />}
+            prefix={<LockPopups />}
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             className="new-password"
             />
 
             <Input.Password placeholder={t("confirm new password")}
-            prefix={<LockOutlined style={{fontSize: 32}} />}
+            prefix={<LockPopups />}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="confirm-password"

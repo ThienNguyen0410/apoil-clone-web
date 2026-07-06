@@ -59,5 +59,20 @@
     "Password": "Mật khẩu",
     "Forgot password": "Quên mật khẩu",
     "Remember me": "Ghi nhớ đăng nhập",
-    "Logging in": "Đang đăng nhập..."
+    "Logging in": "Đang đăng nhập...",
+
+    "Display": "Hiển thị",
+    "Entry per page": "nội dung trong mỗi trang",
+
+    "Discount Code": "Mã giảm giá",
+    "Voucher Program": "Mã chương trình voucher",
+    "Referral Code": "Mã giới thiệu",
+    "Device Group": "Nhóm thiết bị",
+    "Vehicle Brands": "Thương hiệu xe",
+    "Vehicle Models": "Dòng xe",
+    "Instruction Videos": "Video hướng dẫn",
+    "System password": "Mật khẩu hệ thống",
+    "User": "Người dùng",
+    "Role": "Vai trò",
+    "Loyalty Point Settings": "Cấu hình điểm Loyalty"
 }

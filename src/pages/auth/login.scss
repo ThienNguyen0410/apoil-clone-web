@@ -85,6 +85,8 @@
 
         &:hover {
             border: 1px solid #0D733B;
+            box-shadow: 0 0 0 4px rgba(21, 115, 71, 0.1);
+
         }
 
         &:focus {
@@ -150,7 +152,7 @@
             padding: 0px 8px;
             text-align: left;
             align-items: center;
-            width: 170px;
+            width: 190px;
             height: 25px;
             display: flex;
             gap: 17px;
@@ -225,11 +227,11 @@
     }
 }
 .username-input {
-    background-color: #e8f0fe !important;
+    //background-color: #e8f0fe !important;
 }
 
 .password-input {
-    background-color: #e8f0fe !important;
+    //background-color: #e8f0fe !important;
 }
 
 .ant-checkbox-wrapper {

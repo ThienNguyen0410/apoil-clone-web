@@ -40,7 +40,11 @@
 }
 
 .table_layout.collapsed .customer-table {
-    width: 1660px;
+    width: 1660px !important;
+}
+
+.table_layout.collapsed .customer-table .ant-table table {
+    width: 1660px !important;
 }
 
 .customer-table .ant-table-thead > tr > th {
@@ -53,6 +57,10 @@
     line-height: 22px;
     padding: 10px 8px;
     border: none;
+
+    &::before{
+        display: none !important;
+    }
 }  
 .customer-table .ant-table-thead > tr > th.ant-table-column-has-sorters  {
     background: #e9fdf2
@@ -60,6 +68,7 @@
 
 .customer-table .ant-table-thead > tr > th.ant-table-column-has-sorters:hover {
     background: #e9fdf2 !important;
+    color: black !important;
 }
 
 .customer-table .ant-table-column-sorter-up.active {
@@ -180,19 +189,17 @@
     
 }
 .dashboard-segmented {
-    width: fit-content;
-    height: 52px;
+    width: auto;
+    height: 48px;
     margin-left: 20px;
     border-radius: 60px;
     background-color: rgb(33, 146, 79);;
     
 
     .ant-segmented {
-        width: 100%;
         height: 48px;
         background-color: #0d733b;
         border-radius: 60px;
-        padding: 2px;
     }
 
     .ant-segmented-item {
@@ -207,29 +214,35 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 6px 24px 14px;
+        padding: 8px 28px 14px;
+        
         color: #fff;
         font-weight: 600;
         font-size: 16px;
-        //line-height: 28px;
+        line-height: 28px;
         text-align: center;
         font-family: Inter, sans-serif;
-        
+    
     }
 
     // Item được chọn
     .ant-segmented-item-selected {
         background-color: #ffffff;
         border-radius: 60px;
-        margin: 2px;
+        margin-bottom: 0;
+        height: 44px;
+        width: 100%;
         .ant-segmented-item-label {
+            padding-top: 8px;
             color: #0d733b;
+
         }
     }
 }
 
+
 .status-done {
-    width: 89px;
+    width: 80px;
     height: 30px;
     text-align: center;
     background-color: #e3ffe1;
@@ -242,10 +255,11 @@
 
     border: 1px solid #34cd26;
 
-    font-size: 14px;
+    font-size: 12px;
     line-height: 22px;
 
     font-weight: 600;
+    margin-left: -5px;
 }
 
 .status-overdue {
@@ -253,6 +267,8 @@
     border-radius: 20px;
     color: #cd2626;
     padding: 5px 10px;
+    font-size: 12px;
+    margin-left: 0px;
 }
 
 
@@ -319,23 +335,73 @@
             font-size: 16px;
         }
 
-        input {
-        width: 220px;
-        height: 43px;
-        display: flex;
+        .custom-search-wrapper {
+          position: relative;
+          width: 220px;
+          height: 43px;
+        }
 
+        .custom-search-input {
+          width: 100%;
+          height: 43px;
+          background-color: #fff;
+          border: 1px solid #d9d9d9;
+          border-radius: 8px;
+          color: #333;
+          font-size: 13px;
+          line-height: 20.4286px;
+          padding: 16px 36px 16px 10px;
+
+          &:hover {
+            border-color: #0d733b;
+          }
+
+          &:focus {
+            border-color: #0d733b;
+            outline: none;
+            box-shadow: 0px 0px 4px 0px #0d733b;
+          }
+        }
+
+        .custom-search-btn {
+          position: absolute;
+          right: 0;
+          top: 0;
+          height: 100%;
+          aspect-ratio: 1;
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #0d733b;
+
+          &:hover {
+            background: transparent;
+            border-color: #0d733b;
+          }
+        }
+    }
+
+    .ant-input:hover  {
+        border-color: #0d733b;
+    }
+    .ant-input-affix-wrapper .ant-input-focused {
         background-color: #fff;
-
-        border: 1px solid #0d733b;
+        border-color: #0d733b;
         border-radius: 8px;
-
+        border-style: solid;
+        border-width: 1px;
+        box-shadow: #0d733b 0px 0px 4px 0px;
         color: #333;
-
+        display: flex;
         font-size: 13px;
         line-height: 20.4286px;
+        padding: 8px 10px;
 
-        padding: 16px 10px;
-        
+        .ant-input-outlined {
+            background-color: #0d733b;
         }
     }
 
@@ -360,7 +426,7 @@
 
             background-color: #fff;
 
-            border: 1px solid #228049;
+            //border: 1px solid #d9d9d9;
             border-radius: 6px;
 
             color: #333;
@@ -372,6 +438,17 @@
             padding: 0 11px;
             width: 200px;
             height: 42px;
+
+            &:hover{
+                border-color: #0d733b !important;
+            }
+
+            &.ant-select-focused  {
+                outline: none;
+                border-color: #0d733b !important;
+                box-shadow: 0 0 0 4px rgba(21, 115, 71, 0.1);
+              
+            }
         }
     }
 }
@@ -399,9 +476,66 @@
         border-radius: 6px;
         padding: 0px;
         line-height: 34px;
+
+        &:focus{
+            border-color: #0d733b;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(21, 115, 71, 0.1);
+        }
     }
 }
 
 .action-icon .icon:hover {
     cursor: pointer;
+}
+
+
+.status-result {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 7px;
+}
+.bullet-point {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    font-size: 20px;
+    position: relative;
+    margin-left: -6px;
+}
+
+.ant-space-compact {
+    height: 40px;
+    button {
+        height: 43px;
+        border-left: 1px solid #ffffff !important;
+        border:1px solid #0d733b;
+
+        &:hover {
+            transform: transparent;
+        }
+    }
+}
+
+.search-input .ant-input-group-addon::before {
+    display: none !important;
+}
+
+
+//Select
+.status-select {
+
+    .ant-select-item {
+        background-color: #e2faf0 !important;
+    }
+}
+
+.ant-select-dropdown {
+    padding:0px !important;
+}
+.ant-select-item-option-selected {
+    background-color: #e2faf0 !important;
 }
