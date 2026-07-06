@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     height: 925px;
     margin-top: 10px;
     margin-left: 10px;
@@ -37,7 +37,7 @@
     .logo {
         width: 280px;
         height: 81px;
-        margin: 50px 15.7031px 20px 15.6875px;
+        margin: 68px 15.7031px 20px 15.6875px;
         
         display: block;
         margin-inline: auto;
@@ -55,13 +55,15 @@
     background: color.$side-bar-color;
     font-family: color.$text-font;
     color: color.$text-color;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 52px;
     border-inline-end: none !important;
     padding-inline: 0 !important;
+    margin-left: 4px;
+    //align-items: center;
 }
 
 // --- Menu items ---
@@ -74,18 +76,15 @@
     font-weight: 500;
     display: flex;
     align-items: center;
+    align-items: center;
 }
 
 .side-menu .ant-menu-item-selected {
     color: color.$side-bar-color !important;
     background-color: color.$background-color !important;
-    border-radius: 8px 0 0 8px !important;
-    padding-inline: 24px 30px !important;
-    margin: 10px 5px !important;
     width: 311px !important;
-    align-items: center;
     font-weight: 600;
-    line-height: 40px !important;
+    border-radius: 8px 0 0 8px !important;
 }
 
 // --- Menu icons ---
@@ -99,25 +98,70 @@
 
 // --- Submenu parent ---
 .side-menu .ant-menu-submenu {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0px !important;
+    padding: 0px !important;
     font-weight: 500;
+}
 
+.ant-menu-sub.ant-menu-vertical {
+    background-color: #ffffff !important;
+    margin-left: 0px !important;
+}
+
+.ant-menu-submenu-popup .ant-menu {
+    padding: 0 !important;
 }
 
 .side-menu .ant-menu-submenu > .ant-menu-submenu-title {
-    padding: 0 16px 0 24px !important;
-    border-radius: 12px;
-    margin: 0 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding-inline: 24px 16px !important;
+    margin-inline: 0 !important;
+    width: 310px !important;
+    height: 50px !important;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin: 4px 0px !important;
+    border-radius: 0;
+}
+
+.side-menu .ant-menu-submenu-title .ant-menu-item-icon {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.side-menu .ant-menu-submenu-title .ant-menu-submenu-expand-icon {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.side-menu .ant-menu-submenu-title .ant-menu-submenu-expand-icon .anticon {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.side-menu .ant-menu-submenu-title .ant-menu-submenu-expand-icon svg {
+    width: 24px !important;
+    height: 24px !important;
 }
 
 .side-menu .ant-menu-submenu-selected > .ant-menu-submenu-title {
     background-color: color.$background-color !important;
     color: color.$side-bar-color !important;
-    border-radius: 12px 0 0 12px !important;
-    padding: 0 32px 0 24px !important;
-    margin-right: -16px !important;
+    border-radius: 8px 0 0 8px !important;
+    font-weight: 600;
+    
 }
+
+.side-menu .ant-menu-submenu-selected .ant-menu-submenu-title .ant-menu-item-icon {
+    color: color.$side-bar-color !important;
+}
+
+
 
 // --- Submenu popup ---
 .side-menu-popup {
@@ -126,29 +170,66 @@
     box-shadow: #00000014 0px 6px 16px 0px !important;
     color: #333 !important;
     font-size: 14px !important;
-    line-height: 0px !important;
-    padding: 12px !important;
-    margin-left: 8px !important;
+    line-height: 40px !important;
+    padding: 0px !important;
     font-weight: 500;
+    width: fit-content !important;
+    font-family: Inter, sans-serif;
+    
+
+
+    .ant-menu-title-content {
+        font-size: 14px !important;
+        font-family: Inter, sans-serif !important;
+    }
+}
+
+.side-menu-popup .ant-menu-sub.ant-menu-vertical {
+    min-width: 0 !important;
+    padding-inline-start: 0 !important;  // xoá padding mặc định của <ul>
 }
 
 .side-menu-popup .ant-menu-item {
     background: #ffffff !important;
-    color: #333 !important;
+    //color: #0d733b !important;
     border-radius: 12px;
-    margin-inline: 0 !important;
+    margin-inline: 4px !important;
+}
+
+
+.popup-code-management .ant-menu-item {
+    color: #0d733b !important;
+    width: 171px !important;
+    
+}
+.popup-system-settings .ant-menu-item {
+    color: black !important;
+    width: 184px !important;
+}
+
+.popup-code-management .ant-menu-item-selected {
+    color: #21942f !important;
+}
+.popup-system-settings .ant-menu-item-selected {
+    color: #0d733b !important;
 }
 
 .side-menu-popup .ant-menu-item:hover {
-    background: #e6f7ee !important;
-    color: #333 !important;
+    background: #0000000f !important;
+    font-family: Inter, sans-serif;
+    border-radius: 4px;
+}
+
+.side-menu-popup .ant-menu-item-selected:hover {
+    background: color.$background-color !important;
 }
 
 .side-menu-popup .ant-menu-item-selected {
     background: color.$background-color !important;
-    color: #333 !important;
     width: 310px;
-    margin: 10px 5px !important;
+    //margin: 2px !important;
+    margin-left: 4px !important;
+    align-items: center;
 }
 
 // ==============================
@@ -185,18 +266,22 @@
             padding-inline: 0 !important;
             margin-right: 0 !important;
             border-radius: 12px !important;
-            width: auto !important;
+            width: 77px !important;
+
         }
 
         .ant-menu-submenu > .ant-menu-submenu-title {
             padding: 0 !important;
+            width: auto !important;
+            height: auto !important;
             display: flex;
             justify-content: center;
         }
 
         .ant-menu-submenu-selected > .ant-menu-submenu-title {
             padding: 0 !important;
-            margin-right: 0 !important;
+            margin: 0 !important;
+            width: auto !important;
             border-radius: 12px !important;
         }
     }
@@ -280,3 +365,7 @@
 }
 
 
+.ant-menu-submenu-expand-icon {
+    font-size: 24px !important;
+    line-height: 40px;
+}

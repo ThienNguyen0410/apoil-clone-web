@@ -3,31 +3,36 @@ import { Table, Segmented, Select, Pagination } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
 import { fetchCustomers } from '../presenters/slices/customerSlice'
-import SavedBtn from './savedBtn'
-import { Spin } from 'antd'
+import BulletPoint from './icons/BulletPoint'
+import Searchicon from './icons/Searchicon'
+import SavedBtn from './SavedBtn'
+import { Spin, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
-import Header from './header'
+import Header from './Header'
 import dayjs from 'dayjs'
 
 import './dashboardStyle.scss'
 
-const options = [
-  { value: 'tat-ca', label: 'Tất cả' },
-  { value: 'da-thay', label: 'Đã thay' },
-  { value: 'sap-den-han', label: 'Sắp đến hạn' },
-  { value: 'den-han-thay-nhot', label: 'Đến hạn thay nhớt' },
-  { value: 'qua-han', label: 'Quá hạn' },
-  { value: 'chua-thay', label: 'Chưa thay' },
-  { value: 'chua-dang-ky-xe', label: 'Chưa đăng ký xe' },
-];
+
 
 export default function DashboardContent({ collapsed }: { collapsed?: boolean }) {
   const dispatch = useAppDispatch()
   const { customers, loading, error } = useAppSelector((state) => state.customer)
-  const {t} = useTranslation()
   const key = 'Customers'
   const [selectedStatus, setSelectedStatus] = useState('tat-ca')
   const [entriesPerPage, setEntriesPerPage] = useState(10)
+
+
+  const {t} = useTranslation()
+  const options = [
+  { value: 'tat-ca', label: t("All") },
+  { value: 'da-thay', label: t("Changed") },
+  { value: 'sap-den-han', label: t("Ultrasound due") },
+  { value: 'den-han-thay-nhot', label: t("Oil change due") },
+  { value: 'qua-han', label: t("Overdue") },
+  { value: 'chua-thay', label: t("Not changed") },
+  { value: 'chua-dang-ky-xe', label: t("Vehicle not yet registered") },
+];
   useEffect(() => {
     dispatch(fetchCustomers(1))
   }, [dispatch])
@@ -68,23 +73,48 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
 
       render: (text: string) => (
         <span
+        
           className={
             text === 'Đã thay' || text === 'Changed'
               ? 'status-done'
               : 'status-overdue'
           }
         >
-          {text === "Đã thay" || text === "Changed" ? ( t("changed")) : (t("not changed"))}
+          {text === "Đã thay" || text === "Changed" ? (
+            <> 
+            <div className="status-result">
+              <div className="bullet-point">
+                &bull;
+              </div>
+              {t("changed")} 
+            </div>
+           
+          </>
+          ) : 
+          (
+          <>
+            <div className="status-result">
+              <div className="bullet-point">
+                &bull;
+              </div>
+              {t("not changed")} 
+            </div>
+          </>
+        )}
         </span>
       )
     },
 
     {
-      title: t("Action"),
+      title: <div style={{textAlign: "center"}}>{t("Action")}</div>,
       dataIndex: 'action',
       render: () => (
-        <div className="action-icon">
+        <div className="action-icon"
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        >
+          <div className="icon"          >
             <InfoCircleOutlined />
+          </div>
         </div>
       )
     },
@@ -104,17 +134,20 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
 
   const tableFooter = (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} className="footer-box">
-      <div className="entry-display">
-            <p>Display</p>
+      <div className="entry-display"
+      style={{marginTop: "6px"}}
+      >
+            <p>{t("Display")}</p>
             <input
               type="text"
               value={entriesPerPage}
               onChange={(e) => setEntriesPerPage(parseInt(e.target.value) || 0)}
             />
-            <p>entries per page</p>
+            <p>{t("Entry per page")}</p>
       </div>
 
       <Pagination
+      style={{marginRight: "-50px"}}
         current={10}
         total={10}
         pageSize={entriesPerPage}
@@ -133,11 +166,6 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
       </div>
     )
   }
-
-  // if (error) {
-  //   return <div style={{ textAlign: 'center', padding: 100, color: 'red', background:"#e2faf0" }}>{error}</div>
-  // }
-
  
   return (
     <>
@@ -154,11 +182,16 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
       <div className={`table_layout${collapsed ? ' collapsed' : ''}`}>
         <div className="intro-box">
           <div className="search-section" onClick={(e) => e.stopPropagation()}>
-            <h1>Từ khóa</h1>
-            <input
-            type="search"
-            placeholder="Nhập từ khóa"
-            />
+            <h1>{t("Key Word")}</h1>
+            <div className="custom-search-wrapper">
+              <Input
+                className="custom-search-input"
+                placeholder={t("Key Word")}
+              />
+              <button className="custom-search-btn">
+                <Searchicon />
+              </button>
+            </div>
           </div>
 
           <div className="filter-section" onClick={(e) => e.stopPropagation()}>
@@ -173,10 +206,10 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
           </div>
         </div>
 
-          <div className="main-table">
+          <div className="main-table" onClick={(e) => e.stopPropagation()}>
               <Table className="customer-table" columns={columns} dataSource={data} pagination = {false} 
-              
-              footer={!error? () => tableFooter : undefined} />
+              footer={!error? () => tableFooter : undefined} 
+              />
               <div className="saved-btn">
                   <SavedBtn/>
               </div>

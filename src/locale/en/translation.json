@@ -19,7 +19,7 @@
     "Action": "Action",
     "Customer List": "Customer List",
     "Oil Change Schedule Setup": "Oil Change Schedule Setup",
-    "changed": "changed",
+    "changed": "Changed",
     "not changed": "not changed",
 
 
@@ -53,6 +53,27 @@
 
     "confirm logout": "Confirm Logout of the device",
     "lougout confirm": "Are you sure you want to logout?",
-    "ok": "OK"
+    "ok": "OK",
+    
+    "Log in": "Log in",
+    "Usẻname": "Username",
+    "Password": "Password",
+    "Forgot password": "Forgot password",
+    "Remember me": "Remember me",
+    "Logging in": "Logging in...",
 
+    "Display": "Display",
+    "Entry per page": "entries per page",
+
+    "Discount Code": "Discount Code",
+    "Voucher Program": "Voucher Program",
+    "Referral Code": "Referral Program",
+    "Device Group": "Device Group",
+    "Vehicle Brands": "Vehicle Brands",
+    "Vehicle Models": "Vehicle Models",
+    "Instruction Videos": "Instruction Videos",
+    "System password": "System password",
+    "User": "User",
+    "Role": "Role",
+    "Loyalty Point Settings": "Loyalty Point Settings"
 }

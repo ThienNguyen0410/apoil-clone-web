@@ -1,12 +1,13 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
-import {UserOutlined} from '@ant-design/icons'
+import {UserOutlined, DownOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import {Dropdown} from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import vnFlag from '../assets/vnFlag.png'
 import enFlag from '../assets/enFlag.png'
+import avatar from '../assets/avt.png'
 
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
 import { setLanguage } from '../presenters/slices/localeSlice'
@@ -24,9 +25,6 @@ const moduleNameMap: { [key: string]: { name: string; icon: React.ReactNode } } 
     }
 }
 export default function Header({ name }: HeaderProps) {
-  //const [language, setLanguage] = useState('VIE')
-  //const [flag, setFlag] = useState(vnFlag)
-  //items for selected module
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const {language} = useAppSelector((state) => state.locale)
@@ -47,7 +45,7 @@ export default function Header({ name }: HeaderProps) {
       label: <span className="dropdown-item"><img src={vnFlag} alt="VN" className="flag-icon" /> VIE</span>
     },
     {
-      key: 'EN',
+      key: 'ENG',
       label: <span className="dropdown-item"><img src={enFlag} alt="EN" className="flag-icon" /> ENG</span>
     }
   ]
@@ -78,14 +76,21 @@ export default function Header({ name }: HeaderProps) {
           <Dropdown
           menu={{
             items,
-            onClick: (e) => OnSwitchLanguage && OnSwitchLanguage(e.key)
+            onClick: (e) => OnSwitchLanguage && OnSwitchLanguage(e.key),
+            selectedKeys: [language],
           }}>
-            <span className="language-switcher"><img src={flag} alt={language} className="flag-icon" /> {language}</span>
+            <span className="language-switcher" style={{ fontWeight:"600"}}><img src={flag} alt={language} className="flag-icon" /> {language} 
+            <div className="down-outline"
+            style={{color: "#228049"}}
+            >
+              <DownOutlined />
+            </div>
+            </span>
           </Dropdown>
         </div>
 
         <div className="avatar-navigate" onClick={() => navigate("/profile")}>
-          <UserOutlined/>
+          <img src={avatar} alt="Avatar" />
         </div>
       </div>
     </div> 

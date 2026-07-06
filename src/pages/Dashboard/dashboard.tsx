@@ -3,8 +3,12 @@ import {useTranslation} from 'react-i18next'
 import { Layout, Menu } from 'antd'
 import {
   UserOutlined, ApartmentOutlined, DollarOutlined, SettingOutlined,
-  HomeOutlined, ExclamationCircleOutlined, CodeSandboxOutlined, QrcodeOutlined 
+  HomeOutlined, ExclamationCircleOutlined, CodeSandboxOutlined, QrcodeOutlined,
+  MoreOutlined  
 } from '@ant-design/icons'
+
+import Homeicon from '../../components/icons/Homeicon'
+import  Cubeicon from '../../components/icons/Cubeicon'
 import logo from '../../assets/logo.png'
 import DashboardContent from '../../components/DashboardTable'
 import './dasboard.scss'
@@ -47,63 +51,98 @@ export default function Dashboard() {
           mode="vertical"
           selectedKeys={[selectedKey]}
           triggerSubMenuAction="hover"
+          expandIcon={<MoreOutlined style={{fontSize: "24px"}} />}
           items={[
-            { key: 'dashboard', icon: <HomeOutlined style={{fontSize:"24px"}}/>, label: t('Dashboard') },
+            { key: 'dashboard', icon: <Homeicon />, label: t('Dashboard') },
             { key: 'equipments', icon: <ApartmentOutlined style={{fontSize: "24px"}} />, label: t('Device') },
             { key: 'revenue', icon: <DollarOutlined style={{fontSize: "24px"}} />, label: t('Revenue') },
             { key: 'errors', icon: <ExclamationCircleOutlined style={{fontSize: "24px"}} />, label: t('Errors') },
             { key: 'customers', icon: <UserOutlined style={{fontSize: "24px"}} />, label: t('Customers') },
            
-            {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
+            {key: 'oil_type', icon: <Cubeicon/>, label: t('Oil type') },
+            // {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
+            // {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
 
 
-            // {
-            //   key: 'code_management',
-            //   icon: <QrcodeOutlined/>,
-            //   label: t("Code Management"),
-            //   children: [
-            //     {
-            //       key: "device_groups",
-            //       label: "Device group"
-            //     },
+            {
+              key: 'code_management',
+              icon: <QrcodeOutlined style={{fontSize: "24px"}} />,
+              label: t('Code management'),
+              popupClassName: 'side-menu-popup popup-code-management',
+              popupOffset:[5, 0],
+              children: [
+                {
+                  key: "discount-codes",
+                  label: t('Discount Code')
+                },
 
-            //     {
-            //       key: "Vehicle brands",
-            //       label: "Vehicle brands"
-            //     }
-            //   ]
-            // },
+                {
+                  key: "voucher-program",
+                  label: t('Voucher Program')
+                },
+                {
+                  key: "referral-code",
+                  label: t('Referral Code')
+                }
+              ]
+            },
 
-            // {
-            //   key: 'system-settings',
-            //   icon: <SettingOutlined />,
-            //   label: t('System settings'),
-            //   popupClassName: 'side-menu-popup',
-            //   children: [
-            //     {
-            //       key: "roles",
-            //       label: t('Roles'),
-            //     },
+            {
+              key: 'system-settings',
+              icon: <SettingOutlined style={{fontSize: "24px"}} />,
+              label: t('System settings'),
+              popupClassName: 'side-menu-popup popup-system-settings',
+              popupOffset:[5, 0],
+              children: [
+                {
+                  key: "device-group",
+                  label: t('Device Group'),
+                },
 
-            //     {
-            //       key: "users",
-            //       label: t('Users'),
-            //     }
-            //   ]
-            // },
+                {
+                  key: "vehicle-brand",
+                  label: t('Vehicle Brands'),
+                },
+
+                {
+                  key: "vehicle-model",
+                  label: t('Vehicle Models'),
+                },
+                {
+                  key: "instruction-video",
+                  label: t('Instruction Videos'),
+                },
+
+                {
+                  key: "system-password",
+                  label: t('System password'),
+                },
+                {
+                  key: "user",
+                  label: t('User'),
+                },
+                {
+                  key: "role",
+                  label: t('Role'),
+                },
+                {
+                  key: "loyalty-point-setting",
+                  label: t('Loyalty Point Settings'),
+                }
+              ]
+            },
           ]}
         />
       </Sider>
 
       <Layout onClick={() => setCollapsed(true)} className="content-layout">
         <Header className="header-content" >
-          {/* <div className="switch-bar">
-            <Dropdownbar onSwitchLanguage={handleSwitchLanguage} currentLanguage={i18n.language} />
-          </div> */}
         </Header>
         <Content  className="content-box">
-          <div className='module-content' onClick={(e) => e.stopPropagation()}>
-              {selectedKey === 'customers' && <DashboardContent collapsed={collapsed} />}
+          <div className='module-content' onClick={() => setCollapsed(true)} >
+              {selectedKey === 'customers' && 
+              <DashboardContent collapsed={collapsed}
+              />}
           </div>
         </Content>
       </Layout>

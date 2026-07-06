@@ -3,7 +3,7 @@ import './profile.scss'
 import ProfileNav from '../../components/ProfileNav'
 import LogoutPopup from '../../components/popups/logout'
 import LockPopup from '../../components/popups/lock'
-import avatar from '../../assets/avatar.png'
+import avatar from '../../assets/avt.png'
 import {useNavigate} from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
 import { fetchMyProfile, updateProfile, changePassword } from '../../presenters/slices/profileSlice'
@@ -76,7 +76,6 @@ export default function profile() {
     })
   }
 
-  console.log("Open Lock: ", openLock)
   return (
     <div className="profile-page">
       <div className="profile-content">
