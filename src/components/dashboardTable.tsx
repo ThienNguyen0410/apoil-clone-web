@@ -39,8 +39,9 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
 
   const columns = [
     {
-      title: t("No."),
+      title: <div style={{textAlign: "center"}}>{t("No")}</div>,
       dataIndex: 'id',
+      align: 'center' as const,
     },
     {
       title: t("Customer Name"),

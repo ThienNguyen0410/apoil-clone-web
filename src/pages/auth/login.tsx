@@ -16,6 +16,7 @@ export default function Login() {
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+    const [labelHovered, setLabelHovered] = useState(false)
     const dispatch = useAppDispatch()
     const { isAuthenticated, loading, error } = useAppSelector((state) => state.auth)
     const navigate = useNavigate()
@@ -27,6 +28,17 @@ export default function Login() {
             navigate('/dashboard', { replace: true })
         }
     }, [isAuthenticated, navigate])
+
+    useEffect(() => {
+        if (!rememberMe) return
+        const handler = (e: MouseEvent) => {
+        const label = document.querySelector('.item-control label')
+        if (label && label.contains(e.target as Node)) return
+        setLabelHovered(false)
+        }
+        document.addEventListener('click', handler)
+        return () => document.removeEventListener('click', handler)
+    }, [rememberMe])
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -75,14 +87,26 @@ export default function Login() {
                     
 
                     <div className="item-control">
-                       <label>
-                            <Checkbox
-                                checked={rememberMe}
-                                onChange={(e) => setRememberMe(e.target.checked)}
-                                disabled={loading}
-                            />
-                        {t('Remember me')}
-                      </label>
+                       <label
+                         onMouseEnter={() => rememberMe && setLabelHovered(true)}
+                         onMouseLeave={() => rememberMe && setLabelHovered(false)}
+                            style={{
+                            gap: rememberMe && !labelHovered ? '20px' : '17px',
+                            transition: 'gap 0.15s ease-out',
+                         }}
+                       >
+                             <Checkbox
+                                 checked={rememberMe}
+                                 onChange={(e) => setRememberMe(e.target.checked)}
+                                 disabled={loading}
+                                 style={{
+                                   transform: rememberMe && !labelHovered ? 'scale(1.2)' : 'scale(1)',
+
+                                   transition: 'transform 0.15s ease-out',
+                                 }}
+                             />
+                         {t('Remember me')}
+                       </label>
 
                       <a href="#">{t('Forgot password')}?</a>
                     </div>

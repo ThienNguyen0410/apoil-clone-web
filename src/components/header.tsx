@@ -28,6 +28,7 @@ export default function Header({ name }: HeaderProps) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const {language} = useAppSelector((state) => state.locale)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   useEffect(() => {
     if (language === 'VIE') {
@@ -74,12 +75,14 @@ export default function Header({ name }: HeaderProps) {
       <div className='icon-intro-box' onClick={(e) => e.stopPropagation()}>
         <div className="selected-box">
           <Dropdown
+          open={dropdownOpen}
+          onOpenChange={setDropdownOpen}
           menu={{
             items,
             onClick: (e) => OnSwitchLanguage && OnSwitchLanguage(e.key),
             selectedKeys: [language],
           }}>
-            <span className="language-switcher" style={{ fontWeight:"600"}}><img src={flag} alt={language} className="flag-icon" /> {language} 
+            <span className={`language-switcher${dropdownOpen ? ' language-switcher--open' : ''}`} style={{ fontWeight:"600"}}><img src={flag} alt={language} className="flag-icon" /> {language} 
             <div className="down-outline"
             style={{color: "#228049"}}
             >

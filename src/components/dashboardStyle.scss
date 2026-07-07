@@ -13,7 +13,7 @@
     .ant-table {
         border-radius: 20px;
         table{
-            border-spacing: 0 12px;
+            border-spacing: 0 8px;
             border-radius: 8px 8px 0px 0px;
             width: 1437px !important;
             height: 240px !important;
@@ -85,6 +85,7 @@
     background: #f6f6f680 !important;
     font-family: Inter, sans-serif;
     font-weight: 400;
+    padding: 10px 8px !important;
 }
 
 // Header row - border-radius top-left, top-right
@@ -300,7 +301,7 @@
 
         .saved-btn {
             position: absolute;
-            top: 170px;
+            top: 165px;
             right: 0px;
 
             &:hover {

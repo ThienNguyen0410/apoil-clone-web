@@ -9,6 +9,11 @@ export const privateRoutes = [
     },
 
     {
+        path: '/',
+        element: <Dashboard />
+    },
+
+    {
         path: '/profile',
         element: <Profile />
     }

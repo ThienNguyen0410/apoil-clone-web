@@ -89,38 +89,50 @@ export default function profile() {
             </div>
 
             <div className="profile-form-box">
-              <label>{t("Username")}
-                <span style={{color: "red"}}>*</span>
-              </label>
-              <input id="username-input" type="text" placeholder={t("Username")}
-              disabled={true}
-              value={profile?.username}
-              />
+              <div className="profile-form-items" id="user-input">
+                  <label>
+                  {t("Username")}
+                  <span style={{color: "red", marginLeft: "2px"}}>*</span>
+                </label>
+                <input id="username-input" type="text" placeholder={t("Username")}
+                disabled={true}
+                value={profile?.username}
+                />
+              </div>
+             
 
-              <label>{t("Full Name")}
-                <span style={{color: "red"}}>*</span>
-              </label>
-              <input id="name-input" type="text" placeholder={t("Full Name")}
-              value={formData.fullname}
-              disabled={!isEditing}
-              onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
-              />
+              <div className="profile-form-items" id="password-input">
+                  <label>{t("Full Name")}
+                    <span style={{color: "red", marginLeft: "2px"}}> *</span>
+                  </label>
+                  <input id="name-input" type="text" placeholder={t("Full Name")}
+                  value={formData.fullname}
+                  disabled={!isEditing}
+                  onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
+                  />
+              </div>
+              
 
-              <label>{t("Phone Number")}</label>
-              <input id="phone-input" type="text" placeholder={t("Phone Number")}
-              disabled={!isEditing}
-              value={formData.phone_number}
-              onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
-              />
+              <div className="profile-form-items" id="phone-input"> 
+                  <label>{t("Phone Number")}</label>
+                  <input id="phone-input" type="text" placeholder={t("Phone Number")}
+                  disabled={!isEditing}
+                  value={formData.phone_number}
+                  onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
+                  />
+              </div>
 
-              <label>{t("Email")}
-                <span style={{color: "red"}}>*</span>
-              </label>
-              <input id="email-input" type="text" placeholder={t("Email")}
-              disabled={!isEditing}
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
+              
+              <div className="profile-form-items" id="email-input"> 
+                 <label>{t("Email")}
+                  <span style={{color: "red", marginLeft: "2px"}}>*</span>
+                </label>
+                <input id="email-input" type="text" placeholder={t("Email")}
+                disabled={!isEditing}
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div> 
             </div>
           </div>
           <div>

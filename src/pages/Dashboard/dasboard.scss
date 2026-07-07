@@ -56,7 +56,7 @@
     font-family: color.$text-font;
     color: color.$text-color;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     display: flex;
     flex-direction: column;
     margin-top: 52px;
@@ -68,7 +68,7 @@
 
 // --- Menu items ---
 .side-menu .ant-menu-item {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: #fff !important;
     padding-inline: 24px 16px !important;
     margin-inline: 0 !important;
     width: 310px !important;
@@ -80,16 +80,48 @@
 }
 
 .side-menu .ant-menu-item-selected {
+    position: relative !important;
     color: color.$side-bar-color !important;
     background-color: color.$background-color !important;
     width: 311px !important;
-    font-weight: 600;
+    font-weight: 550;
+    overflow: visible !important;
     border-radius: 8px 0 0 8px !important;
+
+    // Curve TRÊN-PHẢI — nằm phía trên selected item
+    // Bo góc DƯỚI-PHẢI của pseudo-element (giao với top-right item)
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -4.5px;
+        top: -21px;
+        width: 41px;
+        height: 30px;
+        background: url("../../assets/be4.png") center / 100% 100% no-repeat;
+        pointer-events: none;
+    }
+
+    // Curve DƯỚI-PHẢI — nằm phía dưới selected item
+    // Bo góc TRÊN-PHẢI của pseudo-element (giao với bottom-right item)
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: -12px;
+        top: 100%;
+        width: 39px;
+        height: 41px;
+        background: url("../../assets/after.png") center / 100% 100% no-repeat;
+        pointer-events: none;
+        
+        //border-bottom-right-radius: 100%;
+    }
 }
 
 // --- Menu icons ---
 .side-menu .ant-menu-item-icon {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: #fff !important;
 }
 
 .side-menu .ant-menu-item-selected .ant-menu-item-icon {
@@ -113,8 +145,9 @@
 }
 
 .side-menu .ant-menu-submenu > .ant-menu-submenu-title {
-    color: rgba(255, 255, 255, 0.9) !important;
-    padding-inline: 24px 16px !important;
+    position: relative !important;
+    color: #fff !important;
+    padding-inline: 24px 8px !important;
     margin-inline: 0 !important;
     width: 310px !important;
     height: 50px !important;
@@ -130,31 +163,61 @@
 }
 
 .side-menu .ant-menu-submenu-title .ant-menu-submenu-expand-icon {
-    width: 24px !important;
-    height: 24px !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 28px !important;
+    height: 28px !important;
 }
 
+
 .side-menu .ant-menu-submenu-title .ant-menu-submenu-expand-icon .anticon {
-    width: 24px !important;
-    height: 24px !important;
-    font-size: 24px !important;
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 28px !important;
     line-height: 1 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    color: #ffffff !important;
 }
 
 .side-menu .ant-menu-submenu-title .ant-menu-submenu-expand-icon svg {
-    width: 24px !important;
-    height: 24px !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin-right: -20px !important;
 }
 
 .side-menu .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    position: relative !important;
     background-color: color.$background-color !important;
     color: color.$side-bar-color !important;
-    border-radius: 8px 0 0 8px !important;
+    border-radius: 0 !important;
     font-weight: 600;
-    
+    overflow: visible !important;
+
+
+     &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -6px;
+        top: -21.5px;
+        width: 41px;
+        height: 30px;
+        background: url("../../assets/be4.png") center / 100% 100% no-repeat;
+        pointer-events: none;
+    }
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: -13px;
+        top: 100%;
+        width: 39px;
+        height: 41px;
+        background: url("../../assets/after.png") center / 100% 100% no-repeat;
+        pointer-events: none;
+    }
 }
 
 .side-menu .ant-menu-submenu-selected .ant-menu-submenu-title .ant-menu-item-icon {
@@ -209,6 +272,7 @@
 
 .popup-code-management .ant-menu-item-selected {
     color: #21942f !important;
+    
 }
 .popup-system-settings .ant-menu-item-selected {
     color: #0d733b !important;
@@ -230,6 +294,32 @@
     //margin: 2px !important;
     margin-left: 4px !important;
     align-items: center;
+    position: relative !important;
+    overflow: visible !important;
+
+    &::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 100%;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle at 100% 100%, transparent 20px, color.$background-color 20px);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 100%;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle at 100% 0, transparent 20px, color.$background-color 20px);
+        pointer-events: none;
+        z-index: 1;
+    }
 }
 
 // ==============================
@@ -267,12 +357,12 @@
             margin-right: 0 !important;
             border-radius: 12px !important;
             width: 77px !important;
-
+            overflow: hidden !important;
         }
 
         .ant-menu-submenu > .ant-menu-submenu-title {
             padding: 0 !important;
-            width: auto !important;
+            width: 77px !important;
             height: auto !important;
             display: flex;
             justify-content: center;
@@ -280,10 +370,18 @@
 
         .ant-menu-submenu-selected > .ant-menu-submenu-title {
             padding: 0 !important;
-            margin: 0 !important;
-            width: auto !important;
+            margin-right:5px !important;
+            width: 77px !important;
             border-radius: 12px !important;
+            overflow: hidden !important;
+            height: 50px !important;
         }
+    }
+
+    .ant-menu-submenu-title .ant-menu-submenu-expand-icon {
+        opacity: 1 !important;
+        width: 24px !important;
+        height: 24px !important;
     }
 }
 
@@ -366,6 +464,6 @@
 
 
 .ant-menu-submenu-expand-icon {
-    font-size: 24px !important;
+    font-size: 28px !important;
     line-height: 40px;
 }

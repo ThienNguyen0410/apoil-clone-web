@@ -4,8 +4,9 @@ import { Layout, Menu } from 'antd'
 import {
   UserOutlined, ApartmentOutlined, DollarOutlined, SettingOutlined,
   HomeOutlined, ExclamationCircleOutlined, CodeSandboxOutlined, QrcodeOutlined,
-  MoreOutlined  
+
 } from '@ant-design/icons'
+import MoreOutlined from '../../components/icons/MoreOutlined'
 
 import Homeicon from '../../components/icons/Homeicon'
 import  Cubeicon from '../../components/icons/Cubeicon'
@@ -51,7 +52,7 @@ export default function Dashboard() {
           mode="vertical"
           selectedKeys={[selectedKey]}
           triggerSubMenuAction="hover"
-          expandIcon={<MoreOutlined style={{fontSize: "24px"}} />}
+          expandIcon={<MoreOutlined />}
           items={[
             { key: 'dashboard', icon: <Homeicon />, label: t('Dashboard') },
             { key: 'equipments', icon: <ApartmentOutlined style={{fontSize: "24px"}} />, label: t('Device') },
@@ -60,10 +61,6 @@ export default function Dashboard() {
             { key: 'customers', icon: <UserOutlined style={{fontSize: "24px"}} />, label: t('Customers') },
            
             {key: 'oil_type', icon: <Cubeicon/>, label: t('Oil type') },
-            // {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
-            // {key: 'oil_type', icon: <CodeSandboxOutlined style={{fontSize: "24px"}}/>, label: t('Oil type') },
-
-
             {
               key: 'code_management',
               icon: <QrcodeOutlined style={{fontSize: "24px"}} />,
