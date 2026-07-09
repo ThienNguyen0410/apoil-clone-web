@@ -90,7 +90,7 @@
         &:focus {
             display: inline-block;
 
-            background-color: #e8f0fe;
+            //background-color: #e8f0fe;
             border: 1px solid #0d733b;
             border-radius: 6px;
 
@@ -107,6 +107,16 @@
         &::placeholder {
             //color: #03031d;
             font-family: Inter, sans-serif;
+        }
+    }
+
+    .username-input.error,
+    .password-input.error {
+        border: 1px solid red;
+
+        &:focus {
+            border: 2px solid red;
+            box-shadow: 0px 0px 0px 2px #fddede;
         }
     }
 
@@ -189,6 +199,10 @@
         }
     }
 }
+
+
+
+
 
 .login-button {
     background-color: #0d733b;

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Table, Segmented, Select, Pagination } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
-import { fetchCustomers } from '../presenters/slices/customerSlice'
+import { fetchCustomers, searchCustomers } from '../presenters/slices/customerSlice'
 import BulletPoint from './icons/BulletPoint'
 import Searchicon from './icons/Searchicon'
 import SavedBtn from './SavedBtn'
@@ -21,7 +21,7 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
   const key = 'Customers'
   const [selectedStatus, setSelectedStatus] = useState('tat-ca')
   const [entriesPerPage, setEntriesPerPage] = useState(10)
-
+  const [searchKeyword, setSearchKeyword] = useState('')
 
   const {t} = useTranslation()
   const options = [
@@ -34,8 +34,15 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
   { value: 'chua-dang-ky-xe', label: t("Vehicle not yet registered") },
 ];
   useEffect(() => {
-    dispatch(fetchCustomers(1))
-  }, [dispatch])
+    const timer = setTimeout(() => {
+      if (searchKeyword === '') dispatch(fetchCustomers(1))
+      else {
+        dispatch(searchCustomers({ current: 1, search: searchKeyword }))
+      }
+    }, 500)
+
+    return () => clearTimeout(timer)
+    }, [dispatch, searchKeyword])
 
   const columns = [
     {
@@ -159,14 +166,6 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
 
     
   )
-
-  if (loading) {
-    return (
-      <div style={{ textAlign: 'center', padding: 100 }}>
-        <Spin size="large" />
-      </div>
-    )
-  }
  
   return (
     <>
@@ -188,6 +187,13 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
               <Input
                 className="custom-search-input"
                 placeholder={t("Key Word")}
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    dispatch(searchCustomers({ current: 1, search: searchKeyword }))
+                  }
+                }}
               />
               <button className="custom-search-btn">
                 <Searchicon />
@@ -208,9 +214,13 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
         </div>
 
           <div className="main-table" onClick={(e) => e.stopPropagation()}>
-              <Table className="customer-table" columns={columns} dataSource={data} pagination = {false} 
-              footer={!error? () => tableFooter : undefined} 
-              />
+
+              <Spin spinning={loading} size="medium" style={{ padding: "50px" }}>
+                  <Table className="customer-table" columns={columns} dataSource={data} pagination = {false} 
+                  footer={!error? () => tableFooter : undefined} 
+                  />
+              </Spin>
+             
               <div className="saved-btn">
                   <SavedBtn/>
               </div>

@@ -7,7 +7,8 @@ export const customerRepository = {
     async getAllCustomers(
         current = 1,
         pageSize = 10,
-        filter = {}
+        search?: string,
+        //filter = {}
     ): Promise<{
         customers: CustomerEntity[];
         pagination: Pagination;
@@ -17,7 +18,8 @@ export const customerRepository = {
                 params: {
                     Current: current,
                     PageSize: pageSize,
-                    ...filter,
+                    //...filter,
+                    SearchKeyword: search,
                 }
             });
 
@@ -40,7 +42,6 @@ export const customerRepository = {
             console.error(`Error fetching customer with ID ${id}:`, error);
             throw error;
         }
-    }
-    
+    },
 }
 

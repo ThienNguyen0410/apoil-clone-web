@@ -1,5 +1,6 @@
 @use "../styles/color";
 .customer-table {
+    //min-height: 200px;
     margin-top: 5px;
     margin-left: 30px;
     background: #FFFFFF !important;
@@ -16,7 +17,8 @@
             border-spacing: 0 8px;
             border-radius: 8px 8px 0px 0px;
             width: 1437px !important;
-            height: 240px !important;
+            margin-left: -50px;
+            margin-top: -50px;
         }
     }
     .ant-table-container {
@@ -28,6 +30,17 @@
 }
 .customer-table .ant-table-footer {
     background: #ffffff !important;
+    margin-left: -55px;
+    margin-right: 25px;
+}
+
+.footer-box {
+    display: flex;
+    gap: 10px;
+    .ant-pagination-prev .ant-pagination-item-link,
+    .ant-pagination-next .ant-pagination-item-link {
+    color: #0d733b;
+}
 }
 
 .ant-pagination-item-active {
@@ -509,6 +522,7 @@
     justify-content: space-between;
     gap: 7px;
 }
+
 .bullet-point {
     width: 6px;
     height: 6px;

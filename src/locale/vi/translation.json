@@ -74,5 +74,10 @@
     "System password": "Mật khẩu hệ thống",
     "User": "Người dùng",
     "Role": "Vai trò",
-    "Loyalty Point Settings": "Cấu hình điểm Loyalty"
+    "Loyalty Point Settings": "Cấu hình điểm Loyalty",
+
+    "Mes.User.Invalid.Password": "Sai mật khẩu",
+    "Mes.User.Required.Username": "Vui lòng nhập tên đăng nhập",
+    "Mes.User.Required.Password": "Vui lòng nhập mật khẩu",
+    "Mes.User.NotFound": "Không thể tìm thấy người dùng"
 }

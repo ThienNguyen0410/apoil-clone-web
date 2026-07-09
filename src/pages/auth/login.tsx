@@ -5,6 +5,7 @@ import type { UserPayLoad } from '../../entities/user/entity'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
 import logo from '../../assets/logo.png'
+import Warning from '../../components/icons/Warning'
 import { useTranslation } from 'react-i18next'
 import EyeVisible from '../../components/icons/Eyevisible'
 import EyeInvisible from '../../components/icons/Eyeinvisible'
@@ -17,6 +18,8 @@ export default function Login() {
     const [rememberMe, setRememberMe] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const [labelHovered, setLabelHovered] = useState(false)
+    const [filledLogin, setFilledLogin] = useState(false)
+    const [failedLogin, setFailedLogin] = useState(false)
     const dispatch = useAppDispatch()
     const { isAuthenticated, loading, error } = useAppSelector((state) => state.auth)
     const navigate = useNavigate()
@@ -32,20 +35,30 @@ export default function Login() {
     useEffect(() => {
         if (!rememberMe) return
         const handler = (e: MouseEvent) => {
-        const label = document.querySelector('.item-control label')
-        if (label && label.contains(e.target as Node)) return
-        setLabelHovered(false)
+            const label = document.querySelector('.item-control label')
+            if (label && label.contains(e.target as Node)) return
+            setLabelHovered(false)
         }
         document.addEventListener('click', handler)
         return () => document.removeEventListener('click', handler)
     }, [rememberMe])
 
+    useEffect(() => {
+        if (error) setFailedLogin(true)
+        else setFailedLogin(false)
+    },[error])
+
+    useEffect(() => {
+
+        setFilledLogin(false)
+    },[])
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
-
+        setFilledLogin(true)
         if (!username || !password) {
-            alert('Vui lòng nhập đầy đủ thông tin đăng nhập')
-            return
+            if (!filledLogin) setFilledLogin(true)
+            return;
         }
 
         const payload: UserPayLoad = {
@@ -53,6 +66,7 @@ export default function Login() {
             password
         }
         dispatch(login(payload))
+
     }
 
   return (
@@ -68,8 +82,18 @@ export default function Login() {
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder={t('Username')}
                     disabled={loading}
-                    className="username-input"
+                    className= {
+                        filledLogin && !username ? "username-input error" :
+                        "username-input"}
                     />
+                    {filledLogin && !username? (
+                    <div
+                    style={{color: 'red', fontFamily: 'Inter, sans-serif', fontSize: '14px',fontWeight: "400", marginTop: '-10px',
+                    }}>
+                        {t("Mes.User.Required.Username")}
+                    </div>) 
+                    : null}
+                    
 
                     <div className= "password-wrapper">
                         <input
@@ -78,12 +102,43 @@ export default function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder={t('Password')}
                         disabled={loading}
-                        className="password-input"
+                        className= {
+                            filledLogin && !password ? "password-input error" :
+                            "password-input"}
                     />
                     <span className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
                         {showPassword ? <EyeVisible /> : <EyeInvisible />}
                     </span>
                     </div>
+
+                    {filledLogin && !password ? (
+                    <div
+                    style={{color: 'red', fontFamily: 'Inter, sans-serif', fontSize: '14px', marginTop: '-10px'}}>
+                        {t("Mes.User.Required.Password")}
+                    </div>) 
+                    : null}
+                    
+                    {
+                       failedLogin&&error? (
+                       <div className="error-msg" 
+                       style={{color: 'red', 
+                               marginTop: '-6px',
+                               padding: '0px',
+                               display: 'flex',
+                               gap: '5px',
+                               fontSize: '14px',
+                               alignItems: 'center',
+                               fontFamily: 'Inter, sans-serif',
+                               lineHeight: '24px',
+                            }}
+                       >
+                        <Warning />
+                        {t(error)}
+                       </div>
+
+
+                       ): null
+                    }
                     
 
                     <div className="item-control">
@@ -111,7 +166,7 @@ export default function Login() {
                       <a href="#">{t('Forgot password')}?</a>
                     </div>
 
-                    {error && <p className="error-message">{error}</p>}
+                   
 
                     <button className="login-button" type="submit" disabled={loading}>
                         {loading ? t('Logging in') : t('Log in')}

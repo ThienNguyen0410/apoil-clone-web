@@ -1,8 +1,7 @@
 import type { UserPayLoad } from '../../entities/user/entity';
 import type UserEntities from "../../entities/user/entity";
 import api from '../api';
-
-
+import {useTranslation} from 'react-i18next';
 export const authRepository = {
     async login(payload: UserPayLoad): Promise<UserEntities> {
         try {
@@ -14,8 +13,11 @@ export const authRepository = {
             localStorage.setItem('accessToken', response.data.data.accessToken);
             localStorage.setItem('refreshToken', response.data.data.refreshToken);
             return response.data.data;
-        } catch (error) {
-            throw new Error('Invalid username or password');
+        } 
+        catch (error: any) {
+            const message = error.response?.data?.message;
+            console.error('Error during login:', message);
+            throw new Error(message);
         }
     }
 }

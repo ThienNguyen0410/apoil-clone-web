@@ -23,6 +23,13 @@ export const fetchCustomers = createAsyncThunk(
     }
 )
 
+export const searchCustomers = createAsyncThunk(
+    'customer/searchCustomers',
+    async({current, search}:{current:number, search:string}) => {
+        return await customerRepository.getAllCustomers(current, 10, search);
+    }
+)
+
 
 const customerSlice = createSlice({
     name: 'customer',
@@ -44,6 +51,19 @@ const customerSlice = createSlice({
             state.loading = false;
             state.error =
                 action.error.message || 'Failed to fetch customers';
+        });
+
+        builder.addCase(searchCustomers.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        builder.addCase(searchCustomers.fulfilled, (state, action) => {
+            state.loading = false;
+            state.customers = action.payload.customers;
+        });
+        builder.addCase(searchCustomers.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || 'Failed to search customers';
         });
     }
 });

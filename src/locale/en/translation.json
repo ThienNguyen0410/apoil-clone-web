@@ -23,7 +23,7 @@
     "not changed": "not changed",
 
 
-    "Key Word": "Key Word",
+    "Key Word": "Keyword",
 
     "All": "All",
     "Changed": "Changed",
@@ -56,7 +56,6 @@
     "ok": "OK",
     
     "Log in": "Log in",
-    "Usẻname": "Username",
     "Password": "Password",
     "Forgot password": "Forgot password",
     "Remember me": "Remember me",
@@ -75,5 +74,10 @@
     "System password": "System password",
     "User": "User",
     "Role": "Role",
-    "Loyalty Point Settings": "Loyalty Point Settings"
+    "Loyalty Point Settings": "Loyalty Point Settings",
+
+    "Mes.User.Invalid.Password": "Wrong password",
+    "Mes.User.Required.Username": "Please enter username",
+    "Mes.User.Required.Password": "Please enter password",
+    "Mes.User.NotFound": "Can not find user"
 }
