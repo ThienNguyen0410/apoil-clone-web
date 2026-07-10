@@ -18,15 +18,8 @@ const initialState: customerState = {
 
 export const fetchCustomers = createAsyncThunk(
     'customer/getCustomers',
-    async(current:number = 1) => {
-        return await customerRepository.getAllCustomers(current);
-    }
-)
-
-export const searchCustomers = createAsyncThunk(
-    'customer/searchCustomers',
-    async({current, search}:{current:number, search:string}) => {
-        return await customerRepository.getAllCustomers(current, 10, search);
+    async({ current, search, filter }: { current: number; search?: string; filter?: Record<string, string> }) => {
+        return await customerRepository.getAllCustomers(current, 10, search, filter);
     }
 )
 
@@ -53,18 +46,6 @@ const customerSlice = createSlice({
                 action.error.message || 'Failed to fetch customers';
         });
 
-        builder.addCase(searchCustomers.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-        })
-        builder.addCase(searchCustomers.fulfilled, (state, action) => {
-            state.loading = false;
-            state.customers = action.payload.customers;
-        });
-        builder.addCase(searchCustomers.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.error.message || 'Failed to search customers';
-        });
     }
 });
 

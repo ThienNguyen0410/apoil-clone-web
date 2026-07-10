@@ -8,6 +8,8 @@ export default interface UserEntities {
     isAuthenticated?: boolean;
     accessToken?: string;
     refreshToken?: string;
+    avatarPath?: string;
+    avatarFile?: File;
 }
 
 

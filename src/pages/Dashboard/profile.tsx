@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import './profile.scss'
 import ProfileNav from '../../components/ProfileNav'
 import LogoutPopup from '../../components/popups/logout'
@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
 import { fetchMyProfile, updateProfile, changePassword } from '../../presenters/slices/profileSlice'
 import { logout } from '../../presenters/slices/authSlice'
 import { useTranslation } from 'react-i18next'
+import CameraEdit from '../../components/icons/CameraEdit'
 
 export default function profile() {
   const navigate = useNavigate()
@@ -16,11 +17,13 @@ export default function profile() {
   const [openLock, setOpenLock] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   //const [isChangPassword, setIschangePassword] = useState(false)
-  const [formData, setFormData] = useState({ fullname: '', phone_number: '', email: '' })
+  const [formData, setFormData] = useState({ fullname: '', phone_number: '', email: '', avatarPath: '' })
+  const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined)
 
   const dispatch = useAppDispatch()
   const {profile} = useAppSelector((s) => s.profile)
   const {t} = useTranslation()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     dispatch(fetchMyProfile())
@@ -32,6 +35,7 @@ export default function profile() {
         fullname: profile.fullname || '',
         phone_number: profile.phone_number || '',
         email: profile.email || '',
+        avatarPath: profile.avatarPath || ''
       })
     }
   }, [profile])
@@ -42,8 +46,11 @@ export default function profile() {
   }
 
   const saveProfile = () => {
-    dispatch(updateProfile(formData))
+    dispatch(updateProfile({ ...formData, avatarFile: selectedFile }))
+      .unwrap()
+      .then(() => dispatch(fetchMyProfile()))
     setIsEditing(false)
+    setSelectedFile(undefined)
   }
 
   const cancelEdit = () => {
@@ -52,8 +59,10 @@ export default function profile() {
         fullname: profile.fullname || '',
         phone_number: profile.phone_number || '',
         email: profile.email || '',
+        avatarPath: profile.avatarPath || ''
       })
     }
+    setSelectedFile(undefined)
     setIsEditing(false)
   }
 
@@ -84,8 +93,13 @@ export default function profile() {
         <div className="profile-user-box">
           <div className="profile-user-form">
             <div className="avt-role">
-              <img src={avatar} alt="Avatar" />
+              <img src={profile?.avatarPath || avatar} alt="Avatar" />
               <h2>{profile?.fullname}</h2>
+              <div className= 'camera-icon' onClick={() => inputRef.current?.click()}
+                style={isEditing ? {cursor: 'pointer', display: 'flex'} : {display: 'none'}}
+                >
+                <CameraEdit />
+              </div>
             </div>
 
             <div className="profile-form-box">
@@ -174,6 +188,20 @@ export default function profile() {
         open={openLock}
         setOpen={setOpenLock}
         handleChangePassword={handleChangePassword}
+      />
+
+      <input
+      type="file"
+      accept="image/*"
+      style={{ display: 'none' }}
+      ref={inputRef}
+      onChange={(e) => {
+        const file = e.target.files?.[0];
+        if (file) {
+          setSelectedFile(file);
+          setFormData({ ...formData, avatarPath: URL.createObjectURL(file) });
+        }
+      }}
       />
     </div>
   )

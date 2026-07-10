@@ -37,30 +37,6 @@
     }
 }
 
-.lock-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
-  color: #333;
-  line-height: 24px;
-  padding: 0px 77px;
-  text-align: left;
-  gap: 15px;
-  margin-bottom: 25px;
-
-  .lock-body .ant-input-affix-wrapper {
-    display: inline-flex;
-    background-color: #fff;
-    border: 1px solid #0d733b; 
-    border-radius: 6px;
-    color: #03031d;
-    font-size: 14px;
-    line-height: 22px;
-    padding: 9px 16px;
-    text-align: left;
-  }
-}
 
 .btn {
     padding: 0 40px 32px;
@@ -76,7 +52,7 @@
         color: #fff;
         font-family: 'Inter', sans-serif;
         font-size: 20px;
-        font-weight: 500;
+        font-weight: 450;
         line-height: 31.4286px;
         margin: 36px 0px 0px;
         text-align: center;
@@ -85,8 +61,8 @@
         margin-left: 34px;
 
         &:hover {
-            background-color: #0b5e31;
             cursor: pointer;
+            filter: brightness(1.1);
         }
     }
 }
@@ -96,15 +72,38 @@
 .confirm-password {
     width: 277px;
     height: 52px;
-    color: #0d733b;
-
+    color: black;
+    font-family: Inter, sans-serif;
     font-size: 14px;
+    display: inline-flex;
+    background-color: #fff;
+    //border: 1px solid #0d733b; 
+    border-radius: 6px;
+    line-height: 22px;
+    padding: 9px 16px;
+    text-align: left;
 
     &:hover {
         border-color: #0d733b;
     }
 
-    &:focus {
+    &.ant-input-affix-wrapper-focused {
         border-color: #0d733b;
+        box-shadow: 0 0 0 2px rgba(13, 213, 130, 0.12);
+        outline: none;
     }
+}
+
+
+.lock-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  color: #333;
+  line-height: 24px;
+  padding: 0px 77px;
+  text-align: left;
+  gap: 15px;
+  margin-bottom: 25px;
 }

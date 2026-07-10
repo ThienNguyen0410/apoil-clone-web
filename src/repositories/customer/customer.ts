@@ -8,19 +8,26 @@ export const customerRepository = {
         current = 1,
         pageSize = 10,
         search?: string,
-        //filter = {}
+        filter?: Record<string, string>
     ): Promise<{
         customers: CustomerEntity[];
         pagination: Pagination;
     }> {
         try {
-            const response = await api.get('/api/Customers', {
-                params: {
+
+             const params : Record<string,any> = {
                     Current: current,
                     PageSize: pageSize,
-                    //...filter,
                     SearchKeyword: search,
                 }
+
+            if (filter) {
+                for (const [key, value] of Object.entries(filter)) {
+                    params[`filter.${key}`] = value;
+                }
+            }
+            const response = await api.get('/api/Customers', {
+                params: params,
             });
 
             const { data } = response.data;

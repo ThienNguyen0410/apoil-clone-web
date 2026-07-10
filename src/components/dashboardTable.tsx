@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react'
 import { Table, Segmented, Select, Pagination } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../presenters/hooks'
-import { fetchCustomers, searchCustomers } from '../presenters/slices/customerSlice'
+import { fetchCustomers} from '../presenters/slices/customerSlice'
 import BulletPoint from './icons/BulletPoint'
 import Searchicon from './icons/Searchicon'
 import SavedBtn from './SavedBtn'
 import { Spin, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
-import Header from './Header'
+import Header from './header'
 import dayjs from 'dayjs'
 
 import './dashboardStyle.scss'
+import { customerRepository } from '../repositories/customer/customer'
 
 
 
@@ -19,31 +20,43 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
   const dispatch = useAppDispatch()
   const { customers, loading, error } = useAppSelector((state) => state.customer)
   const key = 'Customers'
-  const [selectedStatus, setSelectedStatus] = useState('tat-ca')
+  const [selectedStatus, setSelectedStatus] = useState(0)
   const [entriesPerPage, setEntriesPerPage] = useState(10)
   const [searchKeyword, setSearchKeyword] = useState('')
 
   const {t} = useTranslation()
   const options = [
-  { value: 'tat-ca', label: t("All") },
-  { value: 'da-thay', label: t("Changed") },
-  { value: 'sap-den-han', label: t("Ultrasound due") },
-  { value: 'den-han-thay-nhot', label: t("Oil change due") },
-  { value: 'qua-han', label: t("Overdue") },
-  { value: 'chua-thay', label: t("Not changed") },
-  { value: 'chua-dang-ky-xe', label: t("Vehicle not yet registered") },
+  { value: 0, label: t("All") },
+  { value: 1, label: t("Changed") },
+  { value: 2, label: t("Ultrasound due") },
+  { value: 3, label: t("Oil change due") },
+  { value: 4, label: t("Overdue") },
+  { value: 5, label: t("Not changed") },
+  { value: 6, label: t("Vehicle not yet registered") },
 ];
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (searchKeyword === '') dispatch(fetchCustomers(1))
+      const filter: Record<string, string> = {}
+      const status = localStorage.getItem("status")
+      filter.oilChangeStatus = `$eq:${status}`
+      if (searchKeyword === '') dispatch(fetchCustomers({current: 1, filter}))
       else {
-        dispatch(searchCustomers({ current: 1, search: searchKeyword }))
+        dispatch(fetchCustomers({ current: 1, search: searchKeyword, filter }))
       }
     }, 500)
 
     return () => clearTimeout(timer)
     }, [dispatch, searchKeyword])
 
+  useEffect(() => {
+    const status = localStorage.getItem("status")
+    setSelectedStatus(Number(status))
+    const filter: Record<string, string> = {}
+
+    filter.oilChangeStatus = `$eq:${status}`
+    customerRepository.getAllCustomers(1, 7, undefined, filter)
+
+  },[])
   const columns = [
     {
       title: <div style={{textAlign: "center"}}>{t("No")}</div>,
@@ -191,7 +204,7 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
                 onChange={(e) => setSearchKeyword(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    dispatch(searchCustomers({ current: 1, search: searchKeyword }))
+                    dispatch(fetchCustomers({ current: 1, search: searchKeyword }))
                   }
                 }}
               />
@@ -208,7 +221,15 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
               placeholder={selectedStatus}
               options={options}
               value={selectedStatus}
-              onChange={(value) => setSelectedStatus(value)}
+              onChange={(value) => {                
+                setSelectedStatus(value)
+                const filter: Record<string, string> = {}
+                if (value !== 0) {
+                  localStorage.setItem("status", JSON.stringify(value))
+                  filter.oilChangeStatus = `$eq:${value}`
+                }
+               dispatch(fetchCustomers({current: 1, filter}))
+              }}
             />
           </div>
         </div>
