@@ -94,6 +94,13 @@
     }
 }
 
+.new-password.ant-input-affix-wrapper:focus-within,
+.confirm-password.ant-input-affix-wrapper:focus-within {
+    border-color: #0d733b !important;
+    box-shadow: 0 0 0 2px rgba(13, 213, 130, 0.12) !important;
+    outline: none !important;
+}
+
 
 .lock-body {
   display: flex;
@@ -106,4 +113,30 @@
   text-align: left;
   gap: 15px;
   margin-bottom: 25px;
+}
+
+//Error classes
+.confirm-password-error {
+    width: 277px;
+    height: 52px;
+    color: black;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    display: inline-flex;
+    background-color: #fff;
+    //border: 1px solid #0d733b; 
+    border-radius: 6px;
+    line-height: 22px;
+    padding: 9px 16px;
+    text-align: left;
+
+    &:hover {
+        border-color: red;
+    }
+
+    &.ant-input-affix-wrapper-focused {
+        border:1px solid #f00;
+        box-shadow: #ff0104b3 0px 0px 0px 2px;
+        outline: none;
+    }
 }

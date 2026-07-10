@@ -16,6 +16,8 @@ export default function profile() {
   const [openLogout, setOpenLogout] = useState(false)
   const [openLock, setOpenLock] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
+  const [isDifferentPass, setIsdifferentPass] = useState(false)
+  const [isFilledRequired, setIsfilledRequired] = useState(false)
   //const [isChangPassword, setIschangePassword] = useState(false)
   const [formData, setFormData] = useState({ fullname: '', phone_number: '', email: '', avatarPath: '' })
   const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined)
@@ -40,6 +42,7 @@ export default function profile() {
     }
   }, [profile])
 
+
   const handleLogout = () => {
     dispatch(logout())
     navigate("/login")
@@ -47,8 +50,6 @@ export default function profile() {
 
   const saveProfile = () => {
     dispatch(updateProfile({ ...formData, avatarFile: selectedFile }))
-      .unwrap()
-      .then(() => dispatch(fetchMyProfile()))
     setIsEditing(false)
     setSelectedFile(undefined)
   }
@@ -67,9 +68,14 @@ export default function profile() {
   }
 
   const handleChangePassword = (oldPassword: string, newPassword: string, confirmPassword: string) => {
-    // Implement change password logic here
+
     if (newPassword !== confirmPassword) {
-      alert(t("New password and confirm password do not match"))
+      setIsdifferentPass(true)
+      return
+    }
+
+    else if (!oldPassword || !newPassword || !confirmPassword) {
+      setIsfilledRequired(true)
       return
     }
 
@@ -93,7 +99,7 @@ export default function profile() {
         <div className="profile-user-box">
           <div className="profile-user-form">
             <div className="avt-role">
-              <img src={profile?.avatarPath || avatar} alt="Avatar" />
+              <img src={formData.avatarPath||profile?.avatarPath || avatar} alt="Avatar" />
               <h2>{profile?.fullname}</h2>
               <div className= 'camera-icon' onClick={() => inputRef.current?.click()}
                 style={isEditing ? {cursor: 'pointer', display: 'flex'} : {display: 'none'}}
@@ -188,6 +194,8 @@ export default function profile() {
         open={openLock}
         setOpen={setOpenLock}
         handleChangePassword={handleChangePassword}
+        isDifferentPass={isDifferentPass}
+        isFilledRequired={isFilledRequired}
       />
 
       <input
@@ -199,7 +207,7 @@ export default function profile() {
         const file = e.target.files?.[0];
         if (file) {
           setSelectedFile(file);
-          setFormData({ ...formData, avatarPath: URL.createObjectURL(file) });
+          setFormData({...formData, avatarPath: URL.createObjectURL(file)})
         }
       }}
       />

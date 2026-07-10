@@ -12,7 +12,7 @@ export const UserRepositories = {
                 fullname: data.name,
                 phone_number: data.phoneNumber,
                 email: data.email,
-                avatarPath: data.avatarPicture?.originPath
+                avatarPath: data.avatarPicture
             }
         }
         catch(err) {
@@ -34,9 +34,6 @@ export const UserRepositories = {
 
 
             const {data} = res.data;
-            console.log('changeProfile response data:', data);
-            console.log('changeProfile avatarPicture:', data.avatarPicture);
-            console.log('changeProfile originPath:', data.avatarPicture?.originPath);
 
             return {
                 id: data.id,
@@ -44,7 +41,7 @@ export const UserRepositories = {
                 fullname: data.name,
                 phone_number: data.phoneNumber,
                 email: data.email,
-                avatarPath: data.avatarPicture?.originPath
+                avatarPath: data.avatarPicture
             }
         }
         catch(err) {

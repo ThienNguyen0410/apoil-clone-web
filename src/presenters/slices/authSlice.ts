@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/tool
 import type UserEntities from '../../entities/user/entity';
 import type { UserPayLoad } from '../../entities/user/entity';
 import { authRepository } from '../../repositories/auth/auth';
-import { REHYDRATE } from 'redux-persist';
+
 
 interface AuthState {
     user: UserEntities | null;
@@ -17,7 +17,6 @@ const initialState: AuthState = {
     loading: false,
     error: null
 }
-
 
 export const login = createAsyncThunk("auth/Login", async(payload: UserPayLoad) => {
     return await authRepository.login(payload);

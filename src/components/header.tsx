@@ -29,7 +29,7 @@ export default function Header({ name }: HeaderProps) {
   const dispatch = useAppDispatch()
   const {language} = useAppSelector((state) => state.locale)
   const [dropdownOpen, setDropdownOpen] = useState(false)
-
+  const {profile} = useAppSelector((s) => s.profile)
   useEffect(() => {
     if (language === 'VIE') {
       i18n.changeLanguage('vi')
@@ -93,7 +93,7 @@ export default function Header({ name }: HeaderProps) {
         </div>
 
         <div className="avatar-navigate" onClick={() => navigate("/profile")}>
-          <img src={avatar} alt="Avatar" />
+          <img src={profile?.avatarPath} alt="Avatar" />
         </div>
       </div>
     </div> 

@@ -79,5 +79,7 @@
     "Mes.User.Invalid.Password": "Wrong password",
     "Mes.User.Required.Username": "Please enter username",
     "Mes.User.Required.Password": "Please enter password",
-    "Mes.User.NotFound": "Can not find user"
+    "Mes.User.NotFound": "Can not find user",
+
+    "Not match password": "Passwords do not match"
 }

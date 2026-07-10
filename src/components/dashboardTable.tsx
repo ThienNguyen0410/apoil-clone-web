@@ -38,7 +38,14 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
     const timer = setTimeout(() => {
       const filter: Record<string, string> = {}
       const status = localStorage.getItem("status")
-      filter.oilChangeStatus = `$eq:${status}`
+      const statusNum = Number(status)
+
+      if (statusNum === 0) {
+        dispatch(fetchCustomers({current: 1, filter}))
+      }
+
+      else filter.oilChangeStatus = `$eq:${status}`
+      
       if (searchKeyword === '') dispatch(fetchCustomers({current: 1, filter}))
       else {
         dispatch(fetchCustomers({ current: 1, search: searchKeyword, filter }))
@@ -168,7 +175,7 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
       </div>
 
       <Pagination
-      style={{marginRight: "-50px"}}
+        style={{marginRight: "-50px"}}
         current={10}
         total={10}
         pageSize={entriesPerPage}
@@ -228,6 +235,7 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
                   localStorage.setItem("status", JSON.stringify(value))
                   filter.oilChangeStatus = `$eq:${value}`
                 }
+                else localStorage.setItem("status", JSON.stringify(value))
                dispatch(fetchCustomers({current: 1, filter}))
               }}
             />

@@ -4,12 +4,11 @@ export default interface UserEntities {
     fullname?: string;
     phone_number?: string;
     email: string;
-    //roleId?: string;
     isAuthenticated?: boolean;
     accessToken?: string;
     refreshToken?: string;
-    avatarPath?: string;
-    avatarFile?: File;
+    avatarPath?: string; // Received image path from server
+    avatarFile?: File;   // Image file (binary) to upload to server through API PUT/customers/me
 }
 
 
