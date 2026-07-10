@@ -12,5 +12,6 @@ Những việc đã làm được:
 
 
 10/7/2026
-+ Sửa UI
-+ 
++ Sửa UI (segmented, sidebar)
++ Thêm search, filter của table
++ Upload được ảnh của profile
