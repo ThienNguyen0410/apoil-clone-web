@@ -1,0 +1,36 @@
+.custom-table {
+    padding: 50px;
+    table{
+        table-layout: fixed;
+        border-spacing: 0 12px;
+        width: 1437px;
+        margin-left: -24px;
+        transition: width 0.2s ease, margin-left 0.2s ease;
+    }
+}
+
+.main-page.collapsed .custom-table table {
+    width: 1660px;
+}
+.custom-table .ant-table-thead > tr > th {
+    background: #e9fdf2;
+    color: #0d733b;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: table-cell;
+    line-height: 22px;
+    padding: 10px 8px;
+    border: none;
+
+    &::before{
+        display: none !important;
+    }
+}  
+
+.custom-table .ant-table-tbody > tr > td {
+    background: #f6f6f680 !important;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    padding: 10px 8px !important;
+}

@@ -1,4 +1,4 @@
-@use "../styles/color";
+@use "../../styles/color";
 .customer-table {
     //min-height: 200px;
     margin-top: 5px;
@@ -268,7 +268,7 @@
 
 
 .status-done {
-    width: 80px;
+    min-width: 80px;
     height: 30px;
     text-align: center;
     background-color: #e3ffe1;
@@ -285,15 +285,24 @@
     line-height: 22px;
 
     font-weight: 600;
-    margin-left: -5px;
+    margin-left: 0px;
 }
 
 .status-overdue {
+    min-width: 80px;
+    height: 30px;
+    text-align: center;
     background-color: #ffe3e3;
     border-radius: 20px;
     color: #cd2626;
     padding: 5px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #cd2626;
     font-size: 12px;
+    line-height: 22px;
+    font-weight: 600;
     margin-left: 0px;
 }
 
@@ -519,19 +528,15 @@
 .status-result {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 7px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
 }
 
 .bullet-point {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
     font-size: 20px;
-    position: relative;
-    margin-left: -6px;
+    line-height: 1;
+    font-weight: 00;
 }
 
 .ant-space-compact {

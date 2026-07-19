@@ -3,4 +3,6 @@ html, body, #root {
   padding: 0;
   min-height: 100vh;
   background: #e2faf0;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
 }

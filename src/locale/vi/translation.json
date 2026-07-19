@@ -55,7 +55,6 @@
     "ok": "Đồng ý",
 
     "Log in": "Đăng nhập",
-    "Usẻname": "Tên đăng nhập",
     "Password": "Mật khẩu",
     "Forgot password": "Quên mật khẩu",
     "Remember me": "Ghi nhớ đăng nhập",
@@ -81,5 +80,29 @@
     "Mes.User.Required.Password": "Vui lòng nhập mật khẩu",
     "Mes.User.NotFound": "Không thể tìm thấy người dùng",
 
-    "Not match password": "Mật khẩu không khớp"
+    "List of user": "Danh sách người dùng",
+    "Not match password": "Mật khẩu không khớp",
+
+    "User Information": "Thông tin người dùng",
+    "Create User": "Tạo người dùng",
+    "Update User": "Cập nhật người dùng",
+    "Confirm Password": "Xác nhận mật khẩu",
+    "ID Number": "Số CMND/CCCD",
+    "Address": "Địa chỉ",
+    "Image": "Hình ảnh",
+    "Activity Status": "Trạng thái hoạt động",
+    "Active": "Đang hoạt động",
+    "Inactive": "Ngưng hoạt động",
+    "Close": "Đóng",
+    "Add": "Thêm",
+    "Update": "Cập nhật",
+    "Select Role": "Chọn vai trò",
+    "Select Status": "Chọn trạng thái",
+    "Enter phone number": "Vui lòng nhập số điện thoại",
+    "Enter ID number": "Vui lòng nhập cmnd/cccd",
+    "Enter address": "Vui lòng thêm địa chỉ",
+    "Enter password": "Vui lòng nhập mật khẩu",
+    "Enter confirm password": "Vui lòng nhập xác nhận mật khẩu",
+    "Required field": "Là trường thông tin bắt buộc",
+    "Choose File": "Chọn File"
 }

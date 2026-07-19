@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import {Modal, Input, Button} from 'antd'
+import { useState} from 'react'
+import {Modal, Input} from 'antd'
 import { useTranslation } from 'react-i18next'
-import LockPopups from '../icons/LockPopups'
+import LockPopups from '../../icons/Lockicon'
 import './lock.scss'
 
 type LockProps = {
@@ -41,7 +41,7 @@ export default function LockPopup({open, setOpen, handleChangePassword, isDiffer
               placeholder={t("enter old password")}
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
-              prefix={<LockPopups />}
+              prefix={<LockPopups/>}
               className="old-password"
             />
 
@@ -67,7 +67,6 @@ export default function LockPopup({open, setOpen, handleChangePassword, isDiffer
           </div>
         </div>
         
-
     </Modal>
   )
 }

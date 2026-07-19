@@ -1,0 +1,47 @@
+.select-section {
+    display: flex;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    //margin-right: 24px;
+    h1 {
+        color: #242b35;
+        font-weight: 600;
+        margin: 0px 0px 5px;
+        font-family: Inter, sans-serif;
+        font-size: 16px;
+    }
+
+}
+.select-box {
+    width: 200px;
+    height: 42px;
+    border-radius: 8px;
+    .ant-select-item {
+        background-color: #e2faf0 !important;
+    }
+
+    &:hover {
+        border: 1px solid #0d733b;
+        cursor: pointer;
+    }
+
+     &.ant-select-focused  {
+        outline: none;
+        border-color: #0d733b !important;
+        box-shadow: 0 0 0 4px rgba(21, 115, 71, 0.1);
+              
+    }
+    &::placeholder {
+        align-items: center;
+        color: #333;
+        display: flex;
+        flex-basis: 0%;
+        font-size: 14px;
+        line-height: 33px;
+        margin: 0px 20px 0px 0px;
+        padding: 4px 10px;
+    }
+}

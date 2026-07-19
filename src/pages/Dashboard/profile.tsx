@@ -1,8 +1,8 @@
 import {useState, useEffect, useRef} from 'react'
 import './profile.scss'
 import ProfileNav from '../../components/ProfileNav'
-import LogoutPopup from '../../components/popups/logout'
-import LockPopup from '../../components/popups/lock'
+import LogoutPopup from '../../components/popups/Customers/logout'
+import LockPopup from '../../components/popups/Customers/lock'
 import avatar from '../../assets/avt.png'
 import {useNavigate} from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
@@ -18,10 +18,9 @@ export default function profile() {
   const [isEditing, setIsEditing] = useState(false)
   const [isDifferentPass, setIsdifferentPass] = useState(false)
   const [isFilledRequired, setIsfilledRequired] = useState(false)
-  //const [isChangPassword, setIschangePassword] = useState(false)
   const [formData, setFormData] = useState({ fullname: '', phone_number: '', email: '', avatarPath: '' })
   const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined)
-
+  
   const dispatch = useAppDispatch()
   const {profile} = useAppSelector((s) => s.profile)
   const {t} = useTranslation()

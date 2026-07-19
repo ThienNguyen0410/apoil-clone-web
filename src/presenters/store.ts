@@ -3,6 +3,7 @@ import customerReducer from './slices/customerSlice';
 import authReducer from './slices/authSlice';
 import localeReducer from './slices/localeSlice';
 import profileReducer from './slices/profileSlice';
+import userReducer from './slices/userSlice';
 import {persistStore, persistReducer} from 'redux-persist'
 import {FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from 'redux-persist'
 
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     customer: customerReducer,
     auth: authReducer,
     locale: localeReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    user: userReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

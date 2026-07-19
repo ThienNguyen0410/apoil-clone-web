@@ -8,10 +8,12 @@ import {
 } from '@ant-design/icons'
 import MoreOutlined from '../../components/icons/MoreOutlined'
 
+
 import Homeicon from '../../components/icons/Homeicon'
 import  Cubeicon from '../../components/icons/Cubeicon'
 import logo from '../../assets/logo.png'
-import DashboardContent from '../../components/DashboardTable'
+import DashboardContent from '../../components/Customers/index'
+import UserPage from '../../components/System-settings/Users/index'
 import './dasboard.scss'
 const { Sider, Header, Content } = Layout
 
@@ -140,6 +142,10 @@ export default function Dashboard() {
               {selectedKey === 'customers' && 
               <DashboardContent collapsed={collapsed}
               />}
+              {selectedKey === 'user' && 
+              <UserPage collapsed={collapsed}/> 
+              }
+
           </div>
         </Content>
       </Layout>

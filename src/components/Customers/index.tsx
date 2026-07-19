@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 import { Table, Segmented, Select, Pagination } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
-import { useAppDispatch, useAppSelector } from '../presenters/hooks'
-import { fetchCustomers} from '../presenters/slices/customerSlice'
-import BulletPoint from './icons/BulletPoint'
-import Searchicon from './icons/Searchicon'
-import SavedBtn from './SavedBtn'
+import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
+import { fetchCustomers} from '../../presenters/slices/customerSlice'
+import BulletPoint from '../icons/BulletPoint'
+import Searchicon from '../icons/Searchicon'
+import SavedBtn from '../SavedBtn'
 import { Spin, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
-import Header from './header'
+import Header from '../header'
 import dayjs from 'dayjs'
 
-import './dashboardStyle.scss'
-import { customerRepository } from '../repositories/customer/customer'
+import './index.scss'
+import { customerRepository } from '../../repositories/customer/customer'
 
 
 
@@ -96,8 +96,9 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
       sorter: (a:any, b:any) => a.duration_next_change.localeCompare(b.duration_next_change),
     },
     {
-      title: t("Status"),
+      title: <div style={{textAlign: "left"}}>{t("Status")}</div>,
       dataIndex: 'status',
+      align: 'left' as const,
 
       render: (text: string) => (
         <span
@@ -107,6 +108,9 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
               ? 'status-done'
               : 'status-overdue'
           }
+          style={{
+          
+          }}
         >
           {text === "Đã thay" || text === "Changed" ? (
             <> 
@@ -254,7 +258,6 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
                   <SavedBtn/>
               </div>
           </div>
-
           
       </div>
     </>

@@ -1,4 +1,4 @@
-import Login from '../pages/auth/Login'
+import Login from '../pages/Auth/Login'
 
 
 export const publicRoutes = [

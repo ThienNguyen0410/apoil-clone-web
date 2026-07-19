@@ -1,9 +1,15 @@
 export default interface UserEntities {
     id?: string;
+    id_num?: string;
     username?: string;
+    password?: string;
     fullname?: string;
     phone_number?: string;
     email: string;
+    role?: string;
+    roleID?: string;
+    status?: boolean;
+    address?: string;
     isAuthenticated?: boolean;
     accessToken?: string;
     refreshToken?: string;
@@ -12,8 +18,8 @@ export default interface UserEntities {
 }
 
 
-export interface UserPayLoad {
-    username: string;
-    password: string;
-}
+// export interface UserPayLoad {
+//     username: string;
+//     password: string;
+// }
 

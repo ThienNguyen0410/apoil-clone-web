@@ -81,5 +81,29 @@
     "Mes.User.Required.Password": "Please enter password",
     "Mes.User.NotFound": "Can not find user",
 
-    "Not match password": "Passwords do not match"
+    "List of user": "List of user",
+    "Not match password": "Passwords do not match",
+
+    "User Information": "User Information",
+    "Create User": "Create User",
+    "Update User": "Update User",
+    "Confirm Password": "Confirm Password",
+    "ID Number": "ID Number",
+    "Address": "Address",
+    "Image": "Image",
+    "Activity Status": "Activity Status",
+    "Active": "Active",
+    "Inactive": "Inactive",
+    "Close": "Close",
+    "Add": "Add",
+    "Update": "Update",
+    "Select Role": "Select role",
+    "Select Status": "Select status",
+    "Enter phone number": "Please enter phone number",
+    "Enter ID number": "Please enter ID number",
+    "Enter address": "Please enter address",
+    "Enter password": "Please enter password",
+    "Enter confirm password": "Please enter confirm password",
+    "Required field": "is required field",
+    "Choose File": "Choose File"
 }

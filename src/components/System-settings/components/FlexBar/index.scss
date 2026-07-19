@@ -1,0 +1,12 @@
+.flex-bar-row {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    //gap: 16px;
+    .select-component {
+        position: fixed;
+        display: flex;
+        margin-left: auto;
+        right: 105px;
+    }
+}
