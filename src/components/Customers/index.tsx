@@ -183,7 +183,6 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
         current={10}
         total={10}
         pageSize={entriesPerPage}
-        //onChange={(page) => setCurrentPage(page)}
         showSizeChanger={false}
       />
     </div>

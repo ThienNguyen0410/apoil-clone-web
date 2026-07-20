@@ -9,8 +9,9 @@ type TableProps = {
     error: string | null;
     loading: boolean;
     rowSelection?: TableRowSelection<any>;
+    onSort : () => void
 }
-export default function TableView({columns, dataSource, footer, error, loading, rowSelection}: TableProps ){
+export default function TableView({columns, dataSource, footer, error, loading, rowSelection, onSort}: TableProps ){
   return (
     <div className="custom-table" onClick={(e) => e.stopPropagation()}>
         <Spin spinning={loading} size="medium">

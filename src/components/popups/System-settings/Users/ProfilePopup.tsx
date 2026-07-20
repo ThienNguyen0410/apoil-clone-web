@@ -32,7 +32,7 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
     {value: false, label: t('Inactive')},
   ]
 
-  const [Form, setForm] = useState({
+  const initialFormState = {
     username: '',
     password: '',
     confirmPassword: '',
@@ -42,22 +42,24 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
     email: '',
     idNumber: '',
     address: '',
-    status: 0,
+    status: 1,
     avatarPath: ''
-  })
+  }
 
-  
+  const [Form, setForm] = useState(initialFormState)
 
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    const hasData = Form.username || Form.fullname || Form.role || 
-                    Form.phone || Form.email || Form.idNumber || 
-                    Form.address || Form.password || Form.confirmPassword
+  const resetForm = () => {
+    setForm(initialFormState)
+    setImageFile(undefined)
+    setPreviewUrl('')
+  }
 
-    if (!hasData && UserData && !AddMode) {
-      setForm(prev => ({
-        ...prev,
+  useEffect(() => {
+    if (UserData && !AddMode) {
+      setForm({
+        ...initialFormState,
         username: UserData.username || '',
         fullname: UserData.fullname || '',
         role: UserData.roleID || '',
@@ -66,7 +68,7 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
         idNumber: UserData.id_num || '',
         address: UserData.address || '',
         status: UserData.status === 1 ? 1 : 2,
-      }))
+      })
     }
   }, [UserData])
 
@@ -94,22 +96,8 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
       avatarFile: imageFile 
     }))
 
+    resetForm()
     setOpenProfile(false)
-    setForm({
-      username: '',
-      password: '',
-      confirmPassword: '',
-      fullname: '',
-      role: '',
-      phone: '',
-      email: '',
-      idNumber: '',
-      address: '',
-      status: 1,
-      avatarPath: ''
-    }
-    )
-
     localStorage.setItem("ProfilePopupState", JSON.stringify(false))
   }
 
@@ -127,22 +115,8 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
       status: Form.status,
       avatarFile: imageFile 
     }))
-
+    resetForm()
     setOpenProfile(false)
-    setForm({
-      username: '',
-      password: '',
-      confirmPassword: '',
-      fullname: '',
-      role: '',
-      phone: '',
-      email: '',
-      idNumber: '',
-      address: '',
-      status: 1,
-      avatarPath: ''
-    }
-    )
     localStorage.setItem("ProfilePopupState", JSON.stringify(false))
   }
 
@@ -156,6 +130,7 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
       className="profile-popup"
       getContainer={false}
       onCancel={() => {
+        resetForm()
         setOpenProfile(false)
         localStorage.setItem("ProfilePopupState", JSON.stringify(false))
         localStorage.setItem("ProfilePopupViewMode", JSON.stringify(false))
@@ -331,8 +306,11 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
           disabled={isDisabled}
           options={statusOptions}
           placeholder={t('Select Status')}
-          value={Form.status || undefined}
-          onChange={(v) => setForm(prev => ({...prev, status: v}))}
+          value={Form.status === 1 }
+          onChange={(v) => {
+            const status = v === true ? 1 : 2;
+            setForm(prev => ({...prev, status: status}))
+          }}
           aria-required
           />
         </div>
@@ -347,6 +325,7 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
         <div className="profile-btn">
           <button className="close-btn"
           onClick={() => {
+            resetForm()
             setOpenProfile(false)
             localStorage.setItem("ProfilePopupState", JSON.stringify(false))
             localStorage.setItem("ProfilePopupViewMode", JSON.stringify(false))
@@ -358,6 +337,7 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
         <div className="profile-btn">
           <button className="cancel-btn"
           onClick={() => {
+              resetForm()
               setOpenProfile(false)
               localStorage.setItem("ProfilePopupState", JSON.stringify(false))
               localStorage.setItem("ProfilePopupViewMode", JSON.stringify(false))
@@ -372,6 +352,7 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
         <div className="profile-btn">
           <button className="cancel-btn"
           onClick={() => {
+              resetForm()
               setOpenProfile(false)
               localStorage.setItem("ProfilePopupState", JSON.stringify(false))
               localStorage.setItem("ProfilePopupViewMode", JSON.stringify(false))

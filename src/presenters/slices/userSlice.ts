@@ -1,8 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import type UserEntities from '../../entities/user/entity';
 import {UserRepositories} from '../../repositories/user/user';
-import { create } from 'axios';
-
 
 interface UserState {
     Users: UserEntities[];
@@ -122,7 +120,7 @@ const userSlice = createSlice({
             state.error = null
         })
 
-        builder.addCase(updateUserById.fulfilled, (state, action) => {
+        builder.addCase(updateUserById.fulfilled, (state) => {
             state.loading = false;
             state.error = null;
         })

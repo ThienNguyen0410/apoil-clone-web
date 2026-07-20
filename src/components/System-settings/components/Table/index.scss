@@ -48,3 +48,20 @@
 .custom-table .ant-table-tbody > tr > td:last-child {
     border-radius: 0 8px 8px 0;
 }
+
+.ant-table-thead > tr > th.ant-table-column-has-sorters  {
+    background: #e9fdf2
+}
+
+.ant-table-thead > tr > th.ant-table-column-has-sorters:hover {
+    background: #e9fdf2 !important;
+    color: black !important;
+}
+
+.ant-table-column-sorter-up.active {
+    color: #0d733b !important;
+}
+
+.ant-table-column-sorter-down.active {
+    color: #0d733b !important;
+}

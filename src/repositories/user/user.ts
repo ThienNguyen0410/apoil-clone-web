@@ -75,7 +75,7 @@ export const UserRepositories = {
                 roleID: data.role?.id,
                 phone_number: data.phoneNumber,
                 email: data.email,
-                status: data.status === 1 ? 1 : 0,
+                status: data.status === 1 ? 1 : 2,
                 avatarPath: data.avatarPicture,
                 address: data.address,
             }

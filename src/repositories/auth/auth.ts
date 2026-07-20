@@ -1,6 +1,5 @@
 import type UserEntities from "../../entities/user/entity";
 import api from '../api';
-import {useTranslation} from 'react-i18next';
 export const authRepository = {
     async login(payload: UserEntities): Promise<UserEntities> {
         try {

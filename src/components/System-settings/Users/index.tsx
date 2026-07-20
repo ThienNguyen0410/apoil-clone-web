@@ -12,7 +12,6 @@ import {useAppDispatch, useAppSelector} from '../../../presenters/hooks'
 import {fetchUserData, fetchUsersRoles, fetchUserById, updateUserById, deleteMultipleUsers} from '../../../presenters/slices/userSlice'
 import ProfilePopup from '../../popups/System-settings/Users/ProfilePopup'
 import ConfirmDelete from '../../popups/System-settings/Users/ConfirmDelete'
-import ConfirmChange from '../../popups/System-settings/Users/ChangeStatusPop'
 
 
 import './index.scss'
@@ -120,25 +119,29 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
       title: t('Username'),
       dataIndex: 'username',
       key: 'username',
-      width: 187
+      width: 187,
+      sorter: (a: any, b: any) => sortFunc("username", "asc")
     },
     {
       title: t('Full Name'),
       dataIndex: 'fullname',
       key: 'fullname',
       width: 187,
+      sorter: true
     },
     {
       title: t('Role'),
       dataIndex: 'role',
       key: 'role',
-      width: 187
+      width: 187,
+      sorter: true
     },
     {
       title: t('Phone Number'),
       dataIndex: 'phone_number',
       key: 'phone_number',
-      width: 187
+      width: 187,
+      sorter: true
     },
     {
       title: t('Email'),
@@ -146,6 +149,7 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
       key: 'email',
       width: 187,
       ellipsis: true,
+      sorter: true,
     },
     {
       title: t('Status'),
@@ -235,8 +239,15 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
   const onDeleteUsers = ()  => {
     const deleteIds = dataSource.filter(item => selectedRowKeys.includes(item.key)).map(item => item.id!)
     console.log(deleteIds)
-    dispatch(deleteMultipleUsers(deleteIds))
+    dispatch(deleteMultipleUsers(deleteIds)).unwrap().then(() => {
+      dispatch(fetchUserData({current: currentPage, pageSize, searchKeyword: search}))
+      setSelectedRowKeys([])
+    })
     setOpenDeleteForm(false)
+  }
+
+  const sortFunc = (field: string, order: string) => {
+
   }
 
   return (
@@ -264,6 +275,9 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
             error={error}
             footer={null}
             rowSelection={rowSelection}
+            onSort={() => {
+              
+            }}
             />
 
 
@@ -335,9 +349,10 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
           onChangeStatus={() => {
             
             if(changedStatus) {
-              console.log("Hi")
               const newStatus = changedStatus.status === 1? 2 : 1;
-              dispatch(updateUserById({...changedStatus, status: newStatus}))
+              dispatch(updateUserById({...changedStatus, status: newStatus})).unwrap().then(() => {
+                dispatch(fetchUserData({current: currentPage, pageSize, searchKeyword: search}))
+              })
               setOpenChangeForm(false)
             }
 
