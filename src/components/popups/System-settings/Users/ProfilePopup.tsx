@@ -42,7 +42,7 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
     email: '',
     idNumber: '',
     address: '',
-    status: true,
+    status: 0,
     avatarPath: ''
   })
 
@@ -65,7 +65,7 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
         email: UserData.email || '',
         idNumber: UserData.id_num || '',
         address: UserData.address || '',
-        status: UserData.status ?? true,
+        status: UserData.status === 1 ? 1 : 2,
       }))
     }
   }, [UserData])
@@ -105,10 +105,12 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
       email: '',
       idNumber: '',
       address: '',
-      status: true,
+      status: 1,
       avatarPath: ''
     }
     )
+
+    localStorage.setItem("ProfilePopupState", JSON.stringify(false))
   }
 
   const handleAddUser = () => {
@@ -137,10 +139,11 @@ export default function ProfilePopup({openProfile, setOpenProfile, ViewMode, Add
       email: '',
       idNumber: '',
       address: '',
-      status: true,
+      status: 1,
       avatarPath: ''
     }
     )
+    localStorage.setItem("ProfilePopupState", JSON.stringify(false))
   }
 
   return (

@@ -9,12 +9,15 @@ import Editicon from '../../icons/Editicon'
 import RightMenu from '../components/Right-Menu'
 import {useTranslation} from 'react-i18next'
 import {useAppDispatch, useAppSelector} from '../../../presenters/hooks'
-import {fetchUserData, fetchUsersRoles, fetchUserById, updateUserById} from '../../../presenters/slices/userSlice'
+import {fetchUserData, fetchUsersRoles, fetchUserById, updateUserById, deleteMultipleUsers} from '../../../presenters/slices/userSlice'
 import ProfilePopup from '../../popups/System-settings/Users/ProfilePopup'
 import ConfirmDelete from '../../popups/System-settings/Users/ConfirmDelete'
+import ConfirmChange from '../../popups/System-settings/Users/ChangeStatusPop'
+
 
 import './index.scss'
 import type UserEntities from '../../../entities/user/entity'
+import ChangeStatusPop from '../../popups/System-settings/Users/ChangeStatusPop'
 
 export default function UserPage({ collapsed }: { collapsed?: boolean }) {
   const dispatch = useAppDispatch()
@@ -28,7 +31,8 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
   const [viewMode, setViewMode] = useState(false)
   const [addMode, setAddMode] = useState(false)
   const [openDeleteForm, setOpenDeleteForm] = useState(false)
-
+  const [openChangeForm , setOpenChangeForm] = useState(false)
+  const [changedStatus, setChangeStatus] = useState<UserEntities | null >()
   
   const {t} = useTranslation()
   useEffect(() => {
@@ -147,20 +151,32 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
       title: t('Status'),
       dataIndex: 'status',
       key: 'status',
-      render: (status: boolean, record: UserEntities) => (
+      render: (status: number,record: UserEntities) => (
         <div style={{display: 'flex', alignItems: 'left', gap: 8, fontSize: '12px', fontFamily: 'Inter, sans-serif', justifyContent:'flex-start',
-                  color: "#21924f",
                   fontWeight: '600',
                   lineHeight:'18.8751px',
                   margin: '2px 0px 0px 8px'
 
         }}>
-          <Switch checked={status}
+          <Switch checked={status == 1}
+          style={status === 1 ? {
+            background: "#0d733b"
+          }:
+          {}
+        
+        }
           onChange={() => {
-            dispatch(updateUserById({...record, status: !record.status}))
+            setOpenChangeForm(true)
+            setChangeStatus(record)
           }} 
           />
-          <span>{status ? t('Active') : t('Inactive')}</span>
+          <span
+          style={status === 1? {
+            color: "#21924f"
+          }: {
+            color: "#898989"
+          }}
+          >{status === 1 ? t('Active') : t('Inactive')}</span>
         </div>
       ),
       width: 187
@@ -211,10 +227,17 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
     selectedRowKeys,
     onChange: (newSelectedRowKeys: React.Key[]) => {
       setSelectedRowKeys(newSelectedRowKeys)
+
     },
     columnWidth: 65,
   }
   
+  const onDeleteUsers = ()  => {
+    const deleteIds = dataSource.filter(item => selectedRowKeys.includes(item.key)).map(item => item.id!)
+    console.log(deleteIds)
+    dispatch(deleteMultipleUsers(deleteIds))
+    setOpenDeleteForm(false)
+  }
 
   return (
     <div className={`main-page${collapsed ? ' collapsed' : ''}`}>
@@ -223,7 +246,6 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
       </div>
 
         <div className="main-layout">
-            <div className="flex-bar-row">
                 <FlexBar
                 searchTitle={t("Key Word")}
                 placeholder={t("Key Word")}
@@ -234,7 +256,6 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
                 onChangeStatus={(value: string) => onChangeStatus(value)}
                 options={RolesOptions}
                 />
-            </div>
 
             <TableView
             columns={columns}
@@ -246,6 +267,22 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
             />
 
 
+          {selectedRowKeys.length > 0 ? (
+          <div
+          style={{
+          //background: "red",
+          color: "#0d733b",
+          marginTop: "-30px",
+          marginBottom: "50px",
+          marginLeft: 22,
+          fontSize: 14,
+          lineHeight: "22px" 
+          }}
+          >
+          {selectedRowKeys.length} 
+          <span style={{marginLeft: "5px"}}>nội dung đã được chọn </span>
+          </div>
+          ) : null}
           {!error && !loading? (
             <div className="footer">
               <Footer
@@ -290,6 +327,22 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
           <ConfirmDelete
           openForm={openDeleteForm}
           setOpenForm={setOpenDeleteForm}
+          onDeleteUser={onDeleteUsers}
+          />
+          <ChangeStatusPop
+          openForm={openChangeForm}
+          setOpenForm={setOpenChangeForm}
+          onChangeStatus={() => {
+            
+            if(changedStatus) {
+              console.log("Hi")
+              const newStatus = changedStatus.status === 1? 2 : 1;
+              dispatch(updateUserById({...changedStatus, status: newStatus}))
+              setOpenChangeForm(false)
+            }
+
+            else console.log("Can not find selected user!")
+          }}
           />
         </div>
     </div>

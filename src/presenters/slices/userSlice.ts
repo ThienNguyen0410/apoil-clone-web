@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import type UserEntities from '../../entities/user/entity';
 import {UserRepositories} from '../../repositories/user/user';
+import { create } from 'axios';
 
 
 interface UserState {
@@ -55,6 +56,14 @@ export const addUser = createAsyncThunk(
         return await UserRepositories.AddUser(user)
     }
 )
+
+export const deleteMultipleUsers = createAsyncThunk(
+    "/user/deleteMultipleUsers",
+    async(ids: string[]) => {
+        return await UserRepositories.delteMultipleUsers(ids)
+    }
+)
+
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -121,6 +130,23 @@ const userSlice = createSlice({
         builder.addCase(updateUserById.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message || 'Failed to update profile of user'
+        })
+
+        builder.addCase(deleteMultipleUsers.pending, (state) => {
+            state.loading = true;
+            state.error = null
+        })
+
+        builder.addCase(deleteMultipleUsers.fulfilled, (state, action) => {
+            state.loading = false;
+            state.error = null
+            state.Users = state.Users.filter(user => !action.meta.arg.includes(user.id!));
+            state.total -= action.meta.arg.length;
+        })
+
+        builder.addCase(deleteMultipleUsers.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || 'Failed to delete multiples user'
         })
     }
 });

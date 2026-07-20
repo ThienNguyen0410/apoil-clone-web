@@ -51,7 +51,7 @@ export const UserRepositories = {
                     email: item.email,
                     role: item.role.name,
                     roleID: item.role.id,
-                    status: item.status ? true : false,
+                    status: item.status === 1 ? 1 : 2,
                 })),
                 total: data.pageInfo?.totalCount ?? 0
             }
@@ -75,7 +75,7 @@ export const UserRepositories = {
                 roleID: data.role?.id,
                 phone_number: data.phoneNumber,
                 email: data.email,
-                status: data.status ? true : false,
+                status: data.status === 1 ? 1 : 0,
                 avatarPath: data.avatarPicture,
                 address: data.address,
             }
@@ -144,7 +144,7 @@ export const UserRepositories = {
             if (user.avatarFile) formData.append('AvatarPicture', user.avatarFile);
             formData.append("Name", user.fullname ?? "");
             formData.append("PhoneNumber", user.phone_number ?? "")
-            formData.append("Status", user.status === true ? "1" : "0")
+            formData.append("Status", user.status === 1 ? "1" : "2")
             formData.append("Address", user.address ?? "");
             formData.append("IdentifierNumber", user.id_num ?? "")
             formData.append("RoleId", user.roleID ?? "")
@@ -169,7 +169,7 @@ export const UserRepositories = {
             if (user.avatarFile) formData.append('AvatarPicture', user.avatarFile);
             formData.append("Name", user.fullname?? "")
             formData.append("PhoneNumber",user.phone_number ?? "")
-            formData.append("Status", user.status === true ? "1" : "0")
+            formData.append("Status", user.status === 1 ? "1" : "2")
             formData.append("RoleId", user.roleID ?? "")
             formData.append("Address", user.address ?? "")
             formData.append("IdentifierNumber", user.id_num ?? "")
@@ -195,6 +195,18 @@ export const UserRepositories = {
         }
         catch(err) {
             console.log("Error changing password: ", err);
+            throw err;
+        }
+    },
+
+    async delteMultipleUsers(ids: string[]) {
+        try {
+            await api.post("/api/Users/BulkDelete", {
+                Ids: ids
+            });
+        }
+        catch(err) {
+            console.error("Failed to delete multiple users!")
             throw err;
         }
     }

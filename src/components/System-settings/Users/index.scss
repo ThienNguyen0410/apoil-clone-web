@@ -5,6 +5,8 @@
     margin: 0px 79px 20px 20px; 
     border-radius: 18px;
 
+   
+
 }
 
 .right-menu-wrapper {
@@ -14,9 +16,9 @@
     z-index: 100;
 }
 
-table .ant-switch-inner {
-    background-color: #0d733b
-}
+// table .ant-switch-inner {
+//     background-color: #0d733b
+// }
 
 table .ant-checkbox-input {
     align-items: center;
@@ -28,12 +30,15 @@ table .ant-checkbox-input {
   }
 }
 
+.custom-table {
+  padding-top: 25px;
+}
+
 .custom-table .ant-checkbox {
   width: 24px !important;
   height: 24px !important;
   border-radius: 4px;
-  // Checkmark
-  
+  // Checkmark  
 }
 
 
@@ -46,17 +51,13 @@ table .ant-checkbox-input {
 .ant-table-thead .ant-table-selection-column {
   .ant-checkbox-wrapper .ant-checkbox.ant-checkbox-indeterminate::after {
     width: 16px !important;
-    height: 0px !important;
+    height: 2px !important;
     background-color: #0d733b !important;
     border: none !important;
     border-radius: 0 !important;
     inset-inline-start: 50% !important;
     inset-block-start: 50% !important;
+    inset-block-end: unset !important;
     transform: translate(-50%, -50%) !important;
   }
-}
-
-.ant-checkbox-wrapper .ant-checkbox-checked::after {
-    transform: rotate(45deg) scale(.8) translate(-50%, -50%);
-    top: 40%!important;
 }

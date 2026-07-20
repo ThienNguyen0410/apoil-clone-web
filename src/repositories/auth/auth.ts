@@ -1,9 +1,8 @@
-import type { UserPayLoad } from '../../entities/user/entity';
 import type UserEntities from "../../entities/user/entity";
 import api from '../api';
 import {useTranslation} from 'react-i18next';
 export const authRepository = {
-    async login(payload: UserPayLoad): Promise<UserEntities> {
+    async login(payload: UserEntities): Promise<UserEntities> {
         try {
             const response = await api.post('/api/Users/SignIn', {
                 username: payload.username,

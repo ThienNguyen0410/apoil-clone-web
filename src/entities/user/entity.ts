@@ -8,7 +8,7 @@ export default interface UserEntities {
     email: string;
     role?: string;
     roleID?: string;
-    status?: boolean;
+    status?: number;
     address?: string;
     isAuthenticated?: boolean;
     accessToken?: string;
