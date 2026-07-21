@@ -5,13 +5,12 @@ import { useTranslation } from 'react-i18next'
 import {Dropdown} from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-import vnFlag from '../assets/vnFlag.png'
-import enFlag from '../assets/enFlag.png'
-import avatar from '../assets/avt.png'
+import vnFlag from '../../../assets/vnFlag.png'
+import enFlag from '../../../assets/enFlag.png'
 
-import { useAppDispatch, useAppSelector } from '../presenters/hooks'
-import { setLanguage } from '../presenters/slices/localeSlice'
-import './header.scss'
+import { useAppDispatch, useAppSelector } from '../../../presenters/hooks'
+import { setLanguage } from '../../../presenters/slices/localeSlice'
+import './index.scss'
 
 
 type HeaderProps = {

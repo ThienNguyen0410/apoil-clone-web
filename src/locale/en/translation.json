@@ -105,5 +105,6 @@
     "Enter password": "Please enter password",
     "Enter confirm password": "Please enter confirm password",
     "Required field": "is required field",
-    "Choose File": "Choose File"
+    "Choose File": "Choose File",
+    "Content selected": "contents selected"
 }

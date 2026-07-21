@@ -1,5 +1,5 @@
-import  SearchBox from '../../../common/SearchBox'
-import SelectBox from '../../../common/SelectBox'
+import  SearchBox from '../../common/SearchBox'
+import SelectBox from '../../common/SelectBox'
 import './index.scss'
 
 type FlexBarProps = {

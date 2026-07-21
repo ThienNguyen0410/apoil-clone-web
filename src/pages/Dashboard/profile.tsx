@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react'
-import './profile.scss'
-import ProfileNav from '../../components/ProfileNav'
+import './Profile.scss'
+import ProfileNav from '../../components/Customers/ProfileNav'
 import LogoutPopup from '../../components/popups/Customers/logout'
 import LockPopup from '../../components/popups/Customers/lock'
 import avatar from '../../assets/avt.png'

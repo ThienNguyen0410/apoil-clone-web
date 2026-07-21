@@ -1,12 +1,12 @@
 import {useState, useEffect} from 'react'
 import {Switch} from 'antd'
 import {ExclamationCircleOutlined} from '@ant-design/icons'
-import BreadCrums from '../components/BreadCrumbs'
-import FlexBar from '../components/FlexBar'
-import TableView from '../components/Table'
+import BreadCrums from '../BreadCrumbs'
+import FlexBar from '../FlexBar'
+import TableView from '../Table'
 import Footer from '../../common/Footer'
 import Editicon from '../../icons/Editicon'
-import RightMenu from '../components/Right-Menu'
+import RightMenu from '../Right-Menu'
 import {useTranslation} from 'react-i18next'
 import {useAppDispatch, useAppSelector} from '../../../presenters/hooks'
 import {fetchUserData, fetchUsersRoles, fetchUserById, updateUserById, deleteMultipleUsers} from '../../../presenters/slices/userSlice'
@@ -294,7 +294,7 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
           }}
           >
           {selectedRowKeys.length} 
-          <span style={{marginLeft: "5px"}}>nội dung đã được chọn </span>
+          <span style={{marginLeft: "5px"}}>{t("Content selected")}</span>
           </div>
           ) : null}
           {!error && !loading? (

@@ -1,5 +1,5 @@
-import AddIcon from '../../../icons/Addicon'
-import DeleteIcon from '../../../icons/Deleteicon'
+import AddIcon from '../../icons/Addicon'
+import DeleteIcon from '../../icons/Deleteicon'
 import './index.scss'
 
 type RightMenuProps = {

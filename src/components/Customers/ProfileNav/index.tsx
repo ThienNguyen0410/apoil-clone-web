@@ -1,8 +1,8 @@
-import './profileNav.scss'
+import './index.scss'
 import {LogoutOutlined, EditOutlined,LockOutlined } from '@ant-design/icons'
-import Editicon from './icons/Editicon'
-import Lockicon from './icons/Lockicon'
-import Logouticon from './icons/Logouticon'
+import Editicon from '../../icons/Editicon'
+import Lockicon from '../../icons/Lockicon'
+import Logouticon from '../../icons/Logouticon'
 
 interface ProfileNavProps {
   onLogout?: () => void;

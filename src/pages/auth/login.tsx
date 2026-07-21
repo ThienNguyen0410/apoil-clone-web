@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import EyeVisible from '../../components/icons/Eyevisible'
 import EyeInvisible from '../../components/icons/Eyeinvisible'
 import {Checkbox} from 'antd'
-import './login.scss'
+import './Login.scss'
 
 export default function Login() {
     const [username, setUsername] = useState('')

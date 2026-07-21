@@ -1,5 +1,5 @@
-import Dashboard from '../pages/Dashboard/dashboard'
-import Profile from '../pages/Dashboard/profile'
+import Dashboard from '../pages/Dashboard/Dashboard'
+import Profile from '../pages/Dashboard/Profile'
 
 
 export const privateRoutes = [

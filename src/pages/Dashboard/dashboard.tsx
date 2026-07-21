@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next'
 import { Layout, Menu } from 'antd'
 import {
   UserOutlined, ApartmentOutlined, DollarOutlined, SettingOutlined,
-  HomeOutlined, ExclamationCircleOutlined, CodeSandboxOutlined, QrcodeOutlined,
+ ExclamationCircleOutlined, QrcodeOutlined,
 
 } from '@ant-design/icons'
 import MoreOutlined from '../../components/icons/MoreOutlined'
@@ -14,7 +14,7 @@ import  Cubeicon from '../../components/icons/Cubeicon'
 import logo from '../../assets/logo.png'
 import DashboardContent from '../../components/Customers/index'
 import UserPage from '../../components/System-settings/Users/index'
-import './dasboard.scss'
+import './Dasboard.scss'
 const { Sider, Header, Content } = Layout
 
 export default function Dashboard() {

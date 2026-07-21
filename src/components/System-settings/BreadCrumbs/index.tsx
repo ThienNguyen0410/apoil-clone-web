@@ -3,15 +3,15 @@ import {DownOutlined, SettingOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import {Dropdown, Breadcrumb} from 'antd'
 import { useNavigate } from 'react-router-dom'
-import Separator from '../../../icons/Separator'
-import Setting from '../../../icons/Setting'
+import Separator from '../../icons/Separator'
+import Setting from '../../icons/Setting'
 
 
-import vnFlag from '../../../../assets/vnFlag.png'
-import enFlag from '../../../../assets/enFlag.png'
+import vnFlag from '../../../assets/vnFlag.png'
+import enFlag from '../../../assets/enFlag.png'
 
-import { useAppDispatch, useAppSelector } from '../../../../presenters/hooks'
-import { setLanguage } from '../../../../presenters/slices/localeSlice'
+import { useAppDispatch, useAppSelector } from '../../../presenters/hooks'
+import { setLanguage } from '../../../presenters/slices/localeSlice'
 import './index.scss'
 
 
