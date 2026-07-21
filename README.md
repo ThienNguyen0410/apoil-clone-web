@@ -27,55 +27,121 @@ A web-based Content Management System for managing oil change services. Built wi
 
 ```
 src/
-├── assets/              # Static assets (logo, icons)
+├── assets/                      # Static images (logo, avatars, flags)
+│   ├── after.png
+│   ├── avatar.png
+│   ├── avt.png
+│   ├── be.png
+│   ├── be4.png
+│   ├── enFlag.png
 │   ├── logo.png
-│   └── avatar.png
-├── components/          # Reusable UI components
-│   ├── header.tsx              # Top bar with breadcrumb, language switcher, avatar
-│   ├── header.scss
-│   ├── dashboardTable.tsx      # Customer list table with Segmented navigation
-│   ├── dashboardStyle.scss
-│   ├── dropdownbar.tsx         # Language dropdown (deprecated)
-│   └── dropdown.scss
-├── entities/            # TypeScript interfaces
+│   └── vnFlag.png
+│
+├── components/
+│   ├── common/                  # Reusable shared components
+│   │   ├── Footer/              # Pagination footer
+│   │   ├── SearchBox/           # Keyword search input
+│   │   ├── SelectBox/           # Dropdown select
+│   │   └── Table/               # Generic table wrapper
+│   │
+│   ├── Customers/               # Customer dashboard table
+│   │   ├── Header/              # Top bar: breadcrumb, language switcher, avatar
+│   │   ├── ProfileNav/          # Profile navigation panel
+│   │   ├── SavedBtn/            # Saved indicator button
+│   │   ├── index.tsx
+│   │   └── index.scss
+│   │
+│   ├── icons/                   # 19 custom SVG icon components
+│   │   ├── Addicon.tsx
+│   │   ├── BulletPoint.tsx
+│   │   ├── CameraEdit.tsx
+│   │   ├── ChangeIcon.tsx
+│   │   ├── Cubeicon.tsx
+│   │   ├── Deleteicon.tsx
+│   │   ├── Editicon.tsx
+│   │   ├── Export.tsx
+│   │   ├── Eyeinvisible.tsx
+│   │   ├── Eyevisible.tsx
+│   │   ├── Homeicon.tsx
+│   │   ├── Lockicon.tsx
+│   │   ├── Logouticon.tsx
+│   │   ├── MoreOutlined.tsx
+│   │   ├── Searchicon.tsx
+│   │   ├── Separator.tsx
+│   │   ├── Setting.tsx
+│   │   ├── Trashicon.tsx
+│   │   └── Warning.tsx
+│   │
+│   ├── popups/
+│   │   ├── Customers/           # Lock screen & logout popups
+│   │   │   ├── lock.tsx / lock.scss
+│   │   │   └── logout.tsx / logout.scss
+│   │   └── System-settings/
+│   │       └── Users/           # User management popups
+│   │           ├── ChangeStatusPop.tsx / .scss
+│   │           ├── ConfirmDelete.tsx
+│   │           ├── ConfrimDelete.scss
+│   │           └── ProfilePopup.tsx / .scss
+│   │
+│   └── System-settings/         # Admin user management
+│       ├── BreadCrumbs/         # Breadcrumb navigation
+│       ├── FlexBar/             # Search + Role filter bar
+│       ├── Right-Menu/          # Floating action menu
+│       ├── Table/               # Reusable table wrapper
+│       └── Users/               # User listing page
+│           ├── index.tsx
+│           └── index.scss
+│
+├── entities/                    # TypeScript interfaces
 │   ├── customer/entity.ts
-│   ├── user/entity.ts          # User + login payload interfaces
-│   ├── pagination.ts           # Pagination interface
-│   └── error/entity.ts
-├── icons/               # Custom SVG icon components
-│   ├── vi.tsx                  # Vietnam flag icon
-│   └── us.tsx                  # US flag icon
-├── locale/              # i18n configuration
-│   ├── i18n.ts                 # i18next setup
-│   ├── vi/translation.json     # Vietnamese translations
-│   └── en/translation.json     # English translations
+│   ├── error/entity.ts
+│   ├── user/entity.ts
+│   └── pagination.ts
+│
+├── locale/                      # i18n configuration
+│   ├── i18n.ts                  # i18next setup
+│   ├── en/translation.json      # English translations
+│   └── vi/translation.json      # Vietnamese translations
+│
 ├── pages/
-│   ├── auth/
-│   │   ├── login.tsx           # Login page
-│   │   └── login.scss
-│   └── Dashboard/
-│       ├── dashboard.tsx       # Main dashboard layout with sidebar
-│       ├── dasboard.scss
-│       ├── profile.tsx         # Profile page
-│       └── profile.scss
-├── presenters/          # Redux state management
-│   ├── store.ts                # Redux store with persist config
-│   ├── hooks.ts                # Typed hooks (useAppDispatch, useAppSelector)
+│   ├── Auth/
+│   │   ├── Login.tsx            # Login page
+│   │   └── Login.scss
+│   ├── Dashboard/
+│   │   ├── Dashboard.tsx        # Main layout with sidebar
+│   │   ├── Dasboard.scss
+│   │   ├── Profile.tsx          # Profile page
+│   │   └── Profile.scss
+│   └── Layout/
+│       ├── privateLayout.tsx
+│       └── publicLayout.tsx
+│
+├── presenters/                  # Redux state management
+│   ├── store.ts                 # Redux store with persist config
+│   ├── hooks.ts                 # Typed hooks (useAppDispatch, useAppSelector)
 │   └── slices/
-│       ├── authSlice.ts        # Auth state (login, logout, rehydrate validation)
-│       └── customerSlice.ts    # Customer state (fetch list)
-├── repositories/        # API service layer
-│   ├── api.ts                  # Axios instance with JWT interceptors + refresh
-│   ├── auth/auth.ts            # Auth API (login)
-│   └── customer/customer.ts    # Customer API (CRUD)
+│       ├── authSlice.ts         # Auth (login, logout, JWT refresh)
+│       ├── customerSlice.ts     # Customer data
+│       ├── localeSlice.ts       # Language switching
+│       ├── profileSlice.ts      # Profile data
+│       └── userSlice.ts         # User CRUD
+│
+├── repositories/                # API service layer
+│   ├── api.ts                   # Axios instance + JWT interceptors
+│   ├── auth/auth.ts
+│   ├── customer/customer.ts
+│   └── user/user.ts
+│
 ├── routes/
-│   ├── publicRoutes.tsx        # Public route definitions (/login)
-│   └── privateRoutes.tsx       # Private route definitions (/dashboard, /profile)
+│   ├── PrivateRoutes.tsx        # Private route wrapper
+│   └── PublicRoutes.tsx         # Public route wrapper
+│
 ├── styles/
-│   └── color.scss       # SCSS variables (colors, fonts)
-├── App.tsx              # Root component with PersistGate + routing
-├── App.css
-└── main.tsx             # Application entry point (Provider wrapper)
+│   └── color.scss               # SCSS variables (colors, fonts)
+│
+├── App.tsx / App.css            # Root component with PersistGate + routing
+├── index.css
+└── main.tsx                     # Application entry point
 ```
 
 ---
