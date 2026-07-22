@@ -15,7 +15,7 @@ export const customerRepository = {
     }> {
         try {
 
-             const params : Record<string,any> = {
+            const params : Record<string,any> = {
                     Current: current,
                     PageSize: pageSize,
                     SearchKeyword: search,

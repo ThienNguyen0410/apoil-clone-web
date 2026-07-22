@@ -7,13 +7,12 @@ import {
 
 } from '@ant-design/icons'
 import MoreOutlined from '../../components/icons/MoreOutlined'
-
-
 import Homeicon from '../../components/icons/Homeicon'
 import  Cubeicon from '../../components/icons/Cubeicon'
 import logo from '../../assets/logo.png'
 import DashboardContent from '../../components/Customers/index'
 import UserPage from '../../components/System-settings/Users/index'
+import DevicePage from '../../components/Devices/index'
 import './Dasboard.scss'
 const { Sider, Header, Content } = Layout
 
@@ -57,7 +56,7 @@ export default function Dashboard() {
           expandIcon={<MoreOutlined />}
           items={[
             { key: 'dashboard', icon: <Homeicon />, label: t('Dashboard') },
-            { key: 'equipments', icon: <ApartmentOutlined style={{fontSize: "24px"}} />, label: t('Device') },
+            { key: 'devices', icon: <ApartmentOutlined style={{fontSize: "24px"}} />, label: t('Device') },
             { key: 'revenue', icon: <DollarOutlined style={{fontSize: "24px"}} />, label: t('Revenue') },
             { key: 'errors', icon: <ExclamationCircleOutlined style={{fontSize: "24px"}} />, label: t('Errors') },
             { key: 'customers', icon: <UserOutlined style={{fontSize: "24px"}} />, label: t('Customers') },
@@ -144,6 +143,10 @@ export default function Dashboard() {
               />}
               {selectedKey === 'user' && 
               <UserPage collapsed={collapsed}/> 
+              }
+
+              {
+                selectedKey === 'devices' && <DevicePage/>
               }
 
           </div>

@@ -3,7 +3,7 @@ import {Switch} from 'antd'
 import {ExclamationCircleOutlined} from '@ant-design/icons'
 import BreadCrums from '../BreadCrumbs'
 import FlexBar from '../FlexBar'
-import TableView from '../Table'
+import TableView from '../../common/Table'
 import Footer from '../../common/Footer'
 import Editicon from '../../icons/Editicon'
 import RightMenu from '../Right-Menu'
@@ -268,17 +268,17 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
                 options={RolesOptions}
                 />
 
-            <TableView
-            columns={columns}
-            dataSource={dataSource}
-            loading={loading}
-            error={error}
-            footer={null}
-            rowSelection={rowSelection}
-            onSort={() => {
-              
-            }}
-            />
+              <TableView
+              columns={columns}
+              dataSource={dataSource}
+              loading={loading}
+              error={error}
+              footer={null}
+              rowSelection={rowSelection}
+              onSort={() => {
+                
+              }}
+              />
 
 
           {selectedRowKeys.length > 0 ? (
@@ -349,14 +349,12 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
           onChangeStatus={() => {
             
             if(changedStatus) {
-              const newStatus = changedStatus.status === 1? 2 : 1;
+              const newStatus = changedStatus.status === 1 ? 2 : 1;
               dispatch(updateUserById({...changedStatus, status: newStatus})).unwrap().then(() => {
                 dispatch(fetchUserData({current: currentPage, pageSize, searchKeyword: search}))
               })
               setOpenChangeForm(false)
             }
-
-            else console.log("Can not find selected user!")
           }}
           />
         </div>

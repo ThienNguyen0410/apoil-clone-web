@@ -1,0 +1,65 @@
+.device-main-page .device-main-layout{
+    background-color: #fff !important;
+    height: 841px !important;
+    margin: 0px 79px 20px 20px; 
+    border-radius: 18px;
+
+    .custom-table table {
+        width: 1437px !important
+    }
+}
+
+.device-table-section {
+  margin: 20px 24px 0;
+  width: 1437px;
+}
+
+.table-header-center {
+  text-align: center;
+}
+
+.status-done {
+  min-width: 100px;
+  height: 30px;
+  text-align: center;
+  background-color: #e3ffe1;
+  border-radius: 20px;
+  color: #34cd26;
+  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #34cd26;
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.status-overdue {
+  min-width: 100px;
+  height: 30px;
+  text-align: center;
+  background-color: #ffe3e3;
+  border-radius: 20px;
+  color: #cd2626;
+  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #cd2626;
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.action-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #0d733b;
+}
+
+.footer-box {
+  margin-top: -12px;
+}
