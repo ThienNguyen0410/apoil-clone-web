@@ -21,7 +21,7 @@ export default function TableView({columns, dataSource, footer, error, loading, 
             footer={error ? footer : undefined}
             rowSelection={rowSelection}
             pagination={false}
-            tableLayout="fixed"
+            tableLayout='fixed'
             />
         </Spin>
     </div>
