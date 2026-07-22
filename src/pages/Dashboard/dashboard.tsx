@@ -146,7 +146,7 @@ export default function Dashboard() {
               }
 
               {
-                selectedKey === 'devices' && <DevicePage/>
+                selectedKey === 'devices' && <DevicePage collapsed={collapsed}/>
               }
 
           </div>

@@ -4,8 +4,18 @@ export default interface DeviceEntites {
     device_name: string,
     device_group: string,
     installed_address: string,
-    waste_oil_tank: number,
-    gear_oil: number,
-    scooter_oil: number,
+    waste_oil_tank:  {
+        currValue: number,
+        maxValue: number
+    },
+    gear_oil: {
+        currValue: number,
+        maxValue: number
+    },
+    scooter_oil: {
+        currValue: number,
+        maxValue: number
+    },
+
     status: number,
 }

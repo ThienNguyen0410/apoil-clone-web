@@ -275,9 +275,7 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
               error={error}
               footer={null}
               rowSelection={rowSelection}
-              onSort={() => {
-                
-              }}
+              onSort={() => {}}
               />
 
 

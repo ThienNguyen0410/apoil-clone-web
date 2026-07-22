@@ -1,6 +1,6 @@
 import {Pagination} from 'antd'
 import {useTranslation} from 'react-i18next'
-
+import './index.scss'
 type FooterProps = {
     //For entries display
     currentEntries: number,
@@ -23,7 +23,7 @@ export default function Footer({currentEntries,setCurrentEntries,currentPage, pa
 
     }}>
         <div className="entry-display"
-        style={{marginLeft: "25px"}}
+        style={{marginLeft: "40px"}}
         >
             <span>{t("Display")}</span>
             <input
@@ -42,7 +42,7 @@ export default function Footer({currentEntries,setCurrentEntries,currentPage, pa
         <div className="pagination-section" onClick={(e) => e.stopPropagation()}>
              <Pagination
             style={{
-                marginRight: "47px"
+                marginRight: "20px"
             }}
             current={currentPage}
             pageSize={pageSize}

@@ -1,25 +1,33 @@
-.device-main-page .device-main-layout{
+.main-page .main-layout{
     background-color: #fff !important;
     height: 841px !important;
     margin: 0px 79px 20px 20px; 
     border-radius: 18px;
 
-    .custom-table table {
-        width: 1437px !important
-    }
+    
 }
 
 .device-table-section {
   margin: 20px 24px 0;
-  width: 1437px;
+
+  table{
+    margin-top: -45px;
+    margin-left: -50px;
+  }
 }
+
+.device-table-section .custom-table table {
+  width: 100%;
+  margin-left: 0;
+}
+
 
 .table-header-center {
   text-align: center;
 }
 
 .status-done {
-  min-width: 100px;
+  min-width: 125px;
   height: 30px;
   text-align: center;
   background-color: #e3ffe1;
@@ -36,17 +44,17 @@
 }
 
 .status-overdue {
-  min-width: 100px;
+  min-width: 135px;
   height: 30px;
   text-align: center;
-  background-color: #ffe3e3;
+  background-color: #ffe6db;
   border-radius: 20px;
-  color: #cd2626;
+  color: #f44;
   padding: 5px 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #cd2626;
+  border: 1px solid #f44;
   font-size: 12px;
   line-height: 22px;
   font-weight: 600;
@@ -61,5 +69,59 @@
 }
 
 .footer-box {
-  margin-top: -12px;
+  margin-top: -10px;
+  display: flex;
+  justify-content: space-between !important;
+
+  .footer-bar {
+    display: flex;
+    justify-content: space-between !important;
+  }
+  .entry-display {
+    margin-left: 5px !important;
+  }
+}
+
+
+.ant-table-wrapper .ant-table-tbody .ant-table-row.ant-table-row-selected >.ant-table-cell {
+    background: #e2faf0 !important;
+}
+
+.custom-table .ant-table-tbody > tr > td {
+  padding: 15px 8px !important
+}
+
+.main-layout .ant-progress-line .ant-progress-rail {
+  background-color: #0000000f !important;
+}
+
+.main-layout .oil-tank-progress {
+  .ant-progress-line .ant-progress-track{
+    background-color: #f44
+  }
+
+ .rightNumber {
+  color: #f44;
+ }
+}
+
+.main-layout .gear-oil-progress {
+  .ant-progress-line .ant-progress-track{
+    background-color: #0d733b
+  }
+
+ .rightNumber {
+  color: #0d733b;
+ }
+}
+
+
+.main-layout .scooter-oil-progress {
+  .ant-progress-line .ant-progress-track{
+    background-color: #0d733b
+  }
+
+ .rightNumber {
+  color: #0d733b;
+ }
 }

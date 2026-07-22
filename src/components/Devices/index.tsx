@@ -1,16 +1,21 @@
 import {useEffect, useState, type Key} from 'react'
 import {InfoCircleOutlined} from '@ant-design/icons'
+import {Progress} from 'antd'
 import {useTranslation} from 'react-i18next'
 import type {TableRowSelection} from 'antd/es/table/interface'
 import BreadCrumb from './BreadCrumbs'
 import FlexBar from './FlexBar'
 import TableView from '../common/Table'
 import Footer from '../common/Footer'
+import Editicon from '../icons/Editicon'
 import {useAppDispatch, useAppSelector} from '../../presenters/hooks'
 import {fetchDeviceData} from '../../presenters/slices/deviceSlice'
+import RightMenu from '../System-settings/Right-Menu'
+import ProgressBar from '../common/Progress'
 import './index.scss'
+import type DeviceEntites from '../../entities/devices/entity'
 
-export default function DevicePage() {
+export default function DevicePage({collapsed} : {collapsed?: boolean}) {
   const dispatch = useAppDispatch()
   const {t} = useTranslation()
   const {Devices, loading, error, total} = useAppSelector((state) => state.device)
@@ -42,59 +47,92 @@ export default function DevicePage() {
       title: <div className="table-header-center">STT</div>,
       dataIndex: 'stt',
       key: 'stt',
-      width: 80,
+      width: 59,
       align: 'center' as const,
     },
     {
       title: 'Mã thiết bị',
       dataIndex: 'device_code',
       key: 'device_code',
-      width: 180,
     },
     {
       title: 'Tên thiết bị',
       dataIndex: 'device_name',
       key: 'device_name',
-      width: 220,
+      ellipsis: true,
     },
     {
       title: 'Nhóm thiết bị',
       dataIndex: 'device_group',
       key: 'device_group',
-      width: 160,
+      render: (value: string) => (
+        <span style={value !== '' ?{color: "#0d733b", background:"#e2faf0", padding: "8px 8px", margin: "2px 0px"} : {}}>{`${value}`}</span>
+      )
     },
     {
       title: 'Địa chỉ lắp đặt',
       dataIndex: 'installed_address',
       key: 'installed_address',
-      width: 260,
+      ellipsis: true,
     },
     {
       title: 'Thùng nhớt thải (L)',
       dataIndex: 'waste_oil_tank',
       key: 'waste_oil_tank',
-      width: 140,
-      render: (value: number) => `${value ?? 0}`,
+      render: (value: { currValue: number; maxValue: number } | null) => {
+        const v = value?.currValue ?? 0
+        const m = value?.maxValue ?? 1
+        return (
+          <div className="oil-tank-progress">
+            <ProgressBar
+              currValue={v/1000}
+              maxValue={m/1000}
+              percent={Math.round((v / m) * 100)}
+            />
+          </div>
+        )
+      }
     },
     {
       title: 'Nhớt xe số (L)',
       dataIndex: 'gear_oil',
       key: 'gear_oil',
-      width: 140,
-      render: (value: number) => `${value ?? 0}`,
+      render: (value: { currValue: number; maxValue: number } | null) => {
+        const v = value?.currValue ?? 0
+        const m = value?.maxValue ?? 1
+        return (
+          <div className="gear-oil-progress">
+            <ProgressBar
+              currValue={v/1000}
+              maxValue={m/1000}
+              percent={Math.round((v / m) * 100)}
+            />
+          </div>
+        )
+      }
     },
     {
       title: 'Nhớt xe tay ga (L)',
       dataIndex: 'scooter_oil',
       key: 'scooter_oil',
-      width: 160,
-      render: (value: number) => `${value ?? 0}`,
+      render: (value: { currValue: number; maxValue: number } | null) => {
+        const v = value?.currValue ?? 0
+        const m = value?.maxValue ?? 1
+        return (
+          <div className="scooter-oil-progress">
+            <ProgressBar
+              currValue={v/1000}
+              maxValue={m/1000}
+              percent={Math.round((v / m) * 100)}
+            />
+          </div>
+        )
+      }
     },
     {
       title: 'Trạng thái hoạt động',
       dataIndex: 'status',
       key: 'status',
-      width: 170,
       render: (text: string) => (
         <span className={text === 'Đang hoạt động' ? 'status-done' : 'status-overdue'}>
           <div className="status-result">
@@ -107,12 +145,18 @@ export default function DevicePage() {
     {
       title: <div className="table-header-center">Hành động</div>,
       key: 'action',
-      width: 120,
       align: 'center' as const,
       render: () => (
-        <div className="action-icon" onClick={(e) => e.stopPropagation()}>
-          <InfoCircleOutlined />
+        <div style={{display: 'flex', gap: 12, color: '#0d733b', justifyContent: 'center', alignItems: 'center'}}>
+          <div className="action-icon" onClick={(e) => e.stopPropagation()}>
+            <InfoCircleOutlined style={{fontSize: 24, color: '#0d733b', cursor: "pointer", marginBottom: "4px"}}/>
+          </div>
+
+          <div className="edit-icon" style={{cursor: "pointer"}}>
+            <Editicon/>
+          </div>
         </div>
+       
       ),
     },
   ]
@@ -129,14 +173,14 @@ export default function DevicePage() {
     onChange: (selectedRowKeys) => {
       setSelectedRowKeys(selectedRowKeys)
     },
-    columnWidth: 60,
+    columnWidth: 65,
   }
 
   return (
-    <div className="device-main-page">
+    <div className={`main-page${collapsed? ' collapsed' : ''}`}>
       <BreadCrumb />
 
-      <div className="device-main-layout">
+      <div className="main-layout">
         <FlexBar
           searchTitle={t('Key Word')}
           placeholder={t('Key Word')}
@@ -154,7 +198,6 @@ export default function DevicePage() {
           group_select_title={t('Device Group')}
         />
 
-        <div className="device-table-section">
           <TableView
             columns={columns}
             dataSource={dataSource}
@@ -166,7 +209,6 @@ export default function DevicePage() {
           />
 
           {!error && !loading ? (
-            <div className="footer-box">
               <Footer
                 currentEntries={currentEntries}
                 setCurrentEntries={setCurrentEntries}
@@ -176,9 +218,22 @@ export default function DevicePage() {
                 onPageChange={() => {}}
                 onPageSizeChange={() => {}}
               />
-            </div>
           ) : null}
-        </div>
+
+
+              <div className="right-menu-wrapper">
+                    <RightMenu 
+                      onAddClick={() => {
+                        localStorage.setItem("ProfilePopupState", JSON.stringify(true))
+                        localStorage.setItem("ProfilePopupViewMode", JSON.stringify(false))
+                      }}
+                      onDelete={() => {
+                       
+                      }}
+                      hasDeleteRow={selectedRowKeys.length > 0}
+                      />
+              </div>
+          
       </div>
     </div>
   )
