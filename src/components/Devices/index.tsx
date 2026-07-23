@@ -1,6 +1,5 @@
 import {useEffect, useState, type Key} from 'react'
 import {InfoCircleOutlined} from '@ant-design/icons'
-import {Progress} from 'antd'
 import {useTranslation} from 'react-i18next'
 import type {TableRowSelection} from 'antd/es/table/interface'
 import BreadCrumb from './BreadCrumbs'
@@ -9,38 +8,51 @@ import TableView from '../common/Table'
 import Footer from '../common/Footer'
 import Editicon from '../icons/Editicon'
 import {useAppDispatch, useAppSelector} from '../../presenters/hooks'
-import {fetchDeviceData} from '../../presenters/slices/deviceSlice'
+import {fetchDeviceData, fetchDeviceGroupData} from '../../presenters/slices/deviceSlice'
 import RightMenu from '../System-settings/Right-Menu'
 import ProgressBar from '../common/Progress'
 import './index.scss'
-import type DeviceEntites from '../../entities/devices/entity'
 
 export default function DevicePage({collapsed} : {collapsed?: boolean}) {
   const dispatch = useAppDispatch()
   const {t} = useTranslation()
-  const {Devices, loading, error, total} = useAppSelector((state) => state.device)
+  const {Devices,DeviceGroupMap, loading, error, total} = useAppSelector((state) => state.device)
   const [search, setSearch] = useState('')
   const [selectedStatus, setSelectedStatus] = useState('')
   const [selectedGroup, setSelectedGroup] = useState('')
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([])
-  const [currentEntries, setCurrentEntries] = useState(7)
-  const [currentPage] = useState(1)
-  const pageSize = 7
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPagesize] = useState(7)
+  const [filter, setFilter] = useState< Record<string, string> | undefined> (undefined)
+  const [sortField, setSortField] = useState<string>()
+  const[sortOrder, setSortOrder] = useState<'asc' | 'desc'>()
 
   const statusOptions = [
     {value: '', label: t('All')},
-    {value: '1', label: t('Active')},
-    {value: '2', label: t('Inactive')},
-  ]
-
-  const groupOptions = [
-    {value: '', label: t('All')},
-    {value: 'APSP', label: 'APSP'},
+    {value: 1, label: t('Active')},
+    {value: 2, label: t('Inactive')},
   ]
 
   useEffect(() => {
-    dispatch(fetchDeviceData({current: 1, pageSize: 7}))
-  }, [dispatch])
+    const timer = setTimeout(() => {
+      const sortQuery = sortField && sortOrder ?`${sortField} ${sortOrder}` : undefined
+      dispatch(fetchDeviceData({current: currentPage, pageSize: pageSize, searchKeyword: search, filter: filter, sortQuery: sortQuery}))
+    }, 500)
+
+    return () => clearInterval(timer)
+  }, [dispatch, currentPage, pageSize, search, filter, sortField, sortOrder])
+
+  useEffect(() => {
+    dispatch(fetchDeviceGroupData({current: currentPage, pageSize: pageSize}))
+  },[dispatch])
+
+  const DeviceGroupOptions = [
+    {value: '', label: 'Tất cả'},
+    ...DeviceGroupMap.map((item: any) => ({
+      value: item.group_id,
+      label: item.group_name
+    }))
+  ]
 
   const columns = [
     {
@@ -54,12 +66,17 @@ export default function DevicePage({collapsed} : {collapsed?: boolean}) {
       title: 'Mã thiết bị',
       dataIndex: 'device_code',
       key: 'device_code',
+      ellipsis: true,
+      sorter: true,
+      sortOrder: sortField === 'device_code' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined
     },
     {
       title: 'Tên thiết bị',
       dataIndex: 'device_name',
       key: 'device_name',
       ellipsis: true,
+      sorter: true,
+      sortOrder: sortField === 'device_name' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined
     },
     {
       title: 'Nhóm thiết bị',
@@ -67,13 +84,17 @@ export default function DevicePage({collapsed} : {collapsed?: boolean}) {
       key: 'device_group',
       render: (value: string) => (
         <span style={value !== '' ?{color: "#0d733b", background:"#e2faf0", padding: "8px 8px", margin: "2px 0px"} : {}}>{`${value}`}</span>
-      )
+      ),
+      sorter: true,
+      sortOrder: sortField === 'device_group' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined
     },
     {
       title: 'Địa chỉ lắp đặt',
       dataIndex: 'installed_address',
       key: 'installed_address',
       ellipsis: true,
+      sorter: true,
+      sortOrder: sortField === 'installed_address' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined
     },
     {
       title: 'Thùng nhớt thải (L)',
@@ -91,7 +112,9 @@ export default function DevicePage({collapsed} : {collapsed?: boolean}) {
             />
           </div>
         )
-      }
+      },
+      sorter: true,
+      sortOrder: sortField === 'waste_oil_tank' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined
     },
     {
       title: 'Nhớt xe số (L)',
@@ -103,13 +126,15 @@ export default function DevicePage({collapsed} : {collapsed?: boolean}) {
         return (
           <div className="gear-oil-progress">
             <ProgressBar
-              currValue={v/1000}
+              currValue={Number((v/1000).toFixed(2))}
               maxValue={m/1000}
               percent={Math.round((v / m) * 100)}
             />
           </div>
         )
-      }
+      },
+      sorter: true,
+      sortOrder: sortField === 'gear_oil' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined
     },
     {
       title: 'Nhớt xe tay ga (L)',
@@ -121,13 +146,15 @@ export default function DevicePage({collapsed} : {collapsed?: boolean}) {
         return (
           <div className="scooter-oil-progress">
             <ProgressBar
-              currValue={v/1000}
+              currValue={Number((v/1000).toFixed(2))}
               maxValue={m/1000}
               percent={Math.round((v / m) * 100)}
             />
           </div>
         )
-      }
+      },
+      sorter: true,
+      sortOrder: sortField === 'scooter_oil' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined
     },
     {
       title: 'Trạng thái hoạt động',
@@ -176,6 +203,53 @@ export default function DevicePage({collapsed} : {collapsed?: boolean}) {
     columnWidth: 65,
   }
 
+
+  //For footer
+  const onPageSizechange = (pagesize: number) => {
+    setPagesize(pagesize)
+  }
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page)
+  }
+
+  //For filter
+  const onChangeStatus = (value: string) => {
+    const status = parseInt(value)
+    setSelectedStatus(value)
+
+    setFilter(prev => {
+      const next = {...(prev ?? {})}
+      if (status === 0) delete next['operationStatus']
+      else next['operationStatus']  = `$eq:${value}`
+      return Object.keys(next).length > 0 ? next : undefined
+    })
+
+  }
+
+  const onChangeGroup = (value: string) => {
+    setSelectedGroup(value)
+    setFilter(prev => {
+      const next = {...(prev ?? {})}
+      if (value === '') delete next['deviceGroups.id']
+      else next['deviceGroups.id']  = `$eq:${value}`
+      return Object.keys(next).length > 0 ? next : undefined
+    })
+  }
+
+  //For sorting 
+  const handleSort = (sorter: {field?:string, order?: 'ascend' | 'descend'}) => {
+    if (sorter.field && sorter.order) {
+      setSortField(sorter.field)
+      setSortOrder(sorter.order === 'ascend' ? 'asc' : 'desc')
+    }
+
+    else {
+      setSortField(undefined)
+      setSortOrder(undefined)
+    }
+  }
+
   return (
     <div className={`main-page${collapsed? ' collapsed' : ''}`}>
       <BreadCrumb />
@@ -188,13 +262,13 @@ export default function DevicePage({collapsed} : {collapsed?: boolean}) {
           setSearch={setSearch}
 
           selectedStatus={selectedStatus}
-          onChangeStatus={setSelectedStatus}
+          onChangeStatus={(value: string) => onChangeStatus(value)}
           statusOptions={statusOptions}
           status_select_title={t('Status')}
 
           selectedGroup={selectedGroup}
-          onChangeGroup={setSelectedGroup}
-          groupOptions={groupOptions}
+          onChangeGroup={(value: string) => onChangeGroup(value)}
+          groupOptions={DeviceGroupOptions}
           group_select_title={t('Device Group')}
         />
 
@@ -205,18 +279,36 @@ export default function DevicePage({collapsed} : {collapsed?: boolean}) {
             error={error}
             footer={null}
             rowSelection={rowSelection}
-            onSort={() => {}}
+            onSort={handleSort}
           />
+
+
+          {selectedRowKeys.length > 0 ? (
+            <div
+            style={{
+            //background: "red",
+            color: "#0d733b",
+            marginTop: "-30px",
+            marginBottom: "50px",
+            marginLeft: 22,
+            fontSize: 14,
+            lineHeight: "22px" 
+            }}
+            >
+            {selectedRowKeys.length} 
+            <span style={{marginLeft: "5px"}}>{t("Content selected")}</span>
+            </div>
+            ) : null}
 
           {!error && !loading ? (
               <Footer
-                currentEntries={currentEntries}
-                setCurrentEntries={setCurrentEntries}
+                currentEntries={pageSize}
+                setCurrentEntries={onPageSizechange}
                 currentPage={currentPage}
                 pageSize={pageSize}
                 total={total}
-                onPageChange={() => {}}
-                onPageSizeChange={() => {}}
+                onPageChange={onPageChange}
+                onPageSizeChange={onPageSizechange}
               />
           ) : null}
 

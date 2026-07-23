@@ -31,6 +31,7 @@ export default function Footer({currentEntries,setCurrentEntries,currentPage, pa
             value={currentEntries}
             onChange={(e) => {
               const val = parseInt(e.target.value) || 1
+        
               setCurrentEntries(val)
             }}
             onClick={(e) => e.stopPropagation()}
@@ -40,7 +41,7 @@ export default function Footer({currentEntries,setCurrentEntries,currentPage, pa
 
 
         <div className="pagination-section" onClick={(e) => e.stopPropagation()}>
-             <Pagination
+            <Pagination
             style={{
                 marginRight: "20px"
             }}

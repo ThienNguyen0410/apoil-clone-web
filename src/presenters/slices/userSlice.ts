@@ -22,8 +22,8 @@ const initialState: UserState = {
 
 export const fetchUserData = createAsyncThunk(
     "user/fetchUserData",
-    async ({current, pageSize, searchKeyword, filter}: {current: number, pageSize: number, searchKeyword?: string, filter?: Record<string, string>}) => {
-        return await UserRepositories.getUsersData(current, pageSize, searchKeyword, filter);
+    async ({current, pageSize, searchKeyword, filter, sortQuery}: {current: number, pageSize: number, searchKeyword?: string, filter?: Record<string, string>, sortQuery?: string}) => {
+        return await UserRepositories.getUsersData(current, pageSize, searchKeyword, filter, sortQuery);
     }
 )
 

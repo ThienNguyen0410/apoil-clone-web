@@ -17,4 +17,6 @@ export const privateRoutes = [
         path: '/profile',
         element: <Profile />
     }
+
+    
 ]

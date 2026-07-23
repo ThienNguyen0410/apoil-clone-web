@@ -26,6 +26,8 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(7)
+  const [sortField, setSortField] = useState<string>()
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>()
   const [openProfile, setOpenProfile] = useState(false)
   const [viewMode, setViewMode] = useState(false)
   const [addMode, setAddMode] = useState(false)
@@ -54,24 +56,25 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
   useEffect(() => {
         const timer = setTimeout(() => {
         const RoleStatus = localStorage.getItem("SelectedRole")
+        const sortQuery = sortField && sortOrder ? `${sortField} ${sortOrder}` : undefined
       
         const filter: Record<string, any> ={}
-        if (search === '' && !RoleStatus) dispatch(fetchUserData({current: currentPage, pageSize: pageSize}))
+        if (search === '' && !RoleStatus) dispatch(fetchUserData({current: currentPage, pageSize: pageSize, sortQuery}))
         else if (search && RoleStatus) {
           filter.roleId = `$eq:${RoleStatus}`
           setSelectedstatus(RoleStatus)
-          dispatch(fetchUserData({current: currentPage, pageSize: pageSize, searchKeyword: search, filter: filter}))
+          dispatch(fetchUserData({current: currentPage, pageSize: pageSize, searchKeyword: search, filter, sortQuery}))
         }
-        else if (search) dispatch(fetchUserData({current: currentPage, pageSize: pageSize ,searchKeyword: search}))
+        else if (search) dispatch(fetchUserData({current: currentPage, pageSize: pageSize ,searchKeyword: search, sortQuery}))
         
         else  {
           filter.roleId = `$eq:${RoleStatus}`;
           setSelectedstatus(RoleStatus ?? '')
-          dispatch(fetchUserData({current: currentPage, pageSize: pageSize, filter: filter}))
+          dispatch(fetchUserData({current: currentPage, pageSize: pageSize, filter, sortQuery}))
         }
     }, 500);
     return () => clearTimeout(timer)
-  },[dispatch, search, currentPage, pageSize])
+  },[dispatch, search, currentPage, pageSize, sortField, sortOrder])
 
   useEffect(() => {
     dispatch(fetchUsersRoles(1))
@@ -120,28 +123,32 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
       dataIndex: 'username',
       key: 'username',
       width: 187,
-      sorter: (a: any, b: any) => sortFunc("username", "asc")
+      sorter: true,
+      sortOrder: sortField === 'username' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined,
     },
     {
       title: t('Full Name'),
       dataIndex: 'fullname',
       key: 'fullname',
       width: 187,
-      sorter: true
+      sorter: true,
+      sortOrder: sortField === 'fullname' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined,
     },
     {
       title: t('Role'),
       dataIndex: 'role',
       key: 'role',
       width: 187,
-      sorter: true
+      sorter: true,
+      sortOrder: sortField === 'role' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined,
     },
     {
       title: t('Phone Number'),
       dataIndex: 'phone_number',
       key: 'phone_number',
       width: 187,
-      sorter: true
+      sorter: true,
+      sortOrder: sortField === 'phone_number' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined,
     },
     {
       title: t('Email'),
@@ -150,6 +157,7 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
       width: 187,
       ellipsis: true,
       sorter: true,
+      sortOrder: sortField === 'email' ? (sortOrder === 'asc' ? 'ascend' : 'descend') : undefined,
     },
     {
       title: t('Status'),
@@ -246,8 +254,15 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
     setOpenDeleteForm(false)
   }
 
-  const sortFunc = (field: string, order: string) => {
-
+  const handleSort = (sorter: { field?: string; order?: 'ascend' | 'descend' }) => {
+    if (sorter.field && sorter.order) {
+      setSortField(sorter.field)
+      setSortOrder(sorter.order === 'ascend' ? 'asc' : 'desc')
+    } else {
+      setSortField(undefined)
+      setSortOrder(undefined)
+    }
+    setCurrentPage(1)
   }
 
   return (
@@ -275,7 +290,7 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
               error={error}
               footer={null}
               rowSelection={rowSelection}
-              onSort={() => {}}
+              onSort={handleSort}
               />
 
 
@@ -340,6 +355,9 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
           openForm={openDeleteForm}
           setOpenForm={setOpenDeleteForm}
           onDeleteUser={onDeleteUsers}
+          first_text='Confirm account deletion?'
+          second_text='This account information data will be deleted.'
+          accept_btn_name='Confirm'
           />
           <ChangeStatusPop
           openForm={openChangeForm}

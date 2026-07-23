@@ -6,9 +6,12 @@ type ConfirmDeleteProps = {
   openForm: boolean
   setOpenForm: (v: boolean) => void
   onDeleteUser: () => void
+  first_text: string
+  second_text: string
+  accept_btn_name: string
 }
 
-export default function ConfirmDelete({ openForm, setOpenForm, onDeleteUser}: ConfirmDeleteProps) {
+export default function ConfirmDelete({ openForm, setOpenForm, onDeleteUser, first_text, second_text, accept_btn_name}: ConfirmDeleteProps) {
   return (
     <Modal
       width={502}
@@ -31,8 +34,8 @@ export default function ConfirmDelete({ openForm, setOpenForm, onDeleteUser}: Co
         </div>
 
         <div className="confirm-delete-text">
-          <h1>Confirm account deletion?</h1>
-          <p>This account information data will be deleted.</p>
+          <h1>{first_text}</h1>
+          <p>{second_text}</p>
         </div>
 
         <div className="confirm-delete-actions">
@@ -42,7 +45,7 @@ export default function ConfirmDelete({ openForm, setOpenForm, onDeleteUser}: Co
           <button type="button" className="confirm-btn"
           onClick={onDeleteUser}
           >
-            Confirm
+            {accept_btn_name}
           </button>
         </div>
       </div>

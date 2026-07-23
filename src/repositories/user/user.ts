@@ -22,7 +22,7 @@ export const UserRepositories = {
         }
     },
 
-    async getUsersData(current=1, pageSize=7, search?: string, filter?: Record<string, string>): Promise<{ users: UserEntities[], total: number }> {
+    async getUsersData(current=1, pageSize=7, search?: string, filter?: Record<string, string>, sortQuery?: string): Promise<{ users: UserEntities[], total: number }> {
         try {
             const params: Record<string, any> = {
                 current: current, 
@@ -35,6 +35,8 @@ export const UserRepositories = {
                     params[`filter.${key}`] = value
                 }
             }
+
+            if (sortQuery) params.sortQuery = sortQuery
 
             const res = await api.get("api/Users", {
                 params: params

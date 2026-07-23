@@ -19,3 +19,8 @@ export default interface DeviceEntites {
 
     status: number,
 }
+
+export default interface DeviceGroupsEntities {
+    groud_id: string,
+    group_name: string,
+}
