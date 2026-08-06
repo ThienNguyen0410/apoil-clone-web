@@ -1,0 +1,109 @@
+
+.main-page {
+    height: 90vh;
+}
+
+.flex-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .select-menu {
+        margin-right: 36px !important;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+}
+
+.processed-status,
+.unprocessed-status {
+    border-radius: 2rem;
+    padding: 0 0.5rem;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    font-size: 12px !important;
+    font-weight: 600;
+    font-family: Inter, sans-serif;
+    line-height: 18.8571px;
+
+}
+
+.processed-status {
+    background-color: rgb(227, 255, 225);
+    border: 1px solid rgb(52, 205, 38);
+    color: rgb(52, 205, 38);
+    span {
+        font-size: 14px;
+        font-weight: 800
+    }
+}
+
+.unprocessed-status {
+    background-color: rgb(255, 245, 225);
+    border: 1px solid rgb(254, 183, 0);
+    color: rgb(254, 183, 0);
+
+      span {
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 800
+    }
+    margin-left: -10px !important;
+
+}
+
+.main-layout {
+    position: relative;
+}
+
+.right-menu-delete {
+    position: fixed;
+    color: red;
+    background-color: #fff !important;
+    width: 80px;
+    height: 64px;
+    top: 94px;
+    border-radius: 8px;
+    right: -10px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    display: flex;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+    svg {
+        width: 22px;
+        height: 22px;
+        
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+    
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+    }
+
+}
+
+// .custom-table .ant-table-thead > tr > th {
+//     height: 64px !important;
+// }
+
+// .custom-table .ant-table-tbody > tr > td {
+//     height: 51px !important;
+//     padding: 10px 8px !important;
+// }
+
+// .custom-table table {
+//     border-spacing: 0px 10px !important;
+//     margin-top: -10px !important;
+// }

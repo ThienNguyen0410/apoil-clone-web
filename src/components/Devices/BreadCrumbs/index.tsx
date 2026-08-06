@@ -1,9 +1,9 @@
-import {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {DownOutlined, ApartmentOutlined} from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import {Dropdown, Breadcrumb} from 'antd'
 import { useNavigate } from 'react-router-dom'
-
+import SeparatorIcon from '../../icons/Separator'
 
 
 import vnFlag from '../../../assets/vnFlag.png'
@@ -13,7 +13,13 @@ import { useAppDispatch, useAppSelector } from '../../../presenters/hooks'
 import { setLanguage } from '../../../presenters/slices/localeSlice'
 import './index.scss'
 
-export default function Header() {
+type BreadCrumbProps = {
+  hasBreadCrumbTabs: boolean,
+  isEdit?: boolean,
+  tabs: any
+}
+
+export default function BreadCrumb({hasBreadCrumbTabs, isEdit, tabs} : BreadCrumbProps)  {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const {language} = useAppSelector((state) => state.locale)
@@ -55,8 +61,40 @@ export default function Header() {
   return (
     <div className="breadcrumb-box"> 
       <div className="breadcrumb-info">
-          <ApartmentOutlined/>
-          {t("Device")}
+          {!hasBreadCrumbTabs ? (
+            <>
+            <ApartmentOutlined/>
+             {t("Device")}
+            </>
+
+          ) : (
+            <Breadcrumb
+            className="breadcrumb-tabs"
+            separator= <SeparatorIcon/>
+       
+            items={[
+              {
+                title: 
+                <div className="bnreadcrumb-tabs" style={{
+                  display: "flex",
+                  gap: "10px",
+                  color: "#333",
+                  fontSize: "20px"
+                }}>
+                  <ApartmentOutlined/>
+                  {t("Device")}
+                </div>
+              },
+
+              {
+                title: 
+                <span>
+                  {isEdit ? t('Device > Update Device').split(' > ').pop() : t('Device > Add Device').split(' > ').pop()}
+                </span>
+              }
+            ]}
+            />
+          )}
       </div>
 
       <div className='icon-intro-box' onClick={(e) => e.stopPropagation()}>

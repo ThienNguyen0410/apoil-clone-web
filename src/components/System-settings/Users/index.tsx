@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import {Switch} from 'antd'
 import {ExclamationCircleOutlined} from '@ant-design/icons'
+import {useOutletContext} from 'react-router-dom'
 import BreadCrums from '../BreadCrumbs'
 import FlexBar from '../FlexBar'
 import TableView from '../../common/Table'
@@ -13,12 +14,14 @@ import {fetchUserData, fetchUsersRoles, fetchUserById, updateUserById, deleteMul
 import ProfilePopup from '../../popups/System-settings/Users/ProfilePopup'
 import ConfirmDelete from '../../popups/System-settings/Users/ConfirmDelete'
 
-
 import './index.scss'
 import type UserEntities from '../../../entities/user/entity'
 import ChangeStatusPop from '../../popups/System-settings/Users/ChangeStatusPop'
 
-export default function UserPage({ collapsed }: { collapsed?: boolean }) {
+type DashboardContext = { collapsed: boolean }
+
+export default function UserPage() {
+  const { collapsed } = useOutletContext<DashboardContext>()
   const dispatch = useAppDispatch()
   const {Users, RolesMap, selectedUser, loading, error, total} = useAppSelector((state) => state.user)
   const [search, setSearch] = useState('')
@@ -34,20 +37,8 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
   const [openDeleteForm, setOpenDeleteForm] = useState(false)
   const [openChangeForm , setOpenChangeForm] = useState(false)
   const [changedStatus, setChangeStatus] = useState<UserEntities | null >()
-  
   const {t} = useTranslation()
-  useEffect(() => {
-    const ProfilePopupState = localStorage.getItem('ProfilePopupState') === 'true';
-    const ProfilePopupViewMode = localStorage.getItem('ProfilePopupViewMode') === 'true';
-    setOpenProfile(ProfilePopupState)
-    setViewMode(ProfilePopupViewMode)
-    setAddMode(false)
 
-    const savedId = localStorage.getItem('UserInfoID')
-    if (ProfilePopupState && savedId) {
-      dispatch(fetchUserById(savedId))
-    }
-  },[])
 
   useEffect(() => {
     setCurrentPage(1)
@@ -203,9 +194,6 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
             setViewMode(true)
             setAddMode(false)
             setOpenProfile(true)
-            localStorage.setItem("ProfilePopupState", JSON.stringify(true))
-            localStorage.setItem("ProfilePopupViewMode", JSON.stringify(true))
-            localStorage.setItem("UserInfoID", record.id ?? "")
             dispatch(fetchUserById(record.id)) 
           }}
           />
@@ -301,7 +289,7 @@ export default function UserPage({ collapsed }: { collapsed?: boolean }) {
           color: "#0d733b",
           marginTop: "-30px",
           marginBottom: "50px",
-          marginLeft: 22,
+          marginLeft: 38,
           fontSize: 14,
           lineHeight: "22px" 
           }}

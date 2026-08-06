@@ -7,6 +7,48 @@
         margin-left: -24px;
         transition: width 0.2s ease, margin-left 0.2s ease;
     }
+
+    .ant-table {
+        scrollbar-color: #0d733b transparent;
+    }
+
+    &.table-scroll {
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+
+        table {
+            margin-left: 0;
+            min-width: 2042px !important;
+        }
+
+        .ant-table-wrapper,
+        .ant-table,
+        .ant-table-container {
+            max-width: 100%;
+        }
+    }
+
+    .ant-table-content,
+    .ant-table-body {
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #0d733b;
+            border-radius: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: #0d733b;
+        }
+    }
 }
 
 .main-page.collapsed .custom-table table {
@@ -23,17 +65,24 @@
     line-height: 22px;
     padding: 10px 8px;
     border: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &::before{
         display: none !important;
     }
 }  
 
-.custom-table .ant-table-tbody > tr > td {
+.custom-table .ant-table-tbody > tr:not(.ant-table-measure-row) > td {
     background: #f6f6f680 !important;
     font-family: Inter, sans-serif;
     font-weight: 400;
     padding: 10px 8px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: keep-all;
 }
 
 .custom-table .ant-table-thead > tr > th:first-child {
@@ -43,11 +92,18 @@
     border-radius: 0 8px 0 0;
 }
 
-.custom-table .ant-table-tbody > tr > td:first-child {
+.custom-table .ant-table-tbody > tr:not(.ant-table-measure-row) > td:first-child {
     border-radius: 8px 0 0 8px;
 }
-.custom-table .ant-table-tbody > tr > td:last-child {
+.custom-table .ant-table-tbody > tr:not(.ant-table-measure-row) > td:last-child {
     border-radius: 0 8px 8px 0;
+}
+
+.custom-table .ant-table-tbody > tr.ant-table-measure-row > td {
+    padding: 0 !important;
+    line-height: 0;
+    height: 0;
+    border: none;
 }
 
 .ant-table-thead > tr > th.ant-table-column-has-sorters  {

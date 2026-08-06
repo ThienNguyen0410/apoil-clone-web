@@ -142,7 +142,7 @@ export const UserRepositories = {
         try {
             const id = user.id
             const formData = new FormData()
-            formData.append("Email", user.email)
+            formData.append("Email", user.email ?? "")
             if (user.avatarFile) formData.append('AvatarPicture', user.avatarFile);
             formData.append("Name", user.fullname ?? "");
             formData.append("PhoneNumber", user.phone_number ?? "")
@@ -167,7 +167,7 @@ export const UserRepositories = {
             const formData = new FormData()
             formData.append("Username", user.username?? "")
             formData.append("Password", user.password ?? "")
-            formData.append("Email", user.email)
+            formData.append("Email", user.email ?? "")
             if (user.avatarFile) formData.append('AvatarPicture', user.avatarFile);
             formData.append("Name", user.fullname?? "")
             formData.append("PhoneNumber",user.phone_number ?? "")
@@ -179,9 +179,8 @@ export const UserRepositories = {
             await api.post("/api/Users", formData, {
                 headers: {'Content-Type': 'multipart/form-data'}
             })
-            console.log("Add user successfully!!!!!!!!!!!")
         }
-
+        
         catch(err) {
             console.error("Failed to add user")
             throw err

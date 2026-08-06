@@ -1,5 +1,5 @@
 import {useState, useEffect, useRef} from 'react'
-import './Profile.scss'
+import './index.scss'
 import ProfileNav from '../../components/Customers/ProfileNav'
 import LogoutPopup from '../../components/popups/Customers/logout'
 import LockPopup from '../../components/popups/Customers/lock'
@@ -178,7 +178,7 @@ export default function profile() {
             
           </div>
         ) 
-          : (<button className="back-btn" onClick={() => navigate("/dashboard")}>{t("Back")}</button>)
+          : (<button className="back-btn" onClick={() => navigate(-1)}>{t("Back")}</button>)
           }
         </div>
       </div>

@@ -1,0 +1,40 @@
+.card {
+    width: 310px;
+    height: 92px;
+    background-image: linear-gradient(135deg, rgb(0, 204, 133), rgb(88, 236, 255));
+    border-radius: 12px;
+    justify-content: center;
+    padding: 14px 18px;
+    position: relative;
+
+    img {
+        position: absolute;
+        width: 101px;
+        height: 92px;
+        right: 0px;
+        bottom: 0px;
+    }
+}
+
+.card-content {
+    font-family: Inter, sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+
+    label {
+        font-size: 14px;
+        
+    }
+
+    span {
+        display: flex;
+        gap: 2px;
+        font-size: 36px;
+
+        p{
+            text-decoration: underline
+        }
+    }
+}

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import {useState} from 'react'
 import {login} from '../../presenters/slices/authSlice'
-import type { UserPayLoad } from '../../entities/user/entity'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
 import logo from '../../assets/logo.png'
@@ -10,7 +9,8 @@ import { useTranslation } from 'react-i18next'
 import EyeVisible from '../../components/icons/Eyevisible'
 import EyeInvisible from '../../components/icons/Eyeinvisible'
 import {Checkbox} from 'antd'
-import './Login.scss'
+import './index.scss'
+import type UserEntities from '../../entities/user/entity'
 
 export default function Login() {
     const [username, setUsername] = useState('')
@@ -28,7 +28,7 @@ export default function Login() {
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (isAuthenticated && token) {
-            navigate('/dashboard', { replace: true })
+            navigate('/')
         }
     }, [isAuthenticated, navigate])
 
@@ -49,7 +49,6 @@ export default function Login() {
     },[error])
 
     useEffect(() => {
-
         setFilledLogin(false)
     },[])
 
@@ -61,12 +60,11 @@ export default function Login() {
             return;
         }
 
-        const payload: UserPayLoad = {
+        const payload: UserEntities = {
             username,
             password
         }
         dispatch(login(payload))
-
     }
 
   return (

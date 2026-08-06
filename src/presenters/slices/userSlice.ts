@@ -100,23 +100,20 @@ const userSlice = createSlice({
         })
 
         builder.addCase(fetchUserById.pending, (state) => {
-            state.loading = true;
             state.error = null;
         })
 
         builder.addCase(fetchUserById.fulfilled, (state, action) => {
-            state.loading = false;
             state.selectedUser = action.payload;
             state.error = null
         })
 
         builder.addCase(fetchUserById.rejected,(state, action) => {
-            state.loading = false;
             state.error = action.error.message || 'Failed to fetch users by id'
         })
 
         builder.addCase(updateUserById.pending, (state) => {
-            state.loading = false;
+            state.loading = true;
             state.error = null
         })
 

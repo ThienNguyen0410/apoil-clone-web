@@ -5,6 +5,9 @@ import localeReducer from './slices/localeSlice';
 import profileReducer from './slices/profileSlice';
 import userReducer from './slices/userSlice';
 import deviceReducer from './slices/deviceSlice'
+import errorReducer from './slices/errorSlice'
+import prodcutReducer from './slices/productSlice'
+import paymentReducer from './slices/paymentSlice'
 import {persistStore, persistReducer} from 'redux-persist'
 import {FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from 'redux-persist'
 
@@ -30,7 +33,10 @@ const rootReducer = combineReducers({
     locale: localeReducer,
     profile: profileReducer,
     user: userReducer,
-    device: deviceReducer
+    device: deviceReducer,
+    error: errorReducer,
+    product: prodcutReducer,
+    payment: paymentReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

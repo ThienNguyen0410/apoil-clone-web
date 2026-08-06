@@ -1,25 +1,27 @@
 import { useEffect, useState } from 'react'
-import { Table, Segmented, Select, Pagination } from 'antd'
+import { Table, Select, Pagination, Grid } from 'antd'
 import { InfoCircleOutlined} from '@ant-design/icons'
+import { useOutletContext } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../presenters/hooks'
 import { fetchCustomers} from '../../presenters/slices/customerSlice'
-import BulletPoint from '../icons/BulletPoint'
 import Searchicon from '../icons/Searchicon'
 import SavedBtn from './SavedBtn'
 import { Spin, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import Header from './Header'
 import dayjs from 'dayjs'
-
+import SegmentedBar from '../common/Segmented'
 import './index.scss'
-import { customerRepository } from '../../repositories/customer/customer'
 
+type DashboardContext = { collapsed: boolean }
 
-
-export default function DashboardContent({ collapsed }: { collapsed?: boolean }) {
+export default function CustomerPage() {
+  const { collapsed } = useOutletContext<DashboardContext>()
   const dispatch = useAppDispatch()
   const { customers, loading, error } = useAppSelector((state) => state.customer)
   const key = 'Customers'
+  const screens = Grid.useBreakpoint()
+  const isMobile = screens.md === false
   const [selectedStatus, setSelectedStatus] = useState(0)
   const [entriesPerPage, setEntriesPerPage] = useState(10)
   const [searchKeyword, setSearchKeyword] = useState('')
@@ -61,9 +63,25 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
     const filter: Record<string, string> = {}
 
     filter.oilChangeStatus = `$eq:${status}`
-    customerRepository.getAllCustomers(1, 7, undefined, filter)
+    dispatch(fetchCustomers({current: 1, search: undefined, filter: filter}))
 
   },[])
+  const renderStatusPill = (text: string) => (
+    <span
+      className={
+        text === 'Đã thay' || text === 'Changed'
+          ? 'status-done'
+          : 'status-overdue'
+      }
+    >
+      <div className="status-result">
+        <div className="bullet-point">
+          &bull;
+        </div>
+        {text === "Đã thay" || text === "Changed" ? t("changed") : t("not changed")}
+      </div>
+    </span>
+  )
   const columns = [
     {
       title: <div style={{textAlign: "center"}}>{t("No")}</div>,
@@ -99,42 +117,7 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
       title: <div style={{textAlign: "left"}}>{t("Status")}</div>,
       dataIndex: 'status',
       align: 'left' as const,
-
-      render: (text: string) => (
-        <span
-        
-          className={
-            text === 'Đã thay' || text === 'Changed'
-              ? 'status-done'
-              : 'status-overdue'
-          }
-          style={{
-          
-          }}
-        >
-          {text === "Đã thay" || text === "Changed" ? (
-            <> 
-            <div className="status-result">
-              <div className="bullet-point">
-                &bull;
-              </div>
-              {t("changed")} 
-            </div>
-           
-          </>
-          ) : 
-          (
-          <>
-            <div className="status-result">
-              <div className="bullet-point">
-                &bull;
-              </div>
-              {t("not changed")} 
-            </div>
-          </>
-        )}
-        </span>
-      )
+      render: (text: string) => renderStatusPill(text)
     },
 
     {
@@ -165,10 +148,8 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
   }))
 
   const tableFooter = (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} className="footer-box">
-      <div className="entry-display"
-      style={{marginTop: "6px"}}
-      >
+    <div className="footer-box">
+      <div className="entry-display">
             <p>{t("Display")}</p>
             <input
               type="text"
@@ -179,7 +160,6 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
       </div>
 
       <Pagination
-        style={{marginRight: "-50px"}}
         current={10}
         total={10}
         pageSize={entriesPerPage}
@@ -190,20 +170,20 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
     
   )
  
+  const segmentedOptions = [
+    { label: t('Customer List'), value: 'customer_list' },
+    { label: t('Oil Change Schedule Setup'), value: 'oil_schedule' },
+  ]
   return (
     <>
       <Header name={key} />
 
-      <Segmented
-        onClick={(e) => e.stopPropagation()}
-        className="dashboard-segmented"
-        options={[
-          { label: t('Customer List'), value: 'customer_list' },
-          { label: t('Oil Change Schedule Setup'), value: 'oil_schedule' },
-        ]}
+      <SegmentedBar
+      options={segmentedOptions}
       />
-      <div className={`table_layout${collapsed ? ' collapsed' : ''}`}>
-        <div className="intro-box">
+      <div className="customer-table-scroll">
+        <div className={`table_layout${collapsed ? ' collapsed' : ''}`}>
+          <div className="intro-box">
           <div className="search-section" onClick={(e) => e.stopPropagation()}>
             <h1>{t("Key Word")}</h1>
             <div className="custom-search-wrapper">
@@ -247,17 +227,61 @@ export default function DashboardContent({ collapsed }: { collapsed?: boolean })
 
           <div className="main-table" onClick={(e) => e.stopPropagation()}>
 
+            {isMobile ? (
+              <Spin spinning={loading} size="medium">
+                <div className="customer-card-list">
+                  {data.map((item) => (
+                    <div className="customer-card" key={item.key}>
+                      <div className="customer-card__top">
+                        <span className="customer-card__index">{item.id}.</span>
+                        <span className="customer-card__name">{item.name}</span>
+                        {renderStatusPill(item.status)}
+                      </div>
+                      <div className="customer-card__row">
+                        <span className="customer-card__label">{t("Phone Number")}</span>
+                        <span className="customer-card__value">{item.phone_number}</span>
+                      </div>
+                      <div className="customer-card__row">
+                        <span className="customer-card__label">{t("Date of Birth")}</span>
+                        <span className="customer-card__value">{item.date_of_birth}</span>
+                      </div>
+                      <div className="customer-card__row">
+                        <span className="customer-card__label">{t("Number of Oil Changes")}</span>
+                        <span className="customer-card__value">{item.times_change_oil}</span>
+                      </div>
+                      <div className="customer-card__row">
+                        <span className="customer-card__label">{t("Next Oil Change Cycle")}</span>
+                        <span className="customer-card__value">{item.duration_next_change}</span>
+                      </div>
+                      <div className="customer-card__action">
+                        <span className="action-icon">
+                          <div className="icon">{item.action}</div>
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Spin>
+            ) : (
               <Spin spinning={loading} size="medium" style={{ padding: "50px" }}>
                   <Table className="customer-table" columns={columns} dataSource={data} pagination = {false} 
                   footer={!error? () => tableFooter : undefined} 
                   />
               </Spin>
-             
+            )}
+              
               <div className="saved-btn">
                   <SavedBtn/>
               </div>
           </div>
+
+          {isMobile && !error && (
+            <div className="customer-mobile-footer">
+              {tableFooter}
+            </div>
+          )}
           
+        </div>
       </div>
     </>
   )

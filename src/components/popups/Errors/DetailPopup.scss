@@ -1,0 +1,122 @@
+.error-detail-popup {
+    height: 600px;
+    background-color: #fff;
+    border-radius: 16px;
+
+    font-family: Inter, sans-serif;
+
+    .header {
+        padding: 32px 48px 0;
+
+        span {
+            color: #0d733b;
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+
+    .body {
+        padding: 24px 48px 48px;
+
+        .body-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .row {
+                display: flex;
+                gap: 24px;
+
+                &.two-cols {
+                    .field {
+                        flex: 1;
+                    }
+                }
+
+                &.two-cols-last {
+                    .field {
+                        input {
+                            width: 456px;
+                        }
+                    }
+                }
+
+                .field {
+                    display: flex;
+                    flex-direction: column;
+
+                    label {
+                        color: #4d4d4d;
+                        font-weight: 700;
+                        font-size: 16px;
+                        margin-bottom: 8px;
+                    }
+
+                    input {
+                        height: 44px;
+                        border-radius: 8px;
+                        border: none;
+                        padding: 0 16px;
+                        background-color: #f0f0f0;
+                        color: #333;
+                        outline: none;
+                        font-family: inherit;
+                        font-size: 14px;
+                    }
+
+                    &.full {
+                        width: 100%;
+                    }
+                }
+
+            }
+
+            .status-wrapper {
+                display: flex;
+                align-items: center;
+                height: 44px;
+            }
+
+            .footer-row {
+                display: flex;
+                justify-content: center;
+                margin-top: 24px;
+
+                .close-btn {
+                    color: #0d733b;
+                    border: 1px solid #0d733b;
+                    background-color: #fff;
+                    width: 150px;
+                    height: 48px;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
+
+
+
+.processed-status {
+    width: fit-content;
+    min-width: none !important;
+    margin: 0 26px;
+    align-items: flex-start;
+    display: flex;
+    
+};
+
+.unprocessed-status {
+    width: fit-content;
+    min-width: 90px !important;
+    align-self: flex-start;
+    margin: 0 26px;
+}
+
+

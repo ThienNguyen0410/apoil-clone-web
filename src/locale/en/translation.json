@@ -104,7 +104,37 @@
     "Enter address": "Please enter address",
     "Enter password": "Please enter password",
     "Enter confirm password": "Please enter confirm password",
-    "Required field": "is required field",
+    "Required field": "This field is required",
     "Choose File": "Choose File",
-    "Content selected": "contents selected"
+    "Content selected": "contents selected",
+    
+    "Device Code": "Device Code",
+    "Device Name": "Device Name",
+    "Installed Address": "Installed Address",
+    "Waste Oil Tank (L)": "Waste Oil Tank (L)",
+    "Gear Oil (L)": "Gear Oil (L)",
+    "Scooter Oil (L)": "Scooter Oil (L)",
+    "Operation Status": "Operation Status",
+    "STT": "No.",
+
+
+    "Mes.Device.Required.Code": "Please enter device code",
+    "Mes.Device.Required.Name": "Please enter device name",
+    "Mes.Device.Required.Group": "Please select device group",
+    "Mes.Device.Required.Phone": "Please enter phone number",
+    "Mes.Device.Required.Password": "Please enter password",
+    "Mes.Device.Required.ConfirmPassword": "Please enter confirm password",
+    "Mes.Device.Required.Province": "Please select province/city",
+    "Mes.Device.Required.District": "Please select district",
+    "Device > Add Device": "Device > Add Device",
+    "Device > Update Device": "Device > Update Device",
+
+    "Error Code": "Error Code",
+    "Category": "Category",
+    "Issue Content": "Issue Content",
+    "Error Description": "Error Description",
+    "Handler": "Handler",
+    "Handling Time": "Handling Time",
+    "Processed": "Processed",
+    "Unprocessed": "Unprocessed"
 }

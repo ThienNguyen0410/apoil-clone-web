@@ -262,6 +262,7 @@
 
 .popup-code-management .ant-menu-item-selected {
     color: #21942f !important;
+   
     
 }
 .popup-system-settings .ant-menu-item-selected {
@@ -456,4 +457,88 @@
 .ant-menu-submenu-expand-icon {
     font-size: 28px !important;
     line-height: 40px;
+}
+
+// ==============================
+// Mobile topbar (hamburger)
+// ==============================
+.mobile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(13, 115, 59, 0.08);
+    z-index: 10;
+
+    .mobile-hamburger {
+        font-size: 24px;
+        color: color.$side-bar-color;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .mobile-logo {
+        height: 36px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+
+// ==============================
+// Mobile drawer (sidebar as overlay)
+// ==============================
+.mobile-drawer {
+    .ant-drawer-body {
+        background: color.$side-bar-color;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        .logo {
+            width: 220px;
+            height: 64px;
+            margin: 32px auto 16px;
+            object-fit: contain;
+        }
+
+        .side-menu {
+            width: 100%;
+            margin-top: 8px;
+            margin-left: 0;
+
+            .ant-menu-item,
+            .ant-menu-submenu > .ant-menu-submenu-title {
+                width: 100% !important;
+                height: 48px !important;
+                margin-inline: 0 !important;
+                padding-inline: 24px !important;
+            }
+
+            .ant-menu-item-selected {
+                width: 100% !important;
+                border-radius: 8px !important;
+                margin-inline: 0 !important;
+
+                &::before,
+                &::after {
+                    display: none;
+                }
+            }
+
+            .ant-menu-submenu-selected > .ant-menu-submenu-title {
+                &::before,
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
 }

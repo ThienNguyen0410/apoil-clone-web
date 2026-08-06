@@ -6,7 +6,8 @@
     font-weight: 500;
     line-height: 27px;
     margin: 30px 40px;
-    width: 1503px;
+    width: 100%;
+    max-width: 1503px;
     height: 36px;
     justify-content: space-between;
 
@@ -14,7 +15,7 @@
         color: #0d733b;
         display: inline;
         font-family: Inter, sans-serif;
-        font-size: 23px;
+        font-size: clamp(1.125rem, 2vw, 1.4375rem);
         font-weight: 700;
         line-height: 36.1429px;
     }
@@ -113,5 +114,40 @@
   background-color: #e6f7ed !important;
   color: #0d733b !important;
   width: 100px !important;
+}
+
+// =====================================================
+// Responsive Header
+// =====================================================
+@media (max-width: 991px) {
+    .breadcrumb-box {
+        margin: 20px 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .breadcrumb-box {
+        margin: 16px;
+    }
+
+    .icon-intro-box {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+        gap: 12px;
+        justify-content: flex-end;
+    }
+
+    .language-switcher {
+        width: 88px;
+        height: 40px;
+        font-size: 13px;
+    }
+
+    .avatar-navigate {
+        width: 40px;
+        height: 40px;
+    }
 }
 

@@ -1,0 +1,15 @@
+=========================== REVENUE TASK ===============================
+1. Hãy đọc soure code của components/common/Table để hiểu cấu trúc của 
+  -> Thêm flag? : boolean để track nếu height của datasource > 8 sẽ bật scroll {{y: 500}}
+  Tương tự nếu length > 8 thì sẽ bật scroll {{x: 500}}
+  Đổi các thanh scroll thành màu #0d733b
+2. Đọc source code của components/Revenue/index.tsx
+  - Thêm vào flex-bar hiện tại 3 SelectBox
+    + Payment Status có các options là All,Processing, Successful, Failed, Expired
+    + Refund có các options là All, Have, No
+    + Export E-Invoice có các options là All, Completed, No, Failed
+  - Thêm DatePicker đã được custom trong components/common/DatePicker
+  - Thêm Table view (dùng table đã được custom trong common/Table)
+    Table có các cột là :No, Device, Transaction Code, Discount Code, Accumulated points, Discount, Total Payment, Payment Code, Oil, product name, Created At, Payment Time, Payment Status, Refund, Export E - invoice, Action
+  - Cột cuối sẽ có data là InfoOutlined lấy từ antd có màu #0d733b curosr: pointer
+  - Chưa cần thêm datasoure vào

@@ -5,7 +5,7 @@ export default interface UserEntities {
     password?: string;
     fullname?: string;
     phone_number?: string;
-    email: string;
+    email?: string;
     role?: string;
     roleID?: string;
     status?: number;
@@ -15,11 +15,5 @@ export default interface UserEntities {
     refreshToken?: string;
     avatarPath?: string; // Received image path from server
     avatarFile?: File;   // Image file (binary) to upload to server through API PUT/customers/me
-}
-
-
-export interface UserPayLoad {
-    username: string;
-    password: string;
 }
 

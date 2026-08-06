@@ -1,4 +1,17 @@
 @use "../../styles/color";
+
+// =====================================================
+// DESKTOP (>= 1200px) — giữ nguyên UI gốc
+// =====================================================
+
+// Scroll wrapper: nếu màn hình desktop nhỏ hơn layout gốc
+// (1485px) thì container này chứa phần tràn, không làm
+// cuộn ngang toàn trang.
+.customer-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
 .customer-table {
     //min-height: 200px;
     margin-top: 5px;
@@ -18,7 +31,7 @@
             border-radius: 8px 8px 0px 0px;
             width: 1437px !important;
             margin-left: -50px;
-            margin-top: -50px;
+            margin-top: -70px !important;
         }
     }
     .ant-table-container {
@@ -36,11 +49,18 @@
 
 .footer-box {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
+
     .ant-pagination-prev .ant-pagination-item-link,
     .ant-pagination-next .ant-pagination-item-link {
-    color: #0d733b;
-}
+        color: #0d733b;
+    }
+
+    .ant-pagination {
+        margin-right: -50px;
+    }
 }
 
 .ant-pagination-item-active {
@@ -115,40 +135,6 @@
 }
 .customer-table .ant-table-tbody > tr > td:last-child {
     border-radius: 0 8px 8px 0;
-}
-
-// ==============================
-// Responsive Table
-// ==============================
-@media (max-width: 1199px) {
-    .customer-table {
-        margin-left: 16px;
-        margin-top: 30px;
-        padding: 12px;
-        overflow-x: auto;
-
-        .ant-table {
-            min-width: 700px;
-        }
-    }
-}
-
-@media (max-width: 768px) {
-    .customer-table {
-        margin-left: 8px;
-        margin-top: 20px;
-        padding: 8px;
-
-        .ant-table {
-            min-width: 600px;
-        }
-
-        .ant-table-thead > tr > th,
-        .ant-table-tbody > tr > td {
-            font-size: 13px;
-            padding: 8px 12px !important;
-        }
-    }
 }
 
 .header-content {
@@ -446,7 +432,7 @@
         position: relative;
         right: 4px;
         top: 15px;
-        
+        margin-bottom: 20px !important;
 
         h1 {
             color: #242b35;
@@ -501,6 +487,7 @@
     gap: 10px ;
     align-items: center;
     background-color: #fff !important;
+    margin-top: 6px;
     input{
         width: 40px;
         height: 34px;
@@ -570,4 +557,250 @@
 }
 .ant-select-item-option-selected {
     background-color: #e2faf0 !important;
+}
+
+// =====================================================
+// TABLET & BELOW (<= 1199px)
+// - Layout container trở nên fluid (không cuộn toàn trang)
+// - Bảng tự cuộn ngang bên trong (chỉ riêng phần Table)
+// =====================================================
+@media (max-width: 1199px) {
+    .customer-table-scroll {
+        overflow-x: visible;
+    }
+
+    .table_layout {
+        width: 100%;
+        max-width: none;
+        height: auto;
+        min-height: 600px;
+        margin-left: 12px;
+        margin-right: 12px;
+        padding: 16px;
+
+        &.collapsed {
+            width: 100%;
+        }
+
+        .saved-btn {
+            right: 16px;
+        }
+    }
+
+    .table_layout.collapsed .customer-table {
+        width: 100% !important;
+    }
+
+    .table_layout.collapsed .customer-table .ant-table table {
+        width: 100% !important;
+    }
+
+    .customer-table {
+        width: 100%;
+        margin-left: 0;
+        padding: 12px;
+        overflow-x: auto;
+
+        .ant-table {
+            overflow-x: visible;
+
+            table {
+                width: 1100px !important;
+                margin-left: 0;
+                margin-top: 0;
+            }
+        }
+    }
+
+    .customer-table .ant-table-footer {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .footer-box .ant-pagination {
+        margin-right: 0;
+    }
+}
+
+// =====================================================
+// TABLET PORTRAIT (<= 991px)
+// - Search & Filter có thể xuống dòng
+// =====================================================
+@media (max-width: 991px) {
+    .intro-box {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}
+
+// =====================================================
+// MOBILE (< 768px)
+// - Search & Filter xếp dọc, full width
+// - Table chuyển thành Card/List
+// - Pagination căn giữa
+// =====================================================
+@media (max-width: 767px) {
+    .customer-table-scroll {
+        overflow-x: hidden;
+    }
+
+    .table_layout {
+        margin-left: 8px;
+        margin-right: 8px;
+        padding: 12px;
+        min-height: 0;
+    }
+
+    .intro-box {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+
+        .search-section,
+        .filter-section {
+            width: 100%;
+            max-width: none;
+            left: 0;
+            right: 0;
+            top: 0;
+            margin-left: 0;
+            margin-bottom: 0 !important;
+
+            h1 {
+                font-size: clamp(0.875rem, 2.5vw, 1rem);
+            }
+        }
+
+        .custom-search-wrapper {
+            width: 100% !important;
+        }
+
+        .status-select {
+            width: 100% !important;
+        }
+    }
+
+    .main-table {
+        flex-direction: column;
+        align-items: stretch;
+
+        .saved-btn {
+            position: static;
+            align-self: flex-end;
+            margin-top: 12px;
+        }
+    }
+
+    // Card list thay cho Table
+    .customer-card-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .customer-card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px;
+        background: #f6f6f680;
+        border-radius: 12px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+
+        &__top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(13, 115, 59, 0.15);
+        }
+
+        &__index {
+            color: color.$side-bar-color;
+            font-weight: 700;
+        }
+
+        &__name {
+            flex: 1;
+            min-width: 0;
+            color: #242b35;
+            font-weight: 600;
+            font-size: clamp(0.9375rem, 3vw, 1rem);
+            line-height: 1.35;
+            word-break: break-word;
+        }
+
+        &__row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        &__label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        &__value {
+            color: #242b35;
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        &__action {
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 4px;
+        }
+    }
+
+    .customer-table {
+        display: none;
+    }
+
+    .customer-mobile-footer {
+        margin-top: 16px;
+    }
+
+    .footer-box {
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .ant-pagination {
+            margin-right: 0;
+        }
+    }
+}
+
+// =====================================================
+// SMALL MOBILE (< 576px)
+// =====================================================
+@media (max-width: 575px) {
+    .table_layout {
+        margin-left: 6px;
+        margin-right: 6px;
+        padding: 10px;
+    }
+
+    .entry-display {
+        gap: 6px;
+
+        p {
+            font-size: 0.8125rem;
+        }
+
+        input {
+            width: 34px;
+            height: 30px;
+        }
+    }
+
+    .customer-card {
+        padding: 12px;
+    }
 }

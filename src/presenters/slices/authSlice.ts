@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 import type UserEntities from '../../entities/user/entity';
-import type { UserPayLoad } from '../../entities/user/entity';
 import { authRepository } from '../../repositories/auth/auth';
 
 
@@ -18,7 +17,7 @@ const initialState: AuthState = {
     error: null
 }
 
-export const login = createAsyncThunk("auth/Login", async(payload: UserPayLoad) => {
+export const login = createAsyncThunk("auth/Login", async(payload: UserEntities) => {
     return await authRepository.login(payload);
 })
 

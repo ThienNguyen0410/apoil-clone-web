@@ -1,0 +1,113 @@
+.custom-segmented {
+    width: auto;
+    height: 48px;
+    margin-left: 20px;
+    border-radius: 60px;
+    background-color: rgb(33, 146, 79);;
+    
+
+    .ant-segmented {
+        height: 48px;
+        background-color: #0d733b;
+        border-radius: 60px;
+    }
+
+    .ant-segmented-item {
+        height: 44px;
+        
+        border-radius: 60px;
+    
+    }
+
+    // Item chưa được chọn
+    .ant-segmented-item-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 28px 14px;
+        
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 28px;
+        text-align: center;
+        font-family: Inter, sans-serif;
+    
+    }
+
+    // Item được chọn
+    .ant-segmented-item-selected {
+        background-color: #ffffff;
+        border-radius: 60px;
+        margin-bottom: 0;
+        height: 44px;
+        width: 100%;
+        .ant-segmented-item-label {
+            padding-top: 8px;
+            color: #0d733b;
+
+        }
+    }
+
+    .ant-segmented-thumb {
+        background-color: #ffffff;
+        border-radius: 60px;
+        height: 44px;
+        width: 100%;
+    }
+}
+
+.ant-segmented-item:not(.ant-segmented-item-selected):hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 60px;
+}
+
+// =====================================================
+// Responsive Tabs
+// =====================================================
+@media (max-width: 991px) {
+    .custom-segmented {
+        margin-left: 12px;
+    }
+}
+
+@media (max-width: 767px) {
+    .custom-segmented {
+        max-width: calc(100vw - 24px);
+        overflow-x: auto;
+        margin-left: 8px;
+
+        .ant-segmented-item-label {
+            padding: 8px 16px 14px;
+            font-size: 0.875rem;
+        }
+    }
+}
+
+@media (max-width: 575px) {
+    .custom-segmented {
+        height: 44px;
+
+        .ant-segmented {
+            height: 44px;
+        }
+
+        .ant-segmented-item {
+            height: 40px;
+        }
+
+        .ant-segmented-item-label {
+            padding: 6px 12px 12px;
+            font-size: 0.8125rem;
+            white-space: nowrap;
+        }
+
+        .ant-segmented-item-selected {
+            height: 40px;
+        }
+
+        .ant-segmented-thumb {
+            height: 40px;
+        }
+    }
+}

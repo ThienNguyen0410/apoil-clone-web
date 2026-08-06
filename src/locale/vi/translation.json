@@ -105,5 +105,34 @@
     "Enter confirm password": "Vui lòng nhập xác nhận mật khẩu",
     "Required field": "Là trường thông tin bắt buộc",
     "Choose File": "Chọn File",
-    "Content selected": "nội dung đã được chọn"
+    "Content selected": "nội dung đã được chọn",
+    
+    "Device Code": "Mã thiết bị",
+    "Device Name": "Tên thiết bị",
+    "Installed Address": "Địa chỉ lắp đặt",
+    "Waste Oil Tank (L)": "Thùng nhớt thải (L)",
+    "Gear Oil (L)": "Nhớt xe số (L)",
+    "Scooter Oil (L)": "Nhớt xe tay ga (L)",
+    "Operation Status": "Trạng thái hoạt động",
+    "STT": "STT",
+    
+    "Mes.Device.Required.Code": "Vui lòng nhập mã thiết bị",
+    "Mes.Device.Required.Name": "Vui lòng nhập tên thiết bị",
+    "Mes.Device.Required.Group": "Vui lòng chọn nhóm thiết bị",
+    "Mes.Device.Required.Phone": "Vui lòng nhập số điện thoại",
+    "Mes.Device.Required.Password": "Vui lòng nhập mật khẩu",
+    "Mes.Device.Required.ConfirmPassword": "Vui lòng nhập xác nhận mật khẩu",
+    "Mes.Device.Required.Province": "Vui lòng chọn tỉnh/thành phố",
+    "Mes.Device.Required.District": "Vui lòng chọn quận/huyện",
+    "Device > Add Device": "Thiết bị > Thêm thiết bị",
+    "Device > Update Device": "Thiết bị > Cập nhật thiết bị",
+
+    "Error Code": "Mã báo lỗi",
+    "Category": "Phân loại",
+    "Issue Content": "Nội dung vấn đề",
+    "Error Description": "Mô tả lỗi",
+    "Handler": "Người xử lí",
+    "Handling Time": "Thời gian xử lí",
+    "Processed": "Đã xử lí",
+    "Unprocessed": "Chưa xử lí"
 }
